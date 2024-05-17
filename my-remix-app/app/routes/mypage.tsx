@@ -1,5 +1,5 @@
 import ShoppingRoomListComponent from "~/component/shoppingRoom/shoppingRoomList";
-import React, {useState} from "react";
+import {useState} from "react";
 
 const Mypage = () => {
 

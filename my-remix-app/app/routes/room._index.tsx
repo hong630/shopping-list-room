@@ -1,4 +1,3 @@
-import React from "react";
 import LoginLayout from "~/component/loginLayout/LoginLayout";
 
 const RoomIndex = () => {

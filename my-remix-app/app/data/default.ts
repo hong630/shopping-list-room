@@ -1,4 +1,13 @@
-export const userData = [
+import {ROOMDETAILDATA, USERDATA} from "~/data/interface";
+
+export const emptyUserData:USERDATA =  {
+    email: '',
+    nickname: '',
+    belong: [''],
+    authority: [{id:'',role:''}]
+}
+
+export const userData:Array<USERDATA> = [
     {email: 'hong@gmail.com', nickname: '홍인', belong:['a','b','c'], authority:[{id:'a',role:'일반'}, {id:'b', role:'방장'}, {id:'c',role:'일반'}]},
     {email: 'alwaysHappy@gmail.com', nickname: '엄마', belong:['a','d'], authority:[{id:'a',role:'방장'}, {id:'d',role:'일반'}]},
     {email: 'new@gmail.com', nickname: '동생', belong:['a'], authority:[{id:'a',role:'일반'}]},
@@ -9,7 +18,22 @@ export const userData = [
     {email: 'beauty@naver.com', nickname: '영아', belong:['c'], authority:[{id:'c',role:'일반'}]},
 ]
 
-export const roomDetailData =[
+export const emptyRoomDetailData:ROOMDETAILDATA =     {
+    id : '',
+    myShoppingRoom : '',
+    detail : '',
+    members : [
+        {
+            email:'',
+            nickname:''
+        }
+    ],
+    invitationLink : '',
+    shoppingList : [],
+    authority:''
+}
+
+export const roomDetailData:Array<ROOMDETAILDATA> =[
     {
         id : 'a',
         myShoppingRoom : '가족 장바구니',
@@ -48,39 +72,3 @@ export const roomDetailData =[
     },
 ]
 
-
-export interface ROOMDETAILDATA {
-    id:string,
-    myShoppingRoom:string,
-    detail:string,
-    members:Array<MEMBER>,
-    invitationLink:string,
-    shoppingList:Array<SHOPPINGLIST>,
-    authority:string
-}
-
-export interface SHOPPINGLIST {
-    name: string,
-    shopped: boolean
-}
-
-export interface MEMBER {
-    email: string,
-    nickname: string,
-    belong: Array<string>,
-    authority: Array<UserDataAuthority>
-}
-
-export interface UserDataAuthority{
-    id: string,
-    role: string
-}
-
-export const emptyUserData =     {
-    id : '',
-    myShoppingRoom : '',
-    detail : '',
-    members : [],
-    invitationLink : '',
-    shoppingList : []
-}

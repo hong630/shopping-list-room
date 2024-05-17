@@ -1,11 +1,12 @@
-import {roomDetailData, ROOMDETAILDATA, SHOPPINGLIST, userData, MEMBER, UserDataAuthority} from "~/data/test";
 import {useParams} from "react-router";
-import React, {useEffect, useRef, useState, createElement, ReactElement, ReactEventHandler} from "react";
+import React, {useEffect, useRef, useState} from "react";
+import {emptyRoomDetailData, roomDetailData} from "~/data/default";
+import {ROOMDETAILDATA, SHOPPINGLIST} from "~/data/interface";
 
 const ShoppingList = () => {
     const params = useParams();
-    const shoppingData = roomDetailData.find(data=>data.id === params.id); //TODO API로 대체
-    const roomId = params.id?.trim();
+    const shoppingData:ROOMDETAILDATA = roomDetailData.find(data=>data.id === params.id)||emptyRoomDetailData; //TODO API로 대체
+    // const roomId = params.id?.trim();
     let originShoppingList:Array<SHOPPINGLIST> = [{name:'아직 장바구니 목록이 없습니다.',shopped:false}];
     if (!(shoppingData === undefined || shoppingData.shoppingList.length === 0)) {
         originShoppingList = shoppingData.shoppingList
@@ -16,8 +17,8 @@ const ShoppingList = () => {
 
     //쇼핑리스트 추가하기
     const addShoppingList = () => {
-        const shopValue = inputElement.current?.value
-        const addedListObject:object = {name:shopValue, shopped:false}
+        const shopValue = inputElement.current?.value || ""
+        const addedListObject:SHOPPINGLIST = {name:shopValue, shopped:false}
         if (shopValue !== undefined && shopValue !== null ){
             shoppingList.findIndex((value)=>{return value["name"] === shopValue}) < 0
                 ? setShoppingList([... shoppingList, addedListObject])
@@ -53,7 +54,7 @@ const ShoppingList = () => {
         if(nextSibling !== null){
             const nextSiblingText = nextSibling.textContent
             shoppingList.map((value)=>{
-                if(value["name"] == nextSiblingText) value["shopped"] === true ? value["shopped"] = false : value["shopped"] = true;
+                if(value["name"] == nextSiblingText) value["shopped"] ? value["shopped"] = false : value["shopped"] = true;
             })
             setShoppingList([...shoppingList]);
         }
@@ -96,22 +97,22 @@ const ShoppingList = () => {
     const [normalMembers, setNormalMembers] = useState(normalMember);
 
     //방 삭제 버튼 보이는 유무
-    let initialDeleteButtonState:boolean = (managerEmail === userEmail) //매니저 이메일과 유저 이메일이 동일하면 true
+    const initialDeleteButtonState:boolean = (managerEmail === userEmail) //매니저 이메일과 유저 이메일이 동일하면 true
     const [showDeleteButton, setShowDeleteButton]=useState(initialDeleteButtonState);
 
     const delegateThisRoom = (event:React.MouseEvent<HTMLButtonElement>) => {
-        let newManagerEmail = event.currentTarget.value.trim();
-        let newManagerName = event.currentTarget.innerText;
-        let authorityOfNewManager = userData?.filter((data)=>{return data.email.trim() === newManagerEmail})[0].authority;
-        let newAuthorityOfNewManager = authorityOfNewManager.map((data)=>{
-            if(data['id'] === roomId) data['role'] = '방장';
-            return data;
-        });
-        let authorityOfOriginalManager = userData?.filter((data)=>{return data.email.trim() === managerEmail})[0].authority;
-        let newAuthorityOfOriginalManager = authorityOfOriginalManager.map((data)=>{
-            if(data['id'] === roomId) data['role'] = '일반';
-            return data;
-        });
+        const newManagerEmail = event.currentTarget.value.trim();
+        const newManagerName = event.currentTarget.innerText;
+        // const authorityOfNewManager:UserDataAuthority[] = userData?.filter((data)=>{return data.email.trim() === newManagerEmail})[0].authority || emptyUserData.authority;
+        // let newAuthorityOfNewManager = authorityOfNewManager?.map((data)=>{
+        //     if(data['id'] === roomId) data['role'] = '방장';
+        //     return data;
+        // });
+        // const authorityOfOriginalManager:UserDataAuthority[] = userData?.filter((data)=>{return data.email.trim() === managerEmail})[0].authority || emptyUserData.authority;
+        // let newAuthorityOfOriginalManager = authorityOfOriginalManager.map((data)=>{
+        //     if(data['id'] === roomId) data['role'] = '일반';
+        //     return data;
+        // });
         //TODO roomDetailData의 roodId에 해당하는 데이터에 newManagerEmail을 저장
         //TODO newMangerEmail의 authority 변경 (userData의 email:newManagerEmail, authority: newAuthorityOfNewManager
         //TODO 현재 관리자의 authority 변경 (userData의 email:originManagerEmail, authority :newAuthorityOfOriginalManager

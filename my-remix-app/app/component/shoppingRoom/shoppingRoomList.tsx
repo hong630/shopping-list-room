@@ -1,15 +1,18 @@
 import {Link} from "@remix-run/react";
-import {ROOMDETAILDATA, roomDetailData} from "~/data/test";
+import {emptyRoomDetailData, roomDetailData} from "~/data/default";
+import {ROOMDETAILDATA} from "~/data/interface";
 
 const ShoppingRoomListComponent = () => {
     //로그인 된 이메일이 hong@gmail.com a, b, c TODO API
     const myRoomList = ['a','b','c'];
 
-    const data = roomDetailData.filter((value, index, array)=>{
-        return myRoomList.findIndex((myRoom)=>{
-            return myRoom === value.id
-        }) >= 0
-    })
+    const data:ROOMDETAILDATA[] = roomDetailData.filter((value)=>{
+        return (
+            myRoomList.findIndex((myRoom)=>{
+                return myRoom === value.id
+            }) >= 0
+        )
+    }) || [emptyRoomDetailData]
 
     return (
         <ul>

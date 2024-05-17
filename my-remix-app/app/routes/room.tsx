@@ -1,6 +1,6 @@
-import {Outlet, useLoaderData} from "@remix-run/react";
-import {json, LoaderFunction} from "@remix-run/node";
-import {ROOMDETAILDATA, roomDetailData} from "~/data/test";
+import {Outlet} from "@remix-run/react";
+// import {json, LoaderFunction} from "@remix-run/node";
+// import {ROOMDETAILDATA, roomDetailData} from "~/data/interface";
 
 
 // export const loader:LoaderFunction = async ({params}) => {
@@ -10,7 +10,7 @@ import {ROOMDETAILDATA, roomDetailData} from "~/data/test";
 // }
 
 const RoomLayout = () => {
-    // const loaderData = useLoaderData<ROOMDETAILDATA>()
+
     return (
         <div>
             <Outlet/>

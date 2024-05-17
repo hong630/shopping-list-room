@@ -1,8 +1,7 @@
-import React, {useState} from "react";
+import {useEffect, useState} from "react";
 import ShoppingRoomListComponent from "~/component/shoppingRoom/shoppingRoomList";
 import MakeRoomModal from "~/component/shoppingRoom/makeRoomModal";
 import LoginComponent from "~/component/auth/login";
-import {Link} from "@remix-run/react";
 import HeaderLayout from "~/component/common/header";
 
 const LoginLayout = (props:{status:boolean}) => {
@@ -13,6 +12,47 @@ const LoginLayout = (props:{status:boolean}) => {
     const [invitationModal, setInvitationModal] = useState(false);
     //방정보 모달
     const [roomInfoModal, setRoomInfoModal] = useState(false);
+
+    useEffect(()=> {
+
+        // GET Test
+        fetch("http://localhost:5173/register")
+            .then(async (res)=>{
+                const data = await res.json()
+                console.log(data)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+            .finally(()=>{
+                    console.log("끝")
+                }
+            )
+
+        // POST Test
+        fetch("http://localhost:5173/register",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ content: "World" }),
+            })
+            .then(async (res)=>{
+                const data = await res.json()
+                console.log(data)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+            .finally(()=>{
+                    console.log("끝")
+                }
+            )
+
+
+    },[])
+
     const openShareRoom = () => {
         setShareRoomToggle(true);
     }
@@ -28,24 +68,21 @@ const LoginLayout = (props:{status:boolean}) => {
     }
 
     //방 정보 모달 열기
-    const openRoomInfoModal = () => {
-        closeInvitationModal();
-        setRoomInfoModal(true);
-    }
+    // const openRoomInfoModal = () => {
+    //     closeInvitationModal();
+    //     setRoomInfoModal(true);
+    // }
 
     //방 정보 모달 닫기
     const closeRoomInfoModal = () => {
         setRoomInfoModal(false);
     }
 
-    //상태 토스트 모달
-    const [toastModal, setToastModal] = useState({state:false, message:""})
-
     return (props.status
         ?
         <>
             <div>
-                <HeaderLayout></HeaderLayout>
+                <HeaderLayout status={true}></HeaderLayout>
                 <h1>로그인 되었습니다.</h1>
                 <ShoppingRoomListComponent/>
                 <button onClick={openShareRoom}>공유방 만들기</button>
@@ -71,13 +108,6 @@ const LoginLayout = (props:{status:boolean}) => {
                         <p></p>
                         {/*<Link to={}>이 방으로 이동하기</Link>*/}
                         <button onClick={closeRoomInfoModal}>닫기</button>
-                    </div>
-                    :<div></div>
-            }
-            {
-                toastModal.state?
-                    <div>
-                        <p style={{backgroundColor:"yellowgreen", position:"fixed", top:"50%", left:"50%", transform:"translate(-50%,-50%)"}}>{toastModal.message}</p>
                     </div>
                     :<div></div>
             }

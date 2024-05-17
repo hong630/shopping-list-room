@@ -1,16 +1,18 @@
-import {emptyUserData, roomDetailData, ROOMDETAILDATA, MEMBER} from "~/data/test";
+import {ROOMDETAILDATA, MEMBER} from "~/data/interface";
 import React from 'react';
 import ShoppingList from "~/component/shoppingRoom/ShoppingList";
 import {useParams} from "react-router";
 import HeaderLayout from "~/component/common/header";
+import {emptyRoomDetailData, roomDetailData} from "~/data/default";
 
 
 const DetailRoom = () => {
     const params = useParams<string>()
 
-    const loaderData:object = roomDetailData.find((value)=>{
+    const loaderData:ROOMDETAILDATA = roomDetailData.find((value)=>{
         return value.id === params.id
-    }) || emptyUserData //TODO API로 대체
+    }) || emptyRoomDetailData //TODO API로 대체
+
     const members:Array<MEMBER> = loaderData.members;
 
     const copyInvitationLink = () => {
@@ -27,7 +29,7 @@ const DetailRoom = () => {
 
     return (
         <div>
-            <HeaderLayout></HeaderLayout>
+            <HeaderLayout status={true}></HeaderLayout>
             <h1>{loaderData.myShoppingRoom}</h1>
             <p>{loaderData.detail}</p>
             <button onClick={copyInvitationLink}>초대링크복사하기</button>
