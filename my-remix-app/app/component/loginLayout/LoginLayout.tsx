@@ -15,40 +15,40 @@ const LoginLayout = (props:{status:boolean}) => {
 
     useEffect(()=> {
 
-        // GET Test
-        fetch("http://localhost:5173/register")
-            .then(async (res)=>{
-                const data = await res.json()
-                console.log(data)
-            })
-            .catch((err)=>{
-                console.log(err)
-            })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
-
-        // POST Test
-        fetch("http://localhost:5173/register",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ content: "World" }),
-            })
-            .then(async (res)=>{
-                const data = await res.json()
-                console.log(data)
-            })
-            .catch((err)=>{
-                console.log(err)
-            })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
+        // // GET Test
+        // fetch("http://localhost:5173/register")
+        //     .then(async (res)=>{
+        //         const data = await res.json()
+        //         console.log(data)
+        //     })
+        //     .catch((err)=>{
+        //         console.log(err)
+        //     })
+        //     .finally(()=>{
+        //             console.log("끝")
+        //         }
+        //     )
+        //
+        // // POST Test
+        // fetch("http://localhost:5173/register",
+        //     {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify({ content: "World" }),
+        //     })
+        //     .then(async (res)=>{
+        //         const data = await res.json()
+        //         console.log(data)
+        //     })
+        //     .catch((err)=>{
+        //         console.log(err)
+        //     })
+        //     .finally(()=>{
+        //             console.log("끝")
+        //         }
+        //     )
 
 
     },[])

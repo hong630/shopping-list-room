@@ -4,7 +4,7 @@ const RoomIndex = () => {
 
     return (
         <div>
-            <LoginLayout status={true}/>
+            <LoginLayout status={false}/>
         </div>
     )
 }

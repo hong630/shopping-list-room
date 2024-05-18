@@ -1,6 +1,7 @@
 import { Form } from '@remix-run/react';
 
 const SignupLayout = () => {
+    //TODO 이미 가입한 아이디인지 체크
     return (
         <div>
             <h1>회원가입 정보를 입력해주세요.</h1>
