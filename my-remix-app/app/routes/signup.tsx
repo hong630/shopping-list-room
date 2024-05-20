@@ -15,7 +15,7 @@ const SignupLayout = () => {
         // 회원가입 API
         fetch("http://localhost:5173/register",
             {
-                method: "POST",
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },

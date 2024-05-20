@@ -3,6 +3,7 @@ import {LoaderFunction} from "@remix-run/node";
 import {catchErrCode} from "~/utils/prismaErr";
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
+import {UserDao} from "~/data/dao";
 
 dotenv.config();
 
@@ -17,22 +18,22 @@ if (!saltRoundsEnv) {
 }
 const saltRounds = parseInt(saltRoundsEnv, 10);
 
+//INFO 회원가입
+
 // 비밀번호 해싱 함수
 async function hashPassword(password:string) {
-        const salt = await bcrypt.genSalt(saltRounds); // 솔트 생성
-        const hash = await bcrypt.hash(password, salt); // 비밀번호와 솔트를 결합하여 해싱
-        return hash;
+        const salt = await bcrypt.genSalt(saltRounds);
+        return await bcrypt.hash(password, salt);
 }
-//회원가입
-export async function createUser(email: string, nickname:string, password: string) {
+// 회원 정보 DB 입력
+async function createUser(email: string, nickname:string, password: string) {
         const hashedPassword = await hashPassword(password);
         return prisma.user.create({
                 data: { email, nickname, password: hashedPassword },
         });
 }
-
-export const action:LoaderFunction = async (param) => {
-        const body = await param.request.json();
+// 회원 가입
+async function signUp(body:UserDao){
         try {
                 await createUser(body.email,body.nickname, body.password)
                 return  {state:true}
@@ -41,6 +42,43 @@ export const action:LoaderFunction = async (param) => {
                         return catchErrCode(err.code)
                 }
                 return  {state:'An error occurred while creating the user.'}
+        }
+}
+
+//INFO LOGIN
+
+// 로그인
+async function login(body:UserDao){
+        const loginEmail = body.email as string
+        const loginPassword = body.password as string
+        const userData = await prisma.user.findUnique({where:{email:loginEmail}})
+
+        if (userData !== null){
+                const compareBool =  await bcrypt.compare(loginPassword, userData.password)
+                if(compareBool){
+                        // TODO 여기서 Session에 회원 data 전달!
+                        return {state: 'Success'}
+                } else {
+                        return {state:'Invalid Password'}
+                }
+        } else {
+                return {state:'Invalid Email'}
+        }
+
+}
+
+
+
+export const action:LoaderFunction = async (param) => {
+        const body = await param.request.json();
+        const method = param.request.method;
+        switch (method) {
+                case "POST":
+                        return await login(body);
+                case "PUT":
+                        return await signUp(body)
+                default :
+                        return {status: "Err"}
         }
 }
 

@@ -1,4 +1,4 @@
-import {ROOMDETAILDATA, USERDATA} from "~/data/interface";
+import {ROOMDETAILDATA, USERDATA} from "~/data/dto";
 
 export const emptyUserData:USERDATA =  {
     email: '',

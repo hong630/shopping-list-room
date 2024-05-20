@@ -1,6 +1,6 @@
 import {Link} from "@remix-run/react";
 import {emptyRoomDetailData, roomDetailData} from "~/data/default";
-import {ROOMDETAILDATA} from "~/data/interface";
+import {ROOMDETAILDATA} from "~/data/dto";
 
 const ShoppingRoomListComponent = () => {
     //로그인 된 이메일이 hong@gmail.com a, b, c TODO API

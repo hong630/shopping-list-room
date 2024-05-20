@@ -1,4 +1,4 @@
-import {ROOMDETAILDATA, MEMBER} from "~/data/interface";
+import {ROOMDETAILDATA, MEMBER} from "~/data/dto";
 import React from 'react';
 import ShoppingList from "~/component/shoppingRoom/ShoppingList";
 import {useParams} from "react-router";

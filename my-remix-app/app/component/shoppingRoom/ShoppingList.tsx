@@ -1,7 +1,7 @@
 import {useParams} from "react-router";
 import React, {useEffect, useRef, useState} from "react";
 import {emptyRoomDetailData, roomDetailData} from "~/data/default";
-import {ROOMDETAILDATA, SHOPPINGLIST} from "~/data/interface";
+import {ROOMDETAILDATA, SHOPPINGLIST} from "~/data/dto";
 
 const ShoppingList = () => {
     const params = useParams();
