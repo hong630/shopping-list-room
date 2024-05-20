@@ -14,8 +14,7 @@ const LoginLayout = (props:{status:boolean}) => {
     const [roomInfoModal, setRoomInfoModal] = useState(false);
 
     useEffect(()=> {
-
-        // // GET Test
+        // GET Test
         // fetch("http://localhost:5173/register")
         //     .then(async (res)=>{
         //         const data = await res.json()
@@ -28,29 +27,6 @@ const LoginLayout = (props:{status:boolean}) => {
         //             console.log("끝")
         //         }
         //     )
-        //
-        // // POST Test
-        // fetch("http://localhost:5173/register",
-        //     {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify({ content: "World" }),
-        //     })
-        //     .then(async (res)=>{
-        //         const data = await res.json()
-        //         console.log(data)
-        //     })
-        //     .catch((err)=>{
-        //         console.log(err)
-        //     })
-        //     .finally(()=>{
-        //             console.log("끝")
-        //         }
-        //     )
-
-
     },[])
 
     const openShareRoom = () => {

@@ -1,6 +1,5 @@
 import {Form} from "@remix-run/react";
 import React, {useState} from "react";
-import {For} from "@babel/types";
 
 const LoginComponent = () => {
     //TODO 이메일과 비밀번호 맞는 지 검사
@@ -34,11 +33,12 @@ const LoginComponent = () => {
 
     //로그인 성공 체크
     const tryLogin = (event:React.FormEvent<HTMLFormElement>) => {
-        console.log('tryLogin working')
-        event.preventDefault()
-        const formData = new FormData(event.currentTarget)
-        const email = formData.get("email")
-        const password = formData.get("password")
+        console.log('tryLogin working');
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const email = formData.get("email");
+        const nickname = formData.get("nickname");
+        const password = formData.get("password");
 
         // POST Test
         fetch("http://localhost:5173/register",
@@ -49,6 +49,7 @@ const LoginComponent = () => {
                 },
                 body: JSON.stringify({
                     email: email,
+                    nickname : nickname,
                     password: password
                 }),
             })
@@ -63,7 +64,7 @@ const LoginComponent = () => {
                 }else if(response === 'noEmail'){
                     //로그인 실패 모달 열기
                     setFailedLogin('noEmail');
-                }else if(response === 'passwordFailed'){
+                }else if(response === 'passwordNotMatched'){
                     //로그인 실패 모달 열기
                     setFailedLogin('passwordNotMatched');
                 }else{
@@ -144,7 +145,10 @@ const LoginComponent = () => {
                                 아이디 : <input type="text" name="email" placeholder="이메일을 입력하세요." required/>
                             </label>
                             <label>
-                                비밀번호 : <input type="text" name="password" placeholder="비밀번호를 입력하세요." required/>
+                                닉네임 : <input type="text" name="nickname" placeholder="서비스에서 사용할 닉네임을 적어주세요." required/>
+                            </label>
+                            <label>
+                                비밀번호 : <input type="password" name="password" placeholder="비밀번호를 입력하세요." required/>
                             </label>
                             <button type="submit">submit</button>
                         </Form>
