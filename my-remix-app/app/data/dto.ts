@@ -30,5 +30,15 @@ export interface ROOMDETAILDATA {
     authority:string
 }
 
+// INFO 로그인 세션
+export interface User {
+    id: number;
+    email: string;
+    nickname: string;
+}
 
+export interface LoggedInUserData {
+    user: User | null;
+    isLoggedIn: boolean;
+}
 

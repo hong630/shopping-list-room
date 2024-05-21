@@ -13,7 +13,7 @@ const SignupLayout = () => {
         //TODO 유효성 검사 필요
 
         // 회원가입 API
-        fetch("http://localhost:5173/register",
+        fetch("http://localhost:5173/api/register",
             {
                 method: "PUT",
                 headers: {

@@ -37,11 +37,10 @@ const LoginComponent = () => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const email = formData.get("email");
-        const nickname = formData.get("nickname");
         const password = formData.get("password");
 
-        // POST Test
-        fetch("http://localhost:5173/register",
+        //로그인 API
+        fetch("http://localhost:5173/api/register",
             {
                 method: "POST",
                 headers: {
@@ -49,24 +48,23 @@ const LoginComponent = () => {
                 },
                 body: JSON.stringify({
                     email: email,
-                    nickname : nickname,
                     password: password
                 }),
             })
             .then(async (res)=>{
+                console.log(res)
                 const data = await res.json()
-                console.log(data)
-                //TODO 로그인 성공 api
-                const response = data.content;
-                if (response === true){
+                // console.log(data)
+                const response = data.state;
+                if (response === 'Success'){
                     //방 목록 페이지로 이동
-                    location.reload();
-                }else if(response === 'noEmail'){
+                    // location.reload();
+                }else if(response === 'Invalid Email'){
                     //로그인 실패 모달 열기
-                    setFailedLogin('noEmail');
-                }else if(response === 'passwordNotMatched'){
+                    setFailedLogin('Invalid Email');
+                }else if(response === 'Invalid Password'){
                     //로그인 실패 모달 열기
-                    setFailedLogin('passwordNotMatched');
+                    setFailedLogin('Invalid Password');
                 }else{
                     console.log('response :', response)
                 }
@@ -145,9 +143,6 @@ const LoginComponent = () => {
                                 아이디 : <input type="text" name="email" placeholder="이메일을 입력하세요." required/>
                             </label>
                             <label>
-                                닉네임 : <input type="text" name="nickname" placeholder="서비스에서 사용할 닉네임을 적어주세요." required/>
-                            </label>
-                            <label>
                                 비밀번호 : <input type="password" name="password" placeholder="비밀번호를 입력하세요." required/>
                             </label>
                             <button type="submit">submit</button>
@@ -158,12 +153,12 @@ const LoginComponent = () => {
                     <div></div>
             }
             {
-                failedLogin === 'noEmail'?(
+                failedLogin === 'Invalid Email'?(
                     <div>
                         <p>존재하지 않는 아이디입니다. 다시 시도해주세요.</p>
                         <button onClick={reloadLogin}>확인</button>
                     </div>
-                ):failedLogin === 'passwordNotMatched'?(
+                ):failedLogin === 'Invalid Password'?(
                         <div>
                             <p>아이디와 비밀번호가 일치하지 않습니다. 다시 시도해주세요.</p>
                             <button onClick={reloadLogin}>확인</button>

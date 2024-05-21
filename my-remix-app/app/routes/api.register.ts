@@ -1,9 +1,10 @@
 import {Prisma, PrismaClient} from '@prisma/client';
-import {LoaderFunction} from "@remix-run/node";
+import {ActionFunction, json} from "@remix-run/node";
 import {catchErrCode} from "~/utils/prismaErr";
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import {UserDao} from "~/data/dao";
+import {commitSession, getSession} from "~/routes/session.server";
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ async function createUser(email: string, nickname:string, password: string) {
 }
 // 회원 가입
 async function signUp(body:UserDao){
+        console.log("bpdu")
         try {
                 await createUser(body.email,body.nickname, body.password)
                 return  {state:true}
@@ -48,7 +50,7 @@ async function signUp(body:UserDao){
 //INFO LOGIN
 
 // 로그인
-async function login(body:UserDao){
+export async function login(body: UserDao, cookie:string|null){
         const loginEmail = body.email as string
         const loginPassword = body.password as string
         const userData = await prisma.user.findUnique({where:{email:loginEmail}})
@@ -56,8 +58,16 @@ async function login(body:UserDao){
         if (userData !== null){
                 const compareBool =  await bcrypt.compare(loginPassword, userData.password)
                 if(compareBool){
-                        // TODO 여기서 Session에 회원 data 전달!
-                        return {state: 'Success'}
+                        // 세션에 user 전달
+                        const session = await getSession(cookie);
+                        session.set("user", { id: userData.id, email: userData.email, nickname: userData.nickname });
+                        return json(
+                            { state: 'Success' },
+                            {
+                                    headers: {
+                                        "Set-Cookie": await commitSession(session),
+                                },
+                        });
                 } else {
                         return {state:'Invalid Password'}
                 }
@@ -69,31 +79,32 @@ async function login(body:UserDao){
 
 
 
-export const action:LoaderFunction = async (param) => {
-        const body = await param.request.json();
-        const method = param.request.method;
+export const action:ActionFunction = async ({ request }) => {
+        const method = request.method;
+        const body = await request.json();
+        const cookie = request.headers.get("Cookie")
         switch (method) {
                 case "POST":
-                        return await login(body);
+                        return await login(body, cookie);
                 case "PUT":
                         return await signUp(body)
                 default :
-                        return {status: "Err"}
+                        return {state: "Err"}
         }
 }
 
 // read user
 //로그인하기
-//비밀번호 찾기
+//비밀번호 찾기 (get)
 
 
 // update user
-//비밀번호 변경하기
-//비밀번호 리셋하기
-//닉네임 변경하기
+//비밀번호 변경하기 (put)
+//비밀번호 리셋하기 (put)
+//닉네임 변경하기 (put)
 
 // delete user
-// 탈퇴하기
+// 탈퇴하기 (delete)
 
 
 
