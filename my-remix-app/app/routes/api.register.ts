@@ -118,6 +118,3 @@ export const action:ActionFunction = async ({ request }) => {
         }
 }
 
-
-// update user
-//비밀번호 리셋하기 (put)

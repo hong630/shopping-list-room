@@ -101,23 +101,49 @@ const LoginComponent = () => {
     }
 
     //비밀번호 찾기 결과 보여주기
-    const showFindingPasswordResult = () => {
+    const showFindingPasswordResult = (event:React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         //비밀번호 찾기 모달 닫기
         closePasswordPage();
+        const formData = new FormData(event.currentTarget);
+        const email = formData.get("email");
 
         //비밀번호 찾기 결과 모달 열기
         //TODO 이메일 유무 체크 API
-        const response:boolean = false;
-        if (response) {
-            //있는 이메일일 때 리셋 이메일 보냈다는 안내 메시지 열기
-            openModalResetCompleted();
-        } else if (response === false) {
-            //없는 이메일일 때 다시 입력해달라는 메시지 열기
-            openModalAskingRetry();
-        } else {
-            //에러
-            console.log('response: ', response);
-        }
+        //비밀번호 변경 API
+        fetch("http://localhost:5173/api/changeUser",
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    type : 'resetPassword',
+                    email: email
+                }),
+            })
+            .then(async (res)=>{
+                const data = await res.json()
+                const response = data.state;
+                console.log(response)
+                if (response === 'Success'){
+                    //있는 이메일일 때 리셋 이메일 보냈다는 안내 메시지 열기
+                    openModalResetCompleted();
+                }else{
+                    //없는 이메일일 때 다시 입력해달라는 메시지 열기
+                    openModalAskingRetry();
+                    console.log(response)
+                }
+            })
+            .catch((err)=>{
+                console.log(err)
+                //없는 이메일일 때 다시 입력해달라는 메시지 열기
+                openModalAskingRetry();
+            })
+            .finally(()=>{
+                    console.log("끝")
+                }
+            )
     }
 
     //비밀번호 찾기 결과 확인 누르면, 비밀번호 찾기 결과 모달 닫고 다시 비밀번호 찾기 모달 열기 (이메일 없는 경우)
@@ -132,6 +158,7 @@ const LoginComponent = () => {
         setFindingPasswordResult('');
         openLogin();
     }
+
 
     return (
         <div>
@@ -168,11 +195,11 @@ const LoginComponent = () => {
             {
                 findingPasswordPage ?
                     <div>
-                        <Form>
+                        <Form onSubmit={showFindingPasswordResult}>
                             <label htmlFor="">
                                 아이디를 입력하세요 : <input type="text" name="email" placeholder="이메일을 입력하세요"/>
                             </label>
-                            <button onClick={showFindingPasswordResult}>제출</button>
+                            <button type="submit">제출</button>
                         </Form>
                     </div>
                     :

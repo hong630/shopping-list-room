@@ -1,9 +1,10 @@
 import {ActionFunction, json} from "@remix-run/node";
 import {UserDao} from "~/data/dao";
-import {PrismaClient} from "@prisma/client";
+import {Prisma, PrismaClient} from "@prisma/client";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import {commitSession, getSession} from "~/routes/session.server";
+import {catchErrCode} from "~/utils/prismaErr";
 
 dotenv.config();
 
@@ -108,14 +109,42 @@ function generateRandomPassword() {
     return password;
 }
 
-// 이메일 전송 설정
-const transporter = nodemailer.createTransport({
-    service: 'Gmail', // 원하는 이메일 서비스 사용
-    auth: {
-        user: 'hongihongi60@gmail.com',
-        pass: process.env.EMAIL_PASSWORD,
-    },
-});
+// TODO 이메일 전송 설정
+// const transporter = nodemailer.createTransport({
+//     service: 'Gmail', // 원하는 이메일 서비스 사용
+//     auth: {
+//         user: 'hongihongi60@gmail.com',
+//         pass: process.env.EMAIL_PASSWORD,
+//     },
+// });
+
+async function resetPassword(body:UserDao){
+    try{
+    // 무작위 비밀번호 생성
+    const newPassword = generateRandomPassword();
+
+    //데이터베이스 비밀번호 업데이트
+    await updatePassword(body.email, newPassword);
+
+    // TODO 이메일 전송
+    // const mailOptions = {
+    //     from: 'hongihongi60@gmail.com',
+    //     to: body.email,
+    //     subject: '비밀번호를 변경하였습니다.',
+    //     text: `새로운 비밀번호는 ${newPassword} 입니다. 로그인 후 비밀번호를 변경해주세요.`,
+    // };
+    //
+    // await transporter.sendMail(mailOptions);
+
+    return { state : 'Success' };
+    } catch (err) {
+        if(err instanceof Prisma.PrismaClientKnownRequestError){
+            return catchErrCode(err.code)
+        }
+        return  {state:'An error occurred while resetting password.'}
+    }
+
+}
 
 
 
@@ -127,6 +156,8 @@ export const action:ActionFunction = async ({ request }) => {
             return await changePassword(body);
         case "nickname":
             return await changeNickname(body, cookie);
+        case "resetPassword":
+            return await resetPassword(body);
         default :
             return {state: "Err"}
     }

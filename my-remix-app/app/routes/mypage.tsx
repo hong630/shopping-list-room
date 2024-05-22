@@ -232,11 +232,8 @@ const Mypage = () => {
                             <label htmlFor="">
                                 변경하실 비밀번호를 입력해주세요. <input type="text" name="password"/>
                             </label>
-                            {/*TODO 비밀번호 변경 api*/}
                             <button type="submit">변경</button>
                         </Form>
-                        {/*TODO 비밀번호 찾기 구현*/}
-                        <button>기존 비밀번호가 기억나지 않으세요?</button>
                     </div>
                     : <div></div>
             }
