@@ -11,3 +11,4 @@ export const catchErrCode = (code:string)=>{
             return { state: 'An unknown error occurred.' };
     }
 }
+

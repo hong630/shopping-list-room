@@ -58,7 +58,7 @@ const LoginComponent = () => {
                 const response = data.state;
                 if (response === 'Success'){
                     //방 목록 페이지로 이동
-                    // location.reload();
+                    location.reload();
                 }else if(response === 'Invalid Email'){
                     //로그인 실패 모달 열기
                     setFailedLogin('Invalid Email');

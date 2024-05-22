@@ -4,7 +4,7 @@ import {catchErrCode} from "~/utils/prismaErr";
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import {UserDao} from "~/data/dao";
-import {commitSession, getSession} from "~/routes/session.server";
+import {commitSession, destroySession, getSession} from "~/routes/session.server";
 
 dotenv.config();
 
@@ -35,7 +35,6 @@ async function createUser(email: string, nickname:string, password: string) {
 }
 // 회원 가입
 async function signUp(body:UserDao){
-        console.log("bpdu")
         try {
                 await createUser(body.email,body.nickname, body.password)
                 return  {state:true}
@@ -77,7 +76,31 @@ export async function login(body: UserDao, cookie:string|null){
 
 }
 
+//INFO 탈퇴하기
 
+// 회원 정보 DB 삭제
+async function deleteUser(email: string) {
+        return prisma.user.delete({
+                where: {email: email},
+        });
+}
+// 탈퇴하기
+export async function withdraw(body: UserDao, cookie:string|null){
+        try {
+                await deleteUser(body.email);
+                //세션 파기
+                const session = await getSession(cookie);
+                return json(
+                    { state: 'Success' },
+                    {
+                            headers: {
+                                    "Set-Cookie": await destroySession(session),
+                            },
+                    });
+        } catch (err){
+                return  {state:err}
+        }
+}
 
 export const action:ActionFunction = async ({ request }) => {
         const method = request.method;
@@ -87,39 +110,14 @@ export const action:ActionFunction = async ({ request }) => {
                 case "POST":
                         return await login(body, cookie);
                 case "PUT":
-                        return await signUp(body)
+                        return await signUp(body);
+                case "DELETE":
+                        return await withdraw(body, cookie);
                 default :
                         return {state: "Err"}
         }
 }
 
-// read user
-//로그인하기
-//비밀번호 찾기 (get)
-
 
 // update user
-//비밀번호 변경하기 (put)
 //비밀번호 리셋하기 (put)
-//닉네임 변경하기 (put)
-
-// delete user
-// 탈퇴하기 (delete)
-
-
-
-
-
-// export const getUsers = async () => {
-//         return prisma.user.findMany()
-// }
-
-// export const getTest = async () => {
-//         const allUser = await getUsers()
-//         console.log(allUser)
-//         return json(allUser);
-// }
-//
-// export const loader:LoaderFunction = () => {
-//         return getTest()
-// }
