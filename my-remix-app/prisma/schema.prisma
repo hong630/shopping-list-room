@@ -1,3 +1,6 @@
+//npx prisma migrate dev --name <migration name>
+//npx prisma migrate dev --name init
+
 datasource db {
   provider = "sqlite"
   url      = "file:./dev.db"
@@ -12,4 +15,24 @@ model User {
   email    String  @unique
   nickname String  @default("귀여운 햄스터")
   password String
+}
+
+model Room {
+  roomId Int @id @default(autoincrement())
+  title String @default("장바구니")
+  description String @default("")
+  link String @unique
+}
+
+model MemberRoom {
+  email String @id
+  roomId Int @unique
+  authority String
+}
+
+model ShoppingItem {
+  id Int @id @default(autoincrement())
+  name String
+  shopped Boolean @default(false)
+  roomId Int @unique
 }
