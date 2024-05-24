@@ -42,3 +42,8 @@ export interface LoggedInUserData {
     isLoggedIn: boolean;
 }
 
+export interface RoomDto {
+    email:string,
+    title:string,
+    description:string
+}

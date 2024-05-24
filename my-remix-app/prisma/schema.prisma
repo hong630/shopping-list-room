@@ -21,13 +21,14 @@ model Room {
   roomId Int @id @default(autoincrement())
   title String @default("장바구니")
   description String @default("")
-  link String @unique
+  code String
 }
 
 model MemberRoom {
-  email String @id
-  roomId Int @unique
+  email String
+  roomId Int
   authority String
+  @@id([email, roomId])
 }
 
 model ShoppingItem {

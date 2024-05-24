@@ -4,7 +4,7 @@ import MakeRoomModal from "~/component/shoppingRoom/makeRoomModal";
 import LoginComponent from "~/component/auth/login";
 import HeaderLayout from "~/component/common/header";
 
-const LoginLayout = (props:{status:boolean}) => {
+const LoginLayout = (props:{status:boolean, email:string}) => {
 
     //장바구니 방 만들기
     const [shareRoomToggle, setShareRoomToggle] = useState(false);
@@ -64,7 +64,7 @@ const LoginLayout = (props:{status:boolean}) => {
                 <button onClick={openShareRoom}>공유방 만들기</button>
                 <button onClick={openInvitationModal}>초대코드로 방찾기</button>
             </div>
-            {shareRoomToggle ? <MakeRoomModal />:<div></div>}
+            {shareRoomToggle ? <MakeRoomModal email={props.email} />:<div></div>}
             {
                 invitationModal?
                     <div style={{backgroundColor:"aliceblue"}}>

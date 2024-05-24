@@ -2,8 +2,6 @@ import {Form} from "@remix-run/react";
 import React, {useState} from "react";
 
 const LoginComponent = () => {
-    //TODO 이메일과 비밀번호 맞는 지 검사
-    //TODO email로 비밀번호 찾기
     //로그인 화면 토글
     const [login, setLogin] = useState<boolean>(true);
 

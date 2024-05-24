@@ -1,5 +1,5 @@
 import LoginLayout from "~/component/loginLayout/LoginLayout";
-import {LoaderFunction, redirect} from "@remix-run/node";
+import {LoaderFunction} from "@remix-run/node";
 import {getUserSession} from "~/routes/session.server";
 import {useLoaderData} from "react-router";
 import {LoggedInUserData} from "~/data/dto";
@@ -14,9 +14,10 @@ const RoomIndex = () => {
     const data = useLoaderData() as LoggedInUserData;
     const { user, isLoggedIn } = data;
     console.log(user);
+    const email = user?.email || ""
     return (
         <div>
-            <LoginLayout status={isLoggedIn}/>
+            <LoginLayout status={isLoggedIn} email={email}/>
         </div>
     )
 }
