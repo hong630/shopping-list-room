@@ -22,12 +22,14 @@ model Room {
   title String @default("장바구니")
   description String @default("")
   code String
+  memberRooms MemberRoom[]
 }
 
 model MemberRoom {
   email String
   roomId Int
   authority String
+  room      Room     @relation(fields: [roomId], references: [roomId])
   @@id([email, roomId])
 }
 

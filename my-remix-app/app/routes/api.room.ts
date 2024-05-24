@@ -1,12 +1,11 @@
 import {ActionFunction, LoaderFunction} from "@remix-run/node";
 import {PrismaClient} from "@prisma/client";
-import {RoomDto} from "~/data/dto";
+import {GetRoomDto} from "~/data/dto";
 
 
 const prisma = new PrismaClient();
 
 //INFO 방 만들기
-
 //5자리 코드 생성
 async function generateRandomCode(length: number){
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -33,7 +32,7 @@ export async function createMemberRoom(email:string, roomId:number, authority:st
     });
 }
 
-async function makeRoom(body:RoomDto){
+async function makeRoom(body:GetRoomDto){
     try{
         const randomCode = await generateRandomCode(5);
         //저장된 방 정보
@@ -46,14 +45,12 @@ async function makeRoom(body:RoomDto){
     }
 }
 
-
 export const action:ActionFunction = async ({request}) => {
     const body = await request.json();
     return await makeRoom(body);
 }
 
 //INFO 사용자 email로 참여하고 있는 방 정보 가져오기
-
 async function getRoomInfo(email:string){
     const memberRooms = await prisma.memberRoom.findMany({
         where: {
@@ -63,15 +60,27 @@ async function getRoomInfo(email:string){
             room: true // Room 정보를 포함하여 가져옴
         }
     });
-
     //Room 정보만 추출
     const rooms = memberRooms.map(memberRoom => memberRoom.room);
-
     return rooms;
 }
 
+//INFO 방 id별로 방 정보 보여주기
+
+
+
 export const loader:LoaderFunction = async ({request}) => {
-    const body = await request.json();
-    return await getRoomInfo(body.email);
+    const loaderUrl = new URL(request.url);
+    const email = loaderUrl.searchParams.get('email') || '';
+    const type = loaderUrl.searchParams.get('type') || '';
+    switch(type){
+        case 'all':
+            return await getRoomInfo(email);
+        default:
+            return {state : 'getting room info error'}
+    }
+
 }
+
+
 

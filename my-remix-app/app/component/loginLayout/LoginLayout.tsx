@@ -60,7 +60,7 @@ const LoginLayout = (props:{status:boolean, email:string}) => {
             <div>
                 <HeaderLayout status={true}></HeaderLayout>
                 <h1>로그인 되었습니다.</h1>
-                <ShoppingRoomListComponent/>
+                <ShoppingRoomListComponent email={props.email}/>
                 <button onClick={openShareRoom}>공유방 만들기</button>
                 <button onClick={openInvitationModal}>초대코드로 방찾기</button>
             </div>
