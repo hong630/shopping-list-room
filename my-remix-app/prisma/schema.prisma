@@ -15,6 +15,7 @@ model User {
   email    String  @unique
   nickname String  @default("귀여운 햄스터")
   password String
+  memberRooms MemberRoom[]
 }
 
 model Room {
@@ -30,6 +31,7 @@ model MemberRoom {
   roomId Int
   authority String
   room      Room     @relation(fields: [roomId], references: [roomId])
+  user      User     @relation(fields: [email], references: [email])
   @@id([email, roomId])
 }
 

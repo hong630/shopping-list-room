@@ -51,7 +51,7 @@ export const action:ActionFunction = async ({request}) => {
 }
 
 //INFO 사용자 email로 참여하고 있는 방 정보 가져오기
-async function getRoomInfo(email:string){
+async function getRoomInfoAll(email:string){
     const memberRooms = await prisma.memberRoom.findMany({
         where: {
             email: email
@@ -66,16 +66,38 @@ async function getRoomInfo(email:string){
 }
 
 //INFO 방 id별로 방 정보 보여주기
+async function getRoomInfoDetail(roomId:number){
+    const roomDetail = await prisma.room.findUnique({
+        where: {
+            roomId: roomId
+        },
+        include:{
+            memberRooms : {
+                    include : {
+                        user : true
+                    }
+            }
+        }
+    });
 
+    if (!roomDetail) {
+        return null; // 방 정보를 찾지 못한 경우 null 반환
+    }
+
+    return roomDetail;
+}
 
 
 export const loader:LoaderFunction = async ({request}) => {
     const loaderUrl = new URL(request.url);
     const email = loaderUrl.searchParams.get('email') || '';
     const type = loaderUrl.searchParams.get('type') || '';
+    const roomId = Number(loaderUrl.searchParams.get('roomId')) || 0;
     switch(type){
         case 'all':
-            return await getRoomInfo(email);
+            return await getRoomInfoAll(email);
+        case 'detail':
+            return await getRoomInfoDetail(roomId)
         default:
             return {state : 'getting room info error'}
     }
