@@ -3,11 +3,10 @@ import React from "react";
 const MakeRoomModal = (props:{email:string}) => {
 
     const makeRoom = (event:React.FormEvent<HTMLFormElement>) => {
-
         const formData = new FormData(event.currentTarget);
         const title = formData.get("title");
         const description = formData.get("description");
-        //로그인 API
+        //방만들기 API
         fetch("http://localhost:5173/api/room",
             {
                 method: "POST",

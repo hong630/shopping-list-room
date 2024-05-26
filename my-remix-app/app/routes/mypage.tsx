@@ -207,7 +207,7 @@ const Mypage = () => {
                     <div>
                         <h1>{user.nickname}의 마이페이지입니다.</h1>
                         <h2>내가 초대된 방 리스트</h2>
-                        <ShoppingRoomListComponent/>
+                        <ShoppingRoomListComponent email={user.email}/>
                         <button onClick={showWithdrawModal}>탈퇴하기</button>
                         <button onClick={openChangingPasswordModal}>비밀번호 변경하기</button>
                         <button onClick={openChangingNicknameModal}>닉네임 변경하기</button>

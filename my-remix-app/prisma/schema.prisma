@@ -15,7 +15,7 @@ model User {
   email    String  @unique
   nickname String  @default("귀여운 햄스터")
   password String
-  memberRooms MemberRoom[]
+  members MemberRoom[]
 }
 
 model Room {
@@ -23,7 +23,7 @@ model Room {
   title String @default("장바구니")
   description String @default("")
   code String
-  memberRooms MemberRoom[]
+  members MemberRoom[]
 }
 
 model MemberRoom {

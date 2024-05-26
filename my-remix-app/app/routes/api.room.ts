@@ -1,6 +1,6 @@
 import {ActionFunction, LoaderFunction} from "@remix-run/node";
 import {PrismaClient} from "@prisma/client";
-import {GetRoomDto} from "~/data/dto";
+import {CheckAuthorityDto, GetRoomDto} from "~/data/dto";
 
 
 const prisma = new PrismaClient();
@@ -45,11 +45,6 @@ async function makeRoom(body:GetRoomDto){
     }
 }
 
-export const action:ActionFunction = async ({request}) => {
-    const body = await request.json();
-    return await makeRoom(body);
-}
-
 //INFO 사용자 email로 참여하고 있는 방 정보 가져오기
 async function getRoomInfoAll(email:string){
     const memberRooms = await prisma.memberRoom.findMany({
@@ -72,7 +67,7 @@ async function getRoomInfoDetail(roomId:number){
             roomId: roomId
         },
         include:{
-            memberRooms : {
+            members : {
                     include : {
                         user : true
                     }
@@ -81,11 +76,127 @@ async function getRoomInfoDetail(roomId:number){
     });
 
     if (!roomDetail) {
-        return null; // 방 정보를 찾지 못한 경우 null 반환
+        return {state : 'no room'};
     }
 
-    return roomDetail;
+    const roomDetailInfo = {
+        roomId: roomDetail.roomId,
+        title: roomDetail.title,
+        description: roomDetail.description,
+        code: roomDetail.code,
+        members: roomDetail.members.map(member => ({
+            email: member.email,
+            nickname: member.user.nickname
+        })),
+        master : roomDetail.members
+            .filter(member => member.authority === 'master')
+            .map(member => member.user.nickname[0] || '')
+    };
+
+    return roomDetailInfo;
 }
+
+//INFO 코드입력하면 방에 들어가기
+async function enterRoomWithCode(email:string, roomId:number, code:string) {
+    try{
+        const roomData = await prisma.room.findUnique({
+            where: {
+                roomId: roomId
+            }
+        })
+
+        // 방이 없음 에러
+        if (!roomData) {
+            return { state: 'Room not found' };
+        }
+        const roomCode = roomData.code;
+
+        if(roomCode === code){
+            await prisma.memberRoom.create({
+                data: { email:email, roomId:roomId, authority:'normal'},
+            });
+            return {state : 'Success'}
+        }else{
+            return {state : 'Invalid Code'}
+        }
+    }catch(err){
+        return {state : err}
+    }
+}
+
+//INFO 권한 체크하기
+//권한 가져오기
+async function getAuthority(email:string, roomId:number){
+    return prisma.memberRoom.findUnique({
+        where : {
+            email_roomId:{
+                email : email,
+                roomId : roomId
+            },
+        },
+        select : {
+            authority : true
+        }
+    })
+}
+
+async function checkAuthority(body:CheckAuthorityDto){
+    try{
+        const email = body.email;
+        const roomId = Number(body.roomId);
+
+        const userAuthority = getAuthority(email, roomId);
+
+        if (!userAuthority) {
+            // 예외 처리: 값이 없을 경우
+            throw new Error('Matched data not found');
+        }
+
+        return {state : userAuthority}
+
+    }catch(err){
+        return {state : 'Invalid email, roomId, or both'}
+    }
+}
+
+//TODO 방정보 변경하기
+// async function changeRoomInfo(body:RoomChangeDto){
+//     try{
+//         const email = body.email;
+//         const title = body.title;
+//         const description = body.description;
+//         const roomId = Number(body.roomId);
+//
+//         const userAuthority = getAuthority(email, roomId);
+//
+//         if (!userAuthority) {
+//             // 예외 처리: 값이 없을 경우
+//             throw new Error('Matched data not found');
+//         }
+//
+//         console.log(userAuthority)
+//         if(userAuthority. === 'master'){
+//             await prisma.room.update({
+//                 where :{
+//                     roomId : roomId
+//                 },
+//                 data : {
+//                     title : title,
+//                     description : description
+//                 }
+//             })
+//
+//             return {state : 'Success'}
+//         }else{
+//             return {state : 'Not a master'}
+//         }
+//     }catch(err){
+//         return {state : err}
+//     }
+// }
+//TODO 권한 변경하기
+//TODO 방 나가기
+
 
 
 export const loader:LoaderFunction = async ({request}) => {
@@ -97,12 +208,33 @@ export const loader:LoaderFunction = async ({request}) => {
         case 'all':
             return await getRoomInfoAll(email);
         case 'detail':
-            return await getRoomInfoDetail(roomId)
+            return await getRoomInfoDetail(roomId);
+        case 'authority' :
+            // TODO 여기부터 고쳐!!!
+            return await checkAuthority(email, roomId)
         default:
-            return {state : 'getting room info error'}
+            return {state : 'Invalid Type'}
     }
-
 }
 
 
-
+export const action:ActionFunction = async ({request}) => {
+    const body = await request.json();
+    const type = body.type;
+    const email = body.email;
+    const roomId = Number(body.roomId);
+    const code = body.code;
+    switch(type){
+        case 'makeRoom':
+            //방 만들기
+            return await makeRoom(body);
+        case 'enter':
+            //방 들어가기
+            return await enterRoomWithCode(email, roomId, code);
+        // case 'update':
+            //방 정보
+            // return await checkAuthority(body);
+        default:
+            return {state : 'Invalid Type'}
+    }
+}

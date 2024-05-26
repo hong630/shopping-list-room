@@ -55,3 +55,31 @@ export interface RoomDto {
     title:string,
     description:string
 }
+
+//INFO 룸 상세
+export interface RoomDetailMembersDto{
+    email : string,
+    nickname : string
+}
+export interface RoomDetailDto {
+    code : string,
+    description : string,
+    master : Array<string>,
+    members : Array<RoomDetailMembersDto>,
+    roomId : number,
+    title : string
+}
+
+//INFO 방정보 변경하기
+export interface RoomChangeDto {
+    email : string,
+    title : string,
+    description : string,
+    roomId : number
+}
+
+//INFO 권한 체크하기
+export interface CheckAuthorityDto {
+    email : string,
+    roomId : number;
+}

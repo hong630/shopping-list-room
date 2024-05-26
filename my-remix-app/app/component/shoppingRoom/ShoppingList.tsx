@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {emptyRoomDetailData, roomDetailData} from "~/data/default";
 import {ROOMDETAILDATA, SHOPPINGLIST} from "~/data/dto";
 
-const ShoppingList = () => {
+const ShoppingList = (props:{managerName:string}) => {
     const params = useParams();
     const shoppingData:ROOMDETAILDATA = roomDetailData.find(data=>data.id === params.id)||emptyRoomDetailData; //TODO API로 대체
     // const roomId = params.id?.trim();
@@ -156,7 +156,7 @@ const ShoppingList = () => {
     }
     return (
         <>
-            <h1>방 관리자 : {managerName}({managerEmail})</h1>
+            <h1>방 관리자 : {props.managerName}</h1>
             <ul>
                 {shoppingList.map((item,index) => {
                     return (
