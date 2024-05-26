@@ -1,0 +1,96 @@
+import {MemberListProps} from "~/data/dto";
+import React, {useRef, useState} from "react";
+import {Form} from "@remix-run/react";
+
+
+const ChangeAuthority:React.FC<MemberListProps> = ({memberData, authority, email, roomId}) => {
+    //authority변경 모달 열기
+    const [openingAuthorityModal, setOpeningAuthorityModal] = useState(false)
+    //후임자 정보
+
+    //authority변경 모달 열기
+    const openAuthorityModal = () => {
+        setOpeningAuthorityModal(true);
+    }
+    //authority변경 모달 닫기
+    const closeAuthorityModal = () => {
+        setOpeningAuthorityModal(false);
+    }
+
+    const formRef = useRef(null);
+
+    const changeMaster = (event:React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if(formRef.current){
+            const formData = new FormData(formRef.current);
+            const newManagerEmail = formData.get('master');
+
+            //권한 변경 API
+            fetch("http://localhost:5173/api/room",
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        type: "changeMaster",
+                        originManagerEmail : email,
+                        newManagerEmail : newManagerEmail,
+                        roomId : roomId
+                    }),
+                })
+                .then(async (res)=>{
+                    console.log(res)
+                    const data = await res.json()
+                    const response = data.state;
+                    if (response === 'Success'){
+                        //방 목록 페이지로 이동
+                        // location.reload();
+                        console.log('성공!')
+                    }else{
+                        console.log('response :', response)
+                    }
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
+                .finally(()=>{
+                        console.log("끝")
+                    }
+                )
+        }
+    }
+    return (
+        <div>
+            {
+                authority ?
+                    <div>
+                        <button onClick={openAuthorityModal}>방장 변경</button>
+                    </div>:
+                    <div></div>
+            }
+            {authority && openingAuthorityModal && memberData && memberData.length > 0 ? (
+                <div>
+                    <Form ref={formRef} onSubmit={changeMaster}>
+                        <ul>
+                            <h1>변경 후보 목록</h1>
+                            {memberData.map((member, index) => (
+                                <li key={index}>
+                                    <label htmlFor="">
+                                        {member.nickname} : <input type="radio" name="master" value={member.email}/>
+                                    </label>
+                                </li>
+                            ))}
+                        </ul>
+                        <button type="submit">제출</button>
+                    </Form>
+                    <button onClick={closeAuthorityModal}>취소</button>
+                </div>
+            ) : (
+                <div></div>
+            )}
+        </div>
+    )
+}
+
+export default ChangeAuthority;

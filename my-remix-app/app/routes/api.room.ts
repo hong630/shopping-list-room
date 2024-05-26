@@ -1,6 +1,6 @@
 import {ActionFunction, LoaderFunction} from "@remix-run/node";
 import {PrismaClient} from "@prisma/client";
-import {CheckAuthorityDto, GetRoomDto} from "~/data/dto";
+import {AuthorityChangeDto, GetRoomDto, RoomChangeDto} from "~/data/dto";
 
 
 const prisma = new PrismaClient();
@@ -52,7 +52,7 @@ async function getRoomInfoAll(email:string){
             email: email
         },
         include: {
-            room: true // Room 정보를 포함하여 가져옴
+            room: true
         }
     });
     //Room 정보만 추출
@@ -127,28 +127,24 @@ async function enterRoomWithCode(email:string, roomId:number, code:string) {
 //INFO 권한 체크하기
 //권한 가져오기
 async function getAuthority(email:string, roomId:number){
-    return prisma.memberRoom.findUnique({
-        where : {
-            email_roomId:{
-                email : email,
-                roomId : roomId
+    const userAuthority = await prisma.memberRoom.findUnique({
+            where : {
+                email_roomId:{
+                    email : email,
+                    roomId : roomId
+                },
             },
-        },
-        select : {
-            authority : true
-        }
-    })
+            select : {
+                authority : true
+            }
+        })
+    return userAuthority
 }
 
-async function checkAuthority(body:CheckAuthorityDto){
+async function checkAuthority(email:string, roomId:number){
     try{
-        const email = body.email;
-        const roomId = Number(body.roomId);
-
-        const userAuthority = getAuthority(email, roomId);
-
+        const userAuthority = await getAuthority(email, roomId);
         if (!userAuthority) {
-            // 예외 처리: 값이 없을 경우
             throw new Error('Matched data not found');
         }
 
@@ -159,42 +155,79 @@ async function checkAuthority(body:CheckAuthorityDto){
     }
 }
 
-//TODO 방정보 변경하기
-// async function changeRoomInfo(body:RoomChangeDto){
-//     try{
-//         const email = body.email;
-//         const title = body.title;
-//         const description = body.description;
-//         const roomId = Number(body.roomId);
-//
-//         const userAuthority = getAuthority(email, roomId);
-//
-//         if (!userAuthority) {
-//             // 예외 처리: 값이 없을 경우
-//             throw new Error('Matched data not found');
-//         }
-//
-//         console.log(userAuthority)
-//         if(userAuthority. === 'master'){
-//             await prisma.room.update({
-//                 where :{
-//                     roomId : roomId
-//                 },
-//                 data : {
-//                     title : title,
-//                     description : description
-//                 }
-//             })
-//
-//             return {state : 'Success'}
-//         }else{
-//             return {state : 'Not a master'}
-//         }
-//     }catch(err){
-//         return {state : err}
-//     }
-// }
-//TODO 권한 변경하기
+//INFO 방정보 변경하기
+async function changeRoomInfo(body:RoomChangeDto){
+    try{
+        const email = body.email;
+        const title = body.title;
+        const description = body.description;
+        const roomId = Number(body.roomId);
+        const userAuthority = await getAuthority(email, roomId);
+
+        if (!userAuthority) {
+            throw new Error('Matched data not found');
+        }
+
+        if(userAuthority.authority === 'master'){
+            await prisma.room.update({
+                where :{
+                    roomId : roomId
+                },
+                data : {
+                    title : title,
+                    description : description
+                }
+            })
+            return {state : 'Success'}
+        }else{
+            return {state : 'Not a master'}
+        }
+    }catch(err){
+        return {state : err}
+    }
+}
+
+//INFO 권한 변경하기
+async function changeAuthority(email:string, roomId:number, authority:string){
+    const changedAuthority = await prisma.memberRoom.update({
+        where :{
+            email_roomId:{
+                email : email,
+                roomId : roomId
+            },
+        },
+        data : {
+            authority : authority
+        }
+    })
+    return changedAuthority
+}
+
+async function changeMaster(body:AuthorityChangeDto){
+
+    const originManager = body.originManagerEmail;
+    const newManager = body.newManagerEmail;
+    const roomId = Number(body.roomId);
+
+    //기존 마스터가 마스터인지, 다른 유저가 일반 유저인지 체크
+    const checkMaster =  await getAuthority(originManager, roomId);
+    const checkNormal = await getAuthority(newManager, roomId);
+
+    if(!checkMaster || !checkNormal){
+        return {state : 'Invalid users'}
+    }
+
+    if(checkMaster.authority === 'master' &&
+        checkNormal.authority === 'normal'){
+        //기존 마스터는 일반 유저로, 일반 유저는 마스터로 변경
+        await changeAuthority(originManager, roomId, 'normal');
+        await changeAuthority(newManager, roomId, 'master');
+        return {state : 'Success'}
+    }else{
+        return {state : 'Invalid successor'}
+    }
+}
+
 //TODO 방 나가기
 
 
@@ -206,12 +239,13 @@ export const loader:LoaderFunction = async ({request}) => {
     const roomId = Number(loaderUrl.searchParams.get('roomId')) || 0;
     switch(type){
         case 'all':
+            //참여하고 있는 방 목록 가져옴
             return await getRoomInfoAll(email);
         case 'detail':
+            //개별 방정보 가져옴
             return await getRoomInfoDetail(roomId);
         case 'authority' :
-            // TODO 여기부터 고쳐!!!
-            return await checkAuthority(email, roomId)
+            return await checkAuthority(email,roomId)
         default:
             return {state : 'Invalid Type'}
     }
@@ -224,6 +258,7 @@ export const action:ActionFunction = async ({request}) => {
     const email = body.email;
     const roomId = Number(body.roomId);
     const code = body.code;
+    console.log(body)
     switch(type){
         case 'makeRoom':
             //방 만들기
@@ -231,9 +266,12 @@ export const action:ActionFunction = async ({request}) => {
         case 'enter':
             //방 들어가기
             return await enterRoomWithCode(email, roomId, code);
-        // case 'update':
+        case 'update':
             //방 정보
-            // return await checkAuthority(body);
+            return await changeRoomInfo(body);
+        case 'changeMaster':
+            //방 권한 변경
+            return await changeMaster(body);
         default:
             return {state : 'Invalid Type'}
     }

@@ -78,8 +78,16 @@ export interface RoomChangeDto {
     roomId : number
 }
 
-//INFO 권한 체크하기
-export interface CheckAuthorityDto {
+//INFO 권한정보 변경하기
+export interface MemberListProps {
+    memberData: RoomDetailMembersDto[],
+    authority : boolean,
     email : string,
-    roomId : number;
+    roomId : number
 }
+export interface AuthorityChangeDto {
+    originManagerEmail : string,
+    newManagerEmail : string,
+    roomId : number
+}
+

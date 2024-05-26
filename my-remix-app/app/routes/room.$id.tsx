@@ -7,6 +7,7 @@ import {Form} from "@remix-run/react";
 import {LoaderFunction, redirect} from "@remix-run/node";
 import {getUserSession} from "~/routes/session.server";
 import ChangeRoomInfo from "~/component/shoppingRoom/ChangeRoomInfo";
+import ChangeAuthority from "~/component/shoppingRoom/ChangeAuthority";
 
 //세션에서 로그인한 사용자 정보 가져오기
 export const loader: LoaderFunction = async ({ request }) => {
@@ -23,7 +24,7 @@ const DetailRoom = () => {
     const roomId:string = params.id || "";
     const data = useLoaderData() as LoggedInUserData;
     const { user } = data;
-    const userEmail = user?.email || null;
+    const userEmail = user?.email || "";
 
     const copyInvitationLink = (event:React.MouseEvent<HTMLButtonElement>) => {
         const text = event.currentTarget.value;
@@ -41,6 +42,9 @@ const DetailRoom = () => {
     const [notMember, setNotMember] = useState(false);
     //방정보 담기
     const [roomDetailInfo, setRoomDetailInfo] = useState<RoomDetailDto | null>(null)
+
+    //권한 설정
+    const [authority, setAuthority] = useState(false);
 
     useEffect(()=>{
         const url = new URL('http://localhost:5173/api/room');
@@ -113,6 +117,33 @@ const DetailRoom = () => {
 
     }
 
+    //권한 체크
+    const checkAuthority = () => {
+        const url = new URL('http://localhost:5173/api/room');
+        url.searchParams.append('type', 'authority');
+        url.searchParams.append('email', userEmail);
+        url.searchParams.append('roomId', roomId.toString());
+
+        fetch(url)
+            .then(async(res)=>{
+                const data = await res.json();
+                if(data.state.authority === 'master'){
+                    //방장일 시 방소개 변경 노출
+                    setAuthority(true)
+                }else{
+                    //방장 아닐 시 방소개 변경 숨김
+                    setAuthority(false)
+                }
+            }).catch((err)=>{
+            console.log(err)
+        })
+    }
+
+    useEffect(()=>{
+        //권한 체크
+        checkAuthority();
+    },[])
+
     return (
         <div>
             <HeaderLayout status={true}></HeaderLayout>
@@ -135,7 +166,8 @@ const DetailRoom = () => {
                     <div>
                         <h1>{roomDetailInfo.title}</h1>
                         <p>{roomDetailInfo.description}</p>
-                        <ChangeRoomInfo email={userEmail || ""} roomId={Number(roomId)}></ChangeRoomInfo>
+                        <ChangeRoomInfo email={userEmail || ""} roomId={Number(roomId)} authority={authority}></ChangeRoomInfo>
+                        <ChangeAuthority email={userEmail || ""} roomId={Number(roomId)} memberData={roomDetailInfo.members} authority={authority}></ChangeAuthority>
                         <button onClick={copyInvitationLink} value={roomDetailInfo.code}>초대링크복사하기</button>
                         <ul>
                             {
