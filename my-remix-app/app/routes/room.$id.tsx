@@ -145,7 +145,7 @@ const DetailRoom = () => {
         //방 나가기 API
         fetch("http://localhost:5173/api/room",
             {
-                method: "POST",
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -220,7 +220,7 @@ const DetailRoom = () => {
                                 ))
                             }
                         </ul>
-                        <ShoppingList managerName={roomDetailInfo?.master[0]} />
+                        <ShoppingList managerName={roomDetailInfo?.master[0]} roomId={Number(roomId)}/>
                     </div>:
                     <div></div>
             }

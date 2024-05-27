@@ -17,7 +17,8 @@ export interface MEMBER {
 
 export interface SHOPPINGLIST {
     name: string,
-    shopped: boolean
+    shopped: boolean,
+    id : number | null
 }
 
 export interface ROOMDETAILDATA {
@@ -91,3 +92,13 @@ export interface AuthorityChangeDto {
     roomId : number
 }
 
+//INFO 쇼핑리스트
+export interface ShoppingListDto{
+    name : string,
+    roomId : number
+}
+
+export interface ChangeShoppedDto{
+    id : number,
+    shopped : boolean
+}
