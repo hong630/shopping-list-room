@@ -228,8 +228,60 @@ async function changeMaster(body:AuthorityChangeDto){
     }
 }
 
-//TODO 방 나가기
+//INFO 방 나가기
+async function deleteMemberRoom(email:string, roomId:number){
+    const deletedMemberRoom = await prisma.memberRoom.delete({
+        where : {
+            email_roomId :{
+                email : email,
+                roomId : roomId
+            }
+        }
+    })
+    return deletedMemberRoom;
+}
 
+async function outRoom(email:string, roomId:number){
+    //나가려는 멤버가 master인지 체크
+    const checkMaster =  await getAuthority(email, roomId)
+    if(!checkMaster){
+        return {state : 'Invalid users'}
+    }
+
+    if(checkMaster.authority === 'master'){
+        //마스터일 경우 권한 위임부터 부탁
+        return {state : 'Master member cannot go out'}
+    }else{
+        //마스터가 아닐 경우 방에서 내보냄
+        await deleteMemberRoom(email, roomId);
+        return {state : 'Success'}
+    }
+}
+
+//INFO 방 삭제 기능
+async function deleteRoomData(roomId:number){
+    await prisma.room.delete({
+        where : {
+            roomId : roomId
+        }
+    });
+}
+async function deleteRoom(email:string, roomId:number){
+    //삭제하려는 멤버가 master인지 체크
+    const checkMaster =  await getAuthority(email, roomId)
+    if(!checkMaster){
+        return {state : 'Invalid users'}
+    }
+    if(checkMaster.authority !== 'master'){
+        //마스터가 아닐 경우 삭제 불가능
+        return {state : 'Normal member cannot delete a room'}
+    }else{
+        //마스터일 경우 삭제
+        console.log('roomId', roomId)
+        await deleteRoomData(roomId);
+        return {state : 'Success'}
+    }
+}
 
 
 export const loader:LoaderFunction = async ({request}) => {
@@ -272,6 +324,12 @@ export const action:ActionFunction = async ({request}) => {
         case 'changeMaster':
             //방 권한 변경
             return await changeMaster(body);
+        case 'outRoom':
+            //방 나가기
+            return await outRoom(email, roomId);
+        case 'deleteRoom':
+            //방 삭제하기
+            return await deleteRoom(email, roomId);
         default:
             return {state : 'Invalid Type'}
     }

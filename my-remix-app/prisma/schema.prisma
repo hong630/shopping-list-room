@@ -24,14 +24,15 @@ model Room {
   description String @default("")
   code String
   members MemberRoom[]
+  shoppingItems ShoppingItem[]
 }
 
 model MemberRoom {
   email String
   roomId Int
   authority String
-  room      Room     @relation(fields: [roomId], references: [roomId])
-  user      User     @relation(fields: [email], references: [email])
+  room      Room     @relation(fields: [roomId], references: [roomId], onDelete: Cascade)
+  user      User     @relation(fields: [email], references: [email], onDelete: Cascade)
   @@id([email, roomId])
 }
 
@@ -39,5 +40,6 @@ model ShoppingItem {
   id Int @id @default(autoincrement())
   name String
   shopped Boolean @default(false)
-  roomId Int @unique
+  room      Room   @relation(fields: [roomId], references: [roomId], onDelete: Cascade)
+  roomId Int
 }

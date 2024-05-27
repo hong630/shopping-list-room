@@ -1,12 +1,17 @@
-import {MemberListProps} from "~/data/dto";
-import React, {useRef, useState} from "react";
+import {MemberListProps, RoomDetailMembersDto} from "~/data/dto";
+import React, {useEffect, useRef, useState} from "react";
 import {Form} from "@remix-run/react";
 
 
 const ChangeAuthority:React.FC<MemberListProps> = ({memberData, authority, email, roomId}) => {
     //authority변경 모달 열기
     const [openingAuthorityModal, setOpeningAuthorityModal] = useState(false)
-    //후임자 정보
+    //후임자 리스트
+    const [successorList, setSuccessorList] = useState<RoomDetailMembersDto[] | null>(null);
+    const setMemberDataExceptMaster = () => {
+        const successorMemberData = memberData.filter(member => member.email !== email);
+        setSuccessorList(successorMemberData);
+    }
 
     //authority변경 모달 열기
     const openAuthorityModal = () => {
@@ -45,7 +50,7 @@ const ChangeAuthority:React.FC<MemberListProps> = ({memberData, authority, email
                     const response = data.state;
                     if (response === 'Success'){
                         //방 목록 페이지로 이동
-                        // location.reload();
+                        location.reload();
                         console.log('성공!')
                     }else{
                         console.log('response :', response)
@@ -60,6 +65,12 @@ const ChangeAuthority:React.FC<MemberListProps> = ({memberData, authority, email
                 )
         }
     }
+
+    useEffect(()=>{
+        setMemberDataExceptMaster();
+        console.log(successorList)
+    },[])
+
     return (
         <div>
             {
@@ -69,12 +80,12 @@ const ChangeAuthority:React.FC<MemberListProps> = ({memberData, authority, email
                     </div>:
                     <div></div>
             }
-            {authority && openingAuthorityModal && memberData && memberData.length > 0 ? (
+            {authority && openingAuthorityModal && successorList && successorList.length > 0 ? (
                 <div>
                     <Form ref={formRef} onSubmit={changeMaster}>
                         <ul>
                             <h1>변경 후보 목록</h1>
-                            {memberData.map((member, index) => (
+                            {successorList?.map((member, index) => (
                                 <li key={index}>
                                     <label htmlFor="">
                                         {member.nickname} : <input type="radio" name="master" value={member.email}/>

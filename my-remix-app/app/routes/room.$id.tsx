@@ -8,6 +8,7 @@ import {LoaderFunction, redirect} from "@remix-run/node";
 import {getUserSession} from "~/routes/session.server";
 import ChangeRoomInfo from "~/component/shoppingRoom/ChangeRoomInfo";
 import ChangeAuthority from "~/component/shoppingRoom/ChangeAuthority";
+import DeleteRoom from "~/component/shoppingRoom/DeleteRoom";
 
 //세션에서 로그인한 사용자 정보 가져오기
 export const loader: LoaderFunction = async ({ request }) => {
@@ -139,6 +140,43 @@ const DetailRoom = () => {
         })
     }
 
+    //방 나가기
+    const outOfRoom = () => {
+        //방 나가기 API
+        fetch("http://localhost:5173/api/room",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    type: "outRoom",
+                    email : userEmail,
+                    roomId : roomId,
+                }),
+            })
+            .then(async (res)=>{
+                const data = await res.json()
+                const response = data.state;
+                if (response === 'Success'){
+                    //방 목록 페이지로 이동
+                    location.href = '/room';
+                }else if (response === 'Master member cannot go out'){
+                    alert('방장은 나갈 수 없습니다. 방장 권한을 위임한 후 나가주세요.');
+                }else{
+                    console.log('response :', response)
+                }
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+            .finally(()=>{
+                    console.log("끝")
+                }
+            )
+    }
+
+
     useEffect(()=>{
         //권한 체크
         checkAuthority();
@@ -166,7 +204,9 @@ const DetailRoom = () => {
                     <div>
                         <h1>{roomDetailInfo.title}</h1>
                         <p>{roomDetailInfo.description}</p>
+                        <button onClick={outOfRoom}>방 나가기</button>
                         <ChangeRoomInfo email={userEmail || ""} roomId={Number(roomId)} authority={authority}></ChangeRoomInfo>
+                        <DeleteRoom email={userEmail || ""} roomId={Number(roomId)} authority={authority}></DeleteRoom>
                         <ChangeAuthority email={userEmail || ""} roomId={Number(roomId)} memberData={roomDetailInfo.members} authority={authority}></ChangeAuthority>
                         <button onClick={copyInvitationLink} value={roomDetailInfo.code}>초대링크복사하기</button>
                         <ul>
