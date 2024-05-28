@@ -1,0 +1,426 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  ChangePasswordFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: routes/api.changeUser.action
+      Runtime: nodejs20.x
+      CodeUri: .
+      MemorySize: 128
+      Timeout: 30
+      Environment:
+        Variables:
+          DATABASE_URL: "file:./dev.db"  # SQLite 데이터베이스 파일 경로
+      Events:
+        ChangePasswordApi:
+          Type: Api
+          Properties:
+            Path: /api/changeUser
+            Method: put
+
+  ChangeNicknameFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: routes/api.changeUser.action
+      Runtime: nodejs20.x
+      CodeUri: .
+      MemorySize: 128
+      Timeout: 30
+      Environment:
+        Variables:
+          DATABASE_URL: "file:./dev.db"
+      Events:
+        ChangeNicknameApi:
+          Type: Api
+          Properties:
+            Path: /api/changeUser
+            Method: put
+
+  ResetPasswordFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: routes/api.changeUser.action
+      Runtime: nodejs20.x
+      CodeUri: .
+      MemorySize: 128
+      Timeout: 30
+      Environment:
+        Variables:
+          DATABASE_URL: "file:./dev.db"
+      Events:
+        ResetPasswordApi:
+          Type: Api
+          Properties:
+            Path: /api/changeUser
+            Method: put
+    LogoutFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.logout.action
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          LogoutApi:
+            Type: Api
+            Properties:
+              Path: /api/logout
+              Method: post
+    LoginFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.register.action
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          LoginApi:
+            Type: Api
+            Properties:
+              Path: /api/register
+              Method: post
+    SignUpFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.register.action
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          SignUpApi:
+            Type: Api
+            Properties:
+              Path: /api/register
+              Method: put
+    WithdrawFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.register.action
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          WithdrawApi:
+            Type: Api
+            Properties:
+              Path: /api/register
+              Method: delete
+    GetRoomInfoAllFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.room.loader
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          GetRoomInfoAllApi:
+            Type: Api
+            Properties:
+              Path: /api/room
+              Method: get
+    GetRoomInfoDetailFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.room.loader
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          GetRoomInfoDetailApi:
+            Type: Api
+            Properties:
+              Path: /api/room
+              Method: get
+    CheckAuthorityFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.room.loader
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          CheckAuthorityApi:
+            Type: Api
+            Properties:
+              Path: /api/room
+              Method: get
+    MakeRoomFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.room.action
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          MakeRoomApi:
+            Type: Api
+            Properties:
+              Path: /api/room
+              Method: post
+    EnterRoomWithCodeFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.room.action
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          EnterRoomWithCodeApi:
+            Type: Api
+            Properties:
+              Path: /api/room
+              Method: post
+    ChangeRoomInfoFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.room.action
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          ChangeRoomInfoApi:
+            Type: Api
+            Properties:
+              Path: /api/room
+              Method: put
+    ChangeMasterFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.room.action
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          ChangeMasterApi:
+            Type: Api
+            Properties:
+              Path: /api/room
+              Method: put
+    OutRoomFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.room.action
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          OutRoomApi:
+            Type: Api
+            Properties:
+              Path: /api/room
+              Method: delete
+    DeleteRoomFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.room.action
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          DeleteRoomApi:
+            Type: Api
+            Properties:
+              Path: /api/room
+              Method: delete
+    GetShoppingListFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.shoppingList.loader
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          GetShoppingListApi:
+            Type: Api
+            Properties:
+              Path: /api/shoppingList
+              Method: get
+    AddShoppingListFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.shoppingList.action
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          AddShoppingListApi:
+            Type: Api
+            Properties:
+              Path: /api/shoppingList
+              Method: post
+    DeleteShoppingListFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.shoppingList.action
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          DeleteShoppingListApi:
+            Type: Api
+            Properties:
+              Path: /api/shoppingList
+              Method: delete
+    ChangeShoppedFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: routes/api.shoppingList.action
+        Runtime: nodejs20.x
+        CodeUri: .
+        MemorySize: 128
+        Timeout: 30
+        Environment:
+          Variables:
+            DATABASE_URL: "file:./dev.db"
+        Events:
+          ChangeShoppedApi:
+            Type: Api
+            Properties:
+              Path: /api/shoppingList
+              Method: put
+Outputs:
+  ChangePasswordApi:
+    Description: "API Gateway endpoint URL for the ChangePassword function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/changeUser"
+
+  ChangeNicknameApi:
+    Description: "API Gateway endpoint URL for the ChangeNickname function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/changeUser"
+
+  ResetPasswordApi:
+    Description: "API Gateway endpoint URL for the ResetPassword function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/changeUser"
+
+  LogoutApi:
+    Description: "API Gateway endpoint URL for the Logout function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/logout"
+
+  LoginApi:
+    Description: "API Gateway endpoint URL for the Login function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/register"
+
+  SignUpApi:
+    Description: "API Gateway endpoint URL for the SignUp function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/register"
+
+  WithdrawApi:
+    Description: "API Gateway endpoint URL for the Withdraw function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/register"
+
+  GetRoomInfoAllApi:
+    Description: "API Gateway endpoint URL for the GetRoomInfoAll function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/room"
+
+  GetRoomInfoDetailApi:
+    Description: "API Gateway endpoint URL for the GetRoomInfoDetail function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/room"
+
+  CheckAuthorityApi:
+    Description: "API Gateway endpoint URL for the CheckAuthority function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/room"
+
+  MakeRoomApi:
+    Description: "API Gateway endpoint URL for the MakeRoom function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/room"
+
+  EnterRoomWithCodeApi:
+    Description: "API Gateway endpoint URL for the EnterRoomWithCode function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/room"
+
+  ChangeRoomInfoApi:
+    Description: "API Gateway endpoint URL for the ChangeRoomInfo function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/room"
+
+  ChangeMasterApi:
+    Description: "API Gateway endpoint URL for the ChangeMaster function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/room"
+
+  OutRoomApi:
+    Description: "API Gateway endpoint URL for the OutRoom function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/room"
+
+  DeleteRoomApi:
+    Description: "API Gateway endpoint URL for the DeleteRoom function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/room"
+
+  GetShoppingListApi:
+    Description: "API Gateway endpoint URL for the GetShoppingList function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/shoppingList"
+
+  AddShoppingListApi:
+    Description: "API Gateway endpoint URL for the AddShoppingList function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/shoppingList"
+
+  DeleteShoppingListApi:
+    Description: "API Gateway endpoint URL for the DeleteShoppingList function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/shoppingList"
+
+  ChangeShoppedApi:
+    Description: "API Gateway endpoint URL for the ChangeShopped function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/shoppingList"

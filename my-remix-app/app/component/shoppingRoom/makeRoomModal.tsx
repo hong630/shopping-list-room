@@ -8,7 +8,7 @@ const MakeRoomModal = (props:{email:string}) => {
         const description = formData.get("description");
         console.log('되긴 하는거야?')
         //방만들기 API
-        fetch("http://localhost:5173/api/room",
+        fetch("http://localhost:3000/api/room",
             {
                 method: "POST",
                 headers: {

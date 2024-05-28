@@ -13,7 +13,6 @@ export const loader: LoaderFunction = async ({ request }) => {
 const RoomIndex = () => {
     const data = useLoaderData() as LoggedInUserData;
     const { user, isLoggedIn } = data;
-    console.log(user);
     const email = user?.email || ""
     return (
         <div>

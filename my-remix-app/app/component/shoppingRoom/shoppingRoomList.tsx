@@ -18,7 +18,7 @@ const ShoppingRoomListComponent = (props:{email:string}) => {
 
 
     useEffect(()=>{
-        const url = new URL('http://localhost:5173/api/room');
+        const url = new URL('http://localhost:3000/api/room');
         url.searchParams.append('email', props.email);
         url.searchParams.append('type', 'all');
         //로그인 API

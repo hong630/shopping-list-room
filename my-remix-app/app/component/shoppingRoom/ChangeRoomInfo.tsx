@@ -18,7 +18,7 @@ const ChangeRoomInfo = (props : {email : string, roomId : number, authority : bo
       const title = formData.get("title");
       const description = formData.get("description");
 
-      fetch("http://localhost:5173/api/room",
+      fetch("http://localhost:3000/api/room",
           {
               method : "PUT",
               headers : {

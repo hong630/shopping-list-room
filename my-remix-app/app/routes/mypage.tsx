@@ -32,7 +32,7 @@ const Mypage = () => {
     const widthdrawService = () => {
         const email = user?.email;
         //TODO 탈퇴  API
-        fetch("http://localhost:5173/api/register",
+        fetch("http://localhost:3000/api/register",
             {
                 method: "DELETE",
                 headers: {
@@ -100,7 +100,7 @@ const Mypage = () => {
         const password = formData.get("password");
 
         //비밀번호 변경 API
-        fetch("http://localhost:5173/api/changeUser",
+        fetch("http://localhost:3000/api/changeUser",
             {
                 method: "PUT",
                 headers: {
@@ -154,7 +154,7 @@ const Mypage = () => {
         const nickname = formData.get("nickname");
 
         //닉네임 변경 API
-        fetch("http://localhost:5173/api/changeUser",
+        fetch("http://localhost:3000/api/changeUser",
             {
                 method: "PUT",
                 headers: {

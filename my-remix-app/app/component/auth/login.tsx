@@ -38,7 +38,7 @@ const LoginComponent = () => {
         const password = formData.get("password");
 
         //로그인 API
-        fetch("http://localhost:5173/api/register",
+        fetch("http://localhost:3000/api/register",
             {
                 method: "POST",
                 headers: {
@@ -109,7 +109,7 @@ const LoginComponent = () => {
         //비밀번호 찾기 결과 모달 열기
         //TODO 이메일 유무 체크 API
         //비밀번호 변경 API
-        fetch("http://localhost:5173/api/changeUser",
+        fetch("http://localhost:3000/api/changeUser",
             {
                 method: "PUT",
                 headers: {

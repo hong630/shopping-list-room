@@ -48,7 +48,7 @@ const DetailRoom = () => {
     const [authority, setAuthority] = useState(false);
 
     useEffect(()=>{
-        const url = new URL('http://localhost:5173/api/room');
+        const url = new URL('http://localhost:3000/api/room');
         url.searchParams.append('roomId', roomId);
         url.searchParams.append('type', 'detail');
         //로그인 API
@@ -83,7 +83,7 @@ const DetailRoom = () => {
         const formData = new FormData(event.currentTarget);
         const code = formData.get("code");
         //방 들어가기 API
-        fetch("http://localhost:5173/api/room",
+        fetch("http://localhost:3000/api/room",
             {
                 method: "POST",
                 headers: {
@@ -120,7 +120,7 @@ const DetailRoom = () => {
 
     //권한 체크
     const checkAuthority = () => {
-        const url = new URL('http://localhost:5173/api/room');
+        const url = new URL('http://localhost:3000/api/room');
         url.searchParams.append('type', 'authority');
         url.searchParams.append('email', userEmail);
         url.searchParams.append('roomId', roomId.toString());
@@ -143,7 +143,7 @@ const DetailRoom = () => {
     //방 나가기
     const outOfRoom = () => {
         //방 나가기 API
-        fetch("http://localhost:5173/api/room",
+        fetch("http://localhost:3000/api/room",
             {
                 method: "DELETE",
                 headers: {

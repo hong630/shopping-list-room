@@ -15,7 +15,7 @@ const LoginLayout = (props:{status:boolean, email:string}) => {
 
     useEffect(()=> {
         // GET Test
-        // fetch("http://localhost:5173/register")
+        // fetch("http://localhost:3000/register")
         //     .then(async (res)=>{
         //         const data = await res.json()
         //         console.log(data)

@@ -13,7 +13,7 @@ const DeleteRoom = (props : {email : string, roomId : number, authority : boolea
 
     const submitToDeleteRoom = () => {
         const roomId = Number(props.roomId);
-        fetch("http://localhost:5173/api/room",
+        fetch("http://localhost:3000/api/room",
             {
                 method : "DELETE",
                 headers : {

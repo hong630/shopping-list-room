@@ -31,7 +31,7 @@ const ChangeAuthority:React.FC<MemberListProps> = ({memberData, authority, email
             const newManagerEmail = formData.get('master');
 
             //권한 변경 API
-            fetch("http://localhost:5173/api/room",
+            fetch("http://localhost:3000/api/room",
                 {
                     method: "PUT",
                     headers: {

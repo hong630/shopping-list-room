@@ -7,7 +7,7 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
 
     useEffect(()=>{
         //쇼핑리스트 불러오기 API
-        const url = new URL('http://localhost:5173/api/shoppingList');
+        const url = new URL('http://localhost:3000/api/shoppingList');
         url.searchParams.append('roomId', props.roomId.toString());
         url.searchParams.append('type', 'getShoppingList');
         fetch(url,
@@ -25,6 +25,40 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
                     console.log("끝")
                 }
             )
+
+
+        const ws = new WebSocket('ws://localhost:24678');
+
+        ws.onopen = () => {
+            console.log('WebSocket connection opened');
+            // 주기적으로 pong 메시지 보내기
+            setInterval(() => {
+                if (ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({ type: 'pong' }));
+                }
+            }, 2000); // 30초마다 pong 메시지 전송
+        };
+
+        ws.onmessage = (event) => {
+            const message = JSON.parse(event.data);
+            if (message.status === 'connected') {
+                console.log('WebSocket status:', message.status);
+            } else if (message.type === 'ping') {
+                console.log('Received ping from server');
+            } else {
+                // 다른 메시지 처리 로직 추가
+                console.log('Received message:', message);
+            }
+        };
+
+        ws.onclose = () => {
+            console.log('WebSocket connection closed');
+        };
+
+        ws.onerror = (error) => {
+            console.log('WebSocket error:', error);
+        };
+
     },[])
 
 
@@ -35,7 +69,7 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
         const shopValue = inputElement.current?.value || ""
 
         //쇼핑리스트 추가하기 API
-        fetch("http://localhost:5173/api/shoppingList",
+        fetch("http://localhost:3000/api/shoppingList",
             {
                 method: "POST",
                 headers: {
@@ -88,7 +122,7 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
         if(parentElement){
             const shoppingItemId = parentElement.getAttribute('data-key');
             //쇼핑리스트 삭제하기 API
-            fetch("http://localhost:5173/api/shoppingList",
+            fetch("http://localhost:3000/api/shoppingList",
                 {
                     method: "DELETE",
                     headers: {
@@ -133,7 +167,7 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
             const shoppingItemShopped = parentElement.getAttribute('data-shoppped');
             const isShopped = shoppingItemShopped === 'true';
             //쇼핑리스트 상태 변경하기 API
-            fetch("http://localhost:5173/api/shoppingList",
+            fetch("http://localhost:3000/api/shoppingList",
                 {
                     method: "PUT",
                     headers: {
@@ -167,8 +201,6 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
 
         }
     }
-
-
     return (
         <>
             <h1>방 관리자 : {props.managerName}</h1>

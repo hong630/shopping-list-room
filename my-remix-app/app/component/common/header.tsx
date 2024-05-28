@@ -4,7 +4,7 @@ const HeaderLayout = (props:{status:boolean}) =>{
 
     //로그아웃 API
     const logout = () => {
-        fetch("http://localhost:5173/api/logout",
+        fetch("http://localhost:3000/api/logout",
             {
                 method: "POST",
                 headers: {
