@@ -31,7 +31,6 @@ const LoginComponent = () => {
 
     //로그인 성공 체크
     const tryLogin = (event:React.FormEvent<HTMLFormElement>) => {
-        console.log('tryLogin working');
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const email = formData.get("email");
@@ -50,9 +49,7 @@ const LoginComponent = () => {
                 }),
             })
             .then(async (res)=>{
-                console.log(res)
                 const data = await res.json()
-                // console.log(data)
                 const response = data.state;
                 if (response === 'Success'){
                     //방 목록 페이지로 이동
@@ -70,10 +67,6 @@ const LoginComponent = () => {
             .catch((err)=>{
                 console.log(err)
             })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
     }
 
     //비밀번호 찾기 모달 열기
@@ -123,25 +116,18 @@ const LoginComponent = () => {
             .then(async (res)=>{
                 const data = await res.json()
                 const response = data.state;
-                console.log(response)
                 if (response === 'Success'){
                     //있는 이메일일 때 리셋 이메일 보냈다는 안내 메시지 열기
                     openModalResetCompleted();
                 }else{
                     //없는 이메일일 때 다시 입력해달라는 메시지 열기
                     openModalAskingRetry();
-                    console.log(response)
                 }
             })
             .catch((err)=>{
-                console.log(err)
                 //없는 이메일일 때 다시 입력해달라는 메시지 열기
                 openModalAskingRetry();
             })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
     }
 
     //비밀번호 찾기 결과 확인 누르면, 비밀번호 찾기 결과 모달 닫고 다시 비밀번호 찾기 모달 열기 (이메일 없는 경우)

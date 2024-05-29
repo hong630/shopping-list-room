@@ -12,9 +12,7 @@ const HeaderLayout = (props:{status:boolean}) =>{
                 },
             })
             .then(async (res)=>{
-                console.log(res)
                 const data = await res.json()
-                // console.log(data)
                 const response = data.state;
                 if (response === 'Success'){
                     //로그인 페이지로 이동
@@ -29,9 +27,6 @@ const HeaderLayout = (props:{status:boolean}) =>{
                 alert('로그아웃에 실패했습니다. 다시 시도해주세요.')
                 location.reload();
             })
-            .finally(()=>{
-                }
-            )
     }
 
     return  (props.status

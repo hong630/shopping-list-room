@@ -28,16 +28,11 @@ const ShoppingRoomListComponent = (props:{email:string}) => {
             })
             .then(async (res)=>{
                 const data:RoomDto[] = await res.json();
-                console.log(data);
                 setShoppingRoomList(data);
             })
             .catch((err)=>{
                 console.log(err)
             })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
     },[])
 
     return (

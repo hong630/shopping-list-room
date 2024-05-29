@@ -1,12 +1,13 @@
 import React, {useEffect, useRef, useState} from "react";
 import {SHOPPINGLIST} from "~/data/dto";
 
-const ShoppingList = (props:{managerName:string, roomId:number}) => {
+const ShoppingList = (props:{email:string, managerName:string, roomId:number}) => {
     const originShoppingList:Array<SHOPPINGLIST> = [{name:'아직 장바구니 목록이 없습니다.',shopped:false, id:null}];
     const [shoppingList, setShoppingList] = useState<Array<SHOPPINGLIST>>(originShoppingList)
 
-    useEffect(()=>{
-        //쇼핑리스트 불러오기 API
+    const [websocket, setWebsocket] = useState<WebSocket|null>(null)
+
+    const getShoppingList = () => {
         const url = new URL('http://localhost:3000/api/shoppingList');
         url.searchParams.append('roomId', props.roomId.toString());
         url.searchParams.append('type', 'getShoppingList');
@@ -21,48 +22,51 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
             .catch((err)=>{
                 console.log(err)
             })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
+    }
 
+    useEffect(()=>{
+        //쇼핑리스트 불러오기 API
+        getShoppingList()
 
-        const ws = new WebSocket('ws://localhost:24678');
-
-        ws.onopen = () => {
-            console.log('WebSocket connection opened');
-            // 주기적으로 pong 메시지 보내기
-            setInterval(() => {
-                if (ws.readyState === WebSocket.OPEN) {
-                    ws.send(JSON.stringify({ type: 'pong' }));
-                }
-            }, 2000); // 30초마다 pong 메시지 전송
-        };
+        const ws = new WebSocket('ws://localhost:3001');
 
         ws.onmessage = (event) => {
+            console.log("event check")
             const message = JSON.parse(event.data);
-            if (message.status === 'connected') {
-                console.log('WebSocket status:', message.status);
-            } else if (message.type === 'ping') {
-                console.log('Received ping from server');
+            //TODO 다른 메시지 처리 로직 추가
+            if (message.type === "createGroup"){
+                console.log('Received createGroup message:', message);
+                ws.send(JSON.stringify({ type:"joinGroup",groupId:props.roomId, userId:props.email}))
             } else {
-                // 다른 메시지 처리 로직 추가
                 console.log('Received message:', message);
+                getShoppingList()
             }
         };
-
+        ws.onopen = () => {
+            ws.send(JSON.stringify({ type:"createGroup",groupId:props.roomId, userId:props.email}))
+        }
         ws.onclose = () => {
             console.log('WebSocket connection closed');
         };
-
         ws.onerror = (error) => {
             console.log('WebSocket error:', error);
         };
+
+        setWebsocket(ws)
+
+        return ()=>{
+            ws.close()
+        }
 
     },[])
 
 
     const inputElement = useRef<HTMLInputElement>(null)
+
+    const sendMessage = () => {
+        console.log("Send!!!")
+        websocket?.send(JSON.stringify({ type:"message",groupId:props.roomId, message:"modify Shopping list"}))
+    }
 
     //쇼핑리스트 추가하기
     const addShoppingList = () => {
@@ -84,13 +88,15 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
             .then(async (res)=>{
                 const data = await res.json()
                 const response = data.state;
-                console.log(response.length)
                 if (response){
                     if (shopValue !== undefined && shopValue !== null ){
                         const addedListObject:SHOPPINGLIST = {name:shopValue, shopped:false, id:response.id}
-                        shoppingList.findIndex((value)=>{return value["name"] === shopValue}) < 0
-                            ? setShoppingList([... shoppingList, addedListObject])
-                            : alert("이미 있잖? 장난?")
+                        if(shoppingList.findIndex((value)=>{return value["name"] === shopValue}) < 0){
+                            setShoppingList([... shoppingList, addedListObject])
+                            sendMessage()
+                        }else{
+                            alert("이미 있어부렀어")
+                        }
                     }
                 }else{
                     console.log('response :', response)
@@ -99,14 +105,9 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
             .catch((err)=>{
                 console.log(err)
             })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
     }
 
     const listUp = async (event:React.KeyboardEvent<HTMLInputElement>) => {
-        console.log(event.key)
         if(event.key === "Enter") {
             await addShoppingList()
             if(inputElement.current !== null){
@@ -136,7 +137,6 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
                 .then(async (res)=>{
                     const data = await res.json()
                     const response = data.state;
-                    console.log(response.length)
                     if (response === 'Success'){
                         if(previousSibling !== null){
                             const previousSiblingText = previousSibling.textContent
@@ -144,6 +144,7 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
                                 return value["name"] !== previousSiblingText
                             })
                             setShoppingList([... newShoppingList])
+                            sendMessage()
                         }
                     }else{
                         console.log('response :', response)
@@ -152,10 +153,6 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
                 .catch((err)=>{
                     console.log(err)
                 })
-                .finally(()=>{
-                        console.log("끝")
-                    }
-                )
         }
     }
 
@@ -187,6 +184,7 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
                             if(value["id"] == shoppingItemId) value["shopped"] = !isShopped
                         })
                         setShoppingList([...shoppingList]);
+                        sendMessage()
                     }else{
                         console.log('response :', response)
                     }
@@ -194,13 +192,9 @@ const ShoppingList = (props:{managerName:string, roomId:number}) => {
                 .catch((err)=>{
                     console.log(err)
                 })
-                .finally(()=>{
-                        console.log("끝")
-                    }
-                )
-
         }
     }
+
     return (
         <>
             <h1>방 관리자 : {props.managerName}</h1>

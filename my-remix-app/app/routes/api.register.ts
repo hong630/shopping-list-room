@@ -10,7 +10,6 @@ dotenv.config();
 
 const prisma = new PrismaClient();
 
-
 // 회원가입
 // 비밀번호 암호화
 const saltRoundsEnv = process.env.SALT_ROUNDS;
@@ -22,12 +21,12 @@ const saltRounds = parseInt(saltRoundsEnv, 10);
 //INFO 회원가입
 
 // 비밀번호 해싱 함수
-async function hashPassword(password:string) {
+export async function hashPassword(password:string) {
         const salt = await bcrypt.genSalt(saltRounds);
         return await bcrypt.hash(password, salt);
 }
 // 회원 정보 DB 입력
-async function createUser(email: string, nickname:string, password: string) {
+export async function createUser(email: string, nickname:string, password: string) {
         const hashedPassword = await hashPassword(password);
         return prisma.user.create({
                 data: { email, nickname, password: hashedPassword },

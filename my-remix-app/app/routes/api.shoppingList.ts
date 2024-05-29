@@ -4,7 +4,6 @@ import {ChangeShoppedDto, ShoppingListDto} from "~/data/dto";
 
 const prisma = new PrismaClient();
 
-
 //INFO 쇼핑리스트 추가하기
 async function createShoppingList(name:string, roomId:number){
     const createdShoppingItem = await prisma.shoppingItem.create({
@@ -18,7 +17,6 @@ async function addShoppingList(body:ShoppingListDto){
     const roomId = Number(body.roomId);
     try{
         const createdShoppingItem = await createShoppingList(name, roomId);
-        console.log(createdShoppingItem)
         return {state : createdShoppingItem}
     }catch(err){
         return {state : err}

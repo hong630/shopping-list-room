@@ -72,10 +72,6 @@ const DetailRoom = () => {
             .catch((err)=>{
                 console.log(err)
             })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
     },[])
 
 
@@ -103,7 +99,6 @@ const DetailRoom = () => {
                 if (response === 'Success'){
                     //방 목록 페이지로 이동
                     location.reload();
-                    console.log('성공!')
                 }else{
                     console.log('response :', response)
                 }
@@ -111,11 +106,6 @@ const DetailRoom = () => {
             .catch((err)=>{
                 console.log(err)
             })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
-
     }
 
     //권한 체크
@@ -170,10 +160,6 @@ const DetailRoom = () => {
             .catch((err)=>{
                 console.log(err)
             })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
     }
 
 
@@ -220,7 +206,7 @@ const DetailRoom = () => {
                                 ))
                             }
                         </ul>
-                        <ShoppingList managerName={roomDetailInfo?.master[0]} roomId={Number(roomId)}/>
+                        <ShoppingList email={userEmail || ""} managerName={roomDetailInfo?.master[0]} roomId={Number(roomId)}/>
                     </div>:
                     <div></div>
             }

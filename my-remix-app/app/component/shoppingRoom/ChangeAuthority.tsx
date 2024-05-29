@@ -45,13 +45,11 @@ const ChangeAuthority:React.FC<MemberListProps> = ({memberData, authority, email
                     }),
                 })
                 .then(async (res)=>{
-                    console.log(res)
                     const data = await res.json()
                     const response = data.state;
                     if (response === 'Success'){
                         //방 목록 페이지로 이동
                         location.reload();
-                        console.log('성공!')
                     }else{
                         console.log('response :', response)
                     }
@@ -59,10 +57,6 @@ const ChangeAuthority:React.FC<MemberListProps> = ({memberData, authority, email
                 .catch((err)=>{
                     console.log(err)
                 })
-                .finally(()=>{
-                        console.log("끝")
-                    }
-                )
         }
     }
 

@@ -310,7 +310,6 @@ export const action:ActionFunction = async ({request}) => {
     const email = body.email;
     const roomId = Number(body.roomId);
     const code = body.code;
-    console.log(body)
     switch(type){
         case 'makeRoom':
             //방 만들기

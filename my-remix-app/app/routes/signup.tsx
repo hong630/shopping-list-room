@@ -38,10 +38,6 @@ const SignupLayout = () => {
             .catch((err)=>{
                 console.log(err)
             })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
     }
     return (
         <div>

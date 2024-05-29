@@ -2,27 +2,13 @@ import {ActionFunction, json} from "@remix-run/node";
 import {UserDao} from "~/data/dao";
 import {Prisma, PrismaClient} from "@prisma/client";
 import dotenv from "dotenv";
-import bcrypt from "bcrypt";
 import {commitSession, getSession} from "~/routes/session.server";
 import {catchErrCode} from "~/utils/prismaErr";
+import {hashPassword} from "~/routes/api.register";
 
 dotenv.config();
 
 const prisma = new PrismaClient();
-
-
-//INFO 비밀번호 변경하기
-//비밀번호 암호화
-const saltRoundsEnv = process.env.SALT_ROUNDS;
-if (!saltRoundsEnv) {
-    throw new Error("SALT_ROUNDS 환경 변수가 정의되지 않았습니다.");
-}
-const saltRounds = parseInt(saltRoundsEnv, 10);
-// 비밀번호 해싱 함수
-async function hashPassword(password:string) {
-    const salt = await bcrypt.genSalt(saltRounds);
-    return await bcrypt.hash(password, salt);
-}
 
 //비밀번호 변경 (prisma)
 async function updatePassword(email:string, newPassword:string) {
@@ -36,7 +22,6 @@ async function updatePassword(email:string, newPassword:string) {
                 password: hashedNewPassword,
             },
         });
-        console.log('Password updated:', updatedUser);
     } catch (error) {
         console.error('Error updating password:', error);
     }
@@ -66,7 +51,6 @@ async function updateNickname(email:string, nickname:string) {
                 nickname: nickname,
             },
         });
-        console.log('Nickname updated:', updatedUser);
     } catch (error) {
         console.error('Error updating nickname:', error);
     }

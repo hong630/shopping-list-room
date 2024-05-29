@@ -6,7 +6,6 @@ const MakeRoomModal = (props:{email:string}) => {
         const formData = new FormData(event.currentTarget);
         const title = formData.get("title");
         const description = formData.get("description");
-        console.log('되긴 하는거야?')
         //방만들기 API
         fetch("http://localhost:3000/api/room",
             {
@@ -22,13 +21,11 @@ const MakeRoomModal = (props:{email:string}) => {
                 }),
             })
             .then(async (res)=>{
-                console.log(res)
                 const data = await res.json()
                 const response = data.state;
                 if (response === 'Success'){
                     //방 목록 페이지로 이동
                     location.reload();
-                    console.log('성공!')
                 }else{
                     console.log('response :', response)
                 }
@@ -36,10 +33,6 @@ const MakeRoomModal = (props:{email:string}) => {
             .catch((err)=>{
                 console.log(err)
             })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
     }
 
     return (

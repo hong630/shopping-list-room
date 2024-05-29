@@ -19,7 +19,6 @@ export const loader: LoaderFunction = async ({ request }) => {
 const Mypage = () => {
     const data = useLoaderData() as LoggedInUserData;
     const { user, isLoggedIn } = data;
-    console.log(user);
 
     //탈퇴하기
     const [withdrawModal, setWithdrawModal] = useState(false);
@@ -43,7 +42,6 @@ const Mypage = () => {
                 }),
             })
             .then(async (res)=>{
-                console.log(res)
                 const data = await res.json()
                 // console.log(data)
                 const response = data.state;
@@ -61,12 +59,6 @@ const Mypage = () => {
                 setToastModal({state:true, message:"탈퇴를 실패하였습니다."});
                 setTimeout(()=>{location.href="/room"},2000)
             })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
-
-
     }
     const showWithdrawModal = () => {
         setWithdrawModal(true);
@@ -140,10 +132,6 @@ const Mypage = () => {
                     location.reload();
                 },2000)
             })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
     }
 
     //닉네임 변경
@@ -194,10 +182,6 @@ const Mypage = () => {
                     location.reload();
                 },2000)
             })
-            .finally(()=>{
-                    console.log("끝")
-                }
-            )
     }
 
     return (
