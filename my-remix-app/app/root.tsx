@@ -6,6 +6,15 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+import type { LinksFunction } from "@remix-run/node"
+import sharedStyles from "~/styles/shared.css?url"
+
+export const links: LinksFunction = () => [
+    { rel: "stylesheet", href: sharedStyles },
+    { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" }
+];
+
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">

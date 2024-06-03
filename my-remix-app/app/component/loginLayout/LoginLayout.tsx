@@ -13,22 +13,6 @@ const LoginLayout = (props:{status:boolean, email:string}) => {
     //방정보 모달
     const [roomInfoModal, setRoomInfoModal] = useState(false);
 
-    useEffect(()=> {
-        // GET Test
-        // fetch("http://localhost:3000/register")
-        //     .then(async (res)=>{
-        //         const data = await res.json()
-        //         console.log(data)
-        //     })
-        //     .catch((err)=>{
-        //         console.log(err)
-        //     })
-        //     .finally(()=>{
-        //             console.log("끝")
-        //         }
-        //     )
-    },[])
-
     const openShareRoom = () => {
         setShareRoomToggle(true);
     }
@@ -42,12 +26,6 @@ const LoginLayout = (props:{status:boolean, email:string}) => {
     const closeInvitationModal = () => {
         setInvitationModal(false);
     }
-
-    //방 정보 모달 열기
-    // const openRoomInfoModal = () => {
-    //     closeInvitationModal();
-    //     setRoomInfoModal(true);
-    // }
 
     //방 정보 모달 닫기
     const closeRoomInfoModal = () => {

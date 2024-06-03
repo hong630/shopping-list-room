@@ -1,7 +1,7 @@
 export const catchErrCode = (code:string)=>{
     switch (code) {
         case 'P2002':
-            return { state: '이미 존재하는 아이디입니다.' };
+            return { state: 'already email exists' };
         case 'P2003':
             return { state: 'Foreign key constraint violation.' };
         case 'P2004':
