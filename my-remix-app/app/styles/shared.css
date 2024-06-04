@@ -124,6 +124,9 @@ input{
     outline: none;
     padding: 0px 8px;
 }
+input::placeholder{
+    font-family: "Gothic A1", sans-serif;
+}
 .header{
     padding-top: 16px;
 }
@@ -161,4 +164,15 @@ input{
     color: #d64d46;
     font-size: 16px;
     padding: 8px 0;
+}
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+    white-space: nowrap;
 }

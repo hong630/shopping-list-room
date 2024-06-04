@@ -32,9 +32,8 @@ const LoginLayout = (props:{status:boolean, email:string}) => {
         setRoomInfoModal(false);
     }
 
-    return (props.status
-        ?
-        <>
+    return (
+        <div>
             <div>
                 <HeaderLayout status={true}></HeaderLayout>
                 <h1>로그인 되었습니다.</h1>
@@ -65,12 +64,8 @@ const LoginLayout = (props:{status:boolean, email:string}) => {
                     </div>
                     :<div></div>
             }
-        </>
-        :
-        <div>
-            <h1>로그인 되지 않았습니다.로그인 해주세요.</h1>
-            <LoginComponent />
-        </div>);
+        </div>
+    )
 }
 
 export default LoginLayout

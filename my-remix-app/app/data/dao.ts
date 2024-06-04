@@ -3,3 +3,8 @@ export interface UserDao {
     nickname:string,
     password:string
 }
+
+export interface ErrorResponse {
+    state: string;
+};
+

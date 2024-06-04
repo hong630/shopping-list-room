@@ -1,5 +1,5 @@
 import {ActionFunction, json} from "@remix-run/node";
-import {UserDao} from "~/data/dao";
+import {ErrorResponse, UserDao} from "~/data/dao";
 import {Prisma, PrismaClient} from "@prisma/client";
 import dotenv from "dotenv";
 import {commitSession, getSession} from "~/routes/session.server";
@@ -11,7 +11,7 @@ dotenv.config();
 const prisma = new PrismaClient();
 
 //비밀번호 변경 (prisma)
-async function updatePassword(email:string, newPassword:string) {
+async function updatePassword(email:string, newPassword:string): Promise<UserDao | ErrorResponse> {
     const hashedNewPassword = await hashPassword(newPassword);
     try {
         const updatedUser = await prisma.user.update({
@@ -22,8 +22,13 @@ async function updatePassword(email:string, newPassword:string) {
                 password: hashedNewPassword,
             },
         });
-    } catch (error) {
-        console.error('Error updating password:', error);
+        return updatedUser;
+    } catch (err) {
+        console.error('Error updating password:', err);
+        if(err instanceof Prisma.PrismaClientKnownRequestError){
+            return catchErrCode(err.code)
+        }
+        return  {state:'An error occurred while resetting password.'}
     }
 }
 
@@ -108,7 +113,11 @@ async function resetPassword(body:UserDao){
     const newPassword = generateRandomPassword();
 
     //데이터베이스 비밀번호 업데이트
-    await updatePassword(body.email, newPassword);
+    const updatedPassword = await updatePassword(body.email, newPassword);
+    //없는 이메일인 경우
+    if ('state' in updatedPassword) {
+        return  {state: 'invalid email'}
+    }
 
     // TODO 이메일 전송
     // const mailOptions = {

@@ -194,6 +194,34 @@ const SignupLayout = () => {
         togglePasswordVisibility(event);
         toggleVisibilityIcon();
     }
+    //유효성 검사 경고 시 스타일 변화
+    const emailInputStyle = {
+        color: (noEmail || incorrectEmail || existEmail) ? '#d64d46' : 'inherit'
+    };
+
+    const passwordInputStyle = {
+        color: (incorrectPassword || noPassword) ? '#d64d46' : 'inherit'
+    };
+
+    const nicknameInputStyle = {
+        color: (overNickname) ? '#d64d46' : 'inherit'
+    };
+
+    //input에 포커스 시 스타일 변화 해제
+    const emailErrorHandleFocus = () => {
+        setNoEmail(false);
+        setIncorrectEmail(false);
+        setExistEmail(false);
+    };
+
+    const passwordErrorHandleFocus = () => {
+        setIncorrectPassword(false);
+        setNoPassword(false);
+    }
+
+    const nicknameErrorHandleFocus = () => {
+        setOverNickname(false);
+    }
 
     return (
         <div>
@@ -213,7 +241,8 @@ const SignupLayout = () => {
                 <Form onSubmit={DoSignup} className="form-container">
                     <div className="input-container">
                         <label htmlFor="email">아이디</label>
-                        <input type="text" name="email" placeholder="example@gmail.com" required/>
+                        <input type="text" name="email" style={emailInputStyle}
+                               onFocus={emailErrorHandleFocus} placeholder="example@gmail.com" required/>
                         {existEmail ?
                             <p className="warning-message">이미 존재하는 아이디입니다.</p>
                             :
@@ -233,7 +262,8 @@ const SignupLayout = () => {
                     <div className="input-container">
                         <label htmlFor="password">비밀번호</label>
                         <div className="password-input-container">
-                            <input type="password" name="password" placeholder="특수문자 포함 8자 이상" required/>
+                            <input type="password" name="password" style={passwordInputStyle}
+                                   onFocus={passwordErrorHandleFocus} placeholder="특수문자 포함 8자 이상" required/>
                             <button className="btn-visibility" onClick={handleVisibility}>
                                 <VisibilityIcon visibility={visibility}></VisibilityIcon>
                             </button>
@@ -251,7 +281,8 @@ const SignupLayout = () => {
                     </div>
                     <div className="input-container">
                         <label htmlFor="nickname">닉네임</label>
-                        <input type="text" name="nickname" placeholder="10자 이하로 입력해주세요." required/>
+                        <input type="text" name="nickname" style={nicknameInputStyle}
+                               onFocus={nicknameErrorHandleFocus} placeholder="10자 이하로 입력해주세요." required/>
                         {overNickname ?
                             <p className="warning-message">닉네임을 10자 이하로 작성해주세요.</p>
                             :
