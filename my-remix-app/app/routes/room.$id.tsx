@@ -26,6 +26,7 @@ const DetailRoom = () => {
     const data = useLoaderData() as LoggedInUserData;
     const { user } = data;
     const userEmail = user?.email || "";
+    const userNickname = user?.nickname || "";
 
     const copyInvitationLink = (event:React.MouseEvent<HTMLButtonElement>) => {
         const text = event.currentTarget.value;
@@ -170,7 +171,7 @@ const DetailRoom = () => {
 
     return (
         <div>
-            <HeaderLayout status={true}></HeaderLayout>
+            <HeaderLayout userName={userNickname}></HeaderLayout>
             {
                 notMember?
                     <div>

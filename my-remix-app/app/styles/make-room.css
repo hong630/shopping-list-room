@@ -1,0 +1,25 @@
+textarea.inactive{
+    background-color: rgba(227,224,215,0);
+    border: 1px solid #f0f0f0;
+}
+
+.textarea-short{
+    height: 86px;
+}
+.textarea-long{
+    height: 104px;
+}
+.content-container{
+    margin-top: 16px;
+}
+.form-make-room{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.form-make-room p{
+    color: #000000;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
