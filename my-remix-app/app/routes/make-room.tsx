@@ -4,7 +4,7 @@ import {LoggedInUserData} from "~/data/dto";
 import {getUserSession} from "~/routes/session.server";
 import {useLoaderData} from "react-router";
 import {sanitizeValue} from "~/utils/sanitize";
-import React from "react";
+import React, {useState} from "react";
 import {Form} from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node"
 import styles from "~/styles/make-room.css?url"
@@ -69,7 +69,21 @@ const MakeRoom = () => {
          }
     }
 
+    // 텍스트 카운트
+    const [titleText, setTitleText] = useState('');
+    const [detailText,setDetailText] = useState('');
+    const handleTitleChange = (event:React.ChangeEvent<HTMLTextAreaElement>) => {
+        if (event.currentTarget.value.length <= 50) {
+            setTitleText(event.currentTarget.value);
+        }
+        console.log(event.currentTarget)
+    };
 
+    const handleDetailChange = (event:React.ChangeEvent<HTMLTextAreaElement>) => {
+        if (event.currentTarget.value.length <= 100) {
+            setDetailText(event.currentTarget.value);
+        }
+    };
     return (
         <div>
             <SimpleHeader title="새로운 장바구니 만들기"></SimpleHeader>
@@ -77,11 +91,21 @@ const MakeRoom = () => {
                 <Form onSubmit={makeRoom} className="form-make-room">
                     <div>
                         <p>장바구니 제목</p>
-                        <textarea name="title" className="textarea-short inactive" placeholder='장바구니 제목을 적어주세요.'></textarea>
+                        <div className="textarea-container short">
+                            <textarea name="title" className="textarea-short"
+                                      value={titleText} placeholder='장바구니 제목을 적어주세요.'
+                                    onChange={handleTitleChange}></textarea>
+                            <span className="limited-length">{titleText.length}/50</span>
+                        </div>
                     </div>
                     <div>
                         <p>장바구니 설명</p>
-                        <textarea name="description" className="textarea-long inactive" placeholder='장바구니 설명을 적어주세요.'></textarea>
+                        <div className="textarea-container long">
+                            <textarea name="description" className="textarea-long"
+                                      value={detailText} placeholder='장바구니 설명을 적어주세요.'
+                                    onChange={handleDetailChange}></textarea>
+                            <span className="limited-length">{detailText.length}/100</span>
+                        </div>
                     </div>
                     <div className="buttons-wrap">
                         <button type="submit">확인</button>

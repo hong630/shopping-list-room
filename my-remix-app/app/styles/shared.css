@@ -93,6 +93,7 @@ body{
     outline: none;
     text-decoration: none;
     text-align: center;
+    line-height: 48px;
 }
 .btn-back{
     color: #030303;

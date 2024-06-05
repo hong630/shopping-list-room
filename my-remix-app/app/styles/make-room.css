@@ -1,13 +1,8 @@
-textarea.inactive{
-    background-color: rgba(227,224,215,0);
-    border: 1px solid #f0f0f0;
-}
-
 .textarea-short{
-    height: 86px;
+    height: 54px;
 }
 .textarea-long{
-    height: 104px;
+    height: 72px;
 }
 .content-container{
     margin-top: 16px;
@@ -22,4 +17,32 @@ textarea.inactive{
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 10px;
+}
+.textarea-container{
+    position: relative;
+    width: 100%;
+    background-color: rgba(227,224,215,0);
+    border: 1px solid #f0f0f0;
+}
+textarea{
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 16px;
+    background-color: transparent;
+    border: none;
+}
+.textarea-container .limited-length{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: #62625b;
+    font-size: 14px;
+}
+.textarea-container.short{
+    height: 80px;
+}
+.textarea-container.long{
+    height: 104px;
 }
