@@ -24,6 +24,12 @@
     background-color: rgba(227,224,215,0);
     border: 1px solid #f0f0f0;
 }
+.textarea-container.active{
+    border: 1px solid #524f48;
+    box-sizing: border-box;
+    background-color: #d5dfca;
+    color: #65625b;
+}
 textarea{
     position: absolute;
     top: 6px;
@@ -32,6 +38,9 @@ textarea{
     padding: 0 16px;
     background-color: transparent;
     border: none;
+    font-family: "Gothic A1";
+    color: #65625b;
+    font-size: 16px;
 }
 .textarea-container .limited-length{
     position: absolute;

@@ -3,6 +3,7 @@ import type { LinksFunction } from "@remix-run/node"
 import styles from "~/styles/find-password.css?url"
 import {Form, Link} from "@remix-run/react";
 import {sanitizeValue} from "~/utils/sanitize";
+import AuthHeader from "~/component/common/AuthHeader";
 
 export const links: LinksFunction = () => [
     { rel: "stylesheet", href: styles },
@@ -75,14 +76,7 @@ const FindPassword = () => {
     };
     return (
         <div>
-            <div className="wrap header">
-                <svg className="btn-back" viewBox="0 0 24 24">
-                    <path d="M0 0h24v24H0z" fill="none">
-                    </path>
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z">
-                    </path>
-                </svg>
-            </div>
+            <AuthHeader/>
             <div className="wrap">
                 <div className="img-container img-shopping">
                     <img src="/shopping.png" alt="shopping image"/>

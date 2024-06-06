@@ -92,10 +92,11 @@ const ShoppingList = (props:{email:string, managerName:string, roomId:number}) =
                     if (shopValue !== undefined && shopValue !== null ){
                         const addedListObject:SHOPPINGLIST = {name:shopValue, shopped:false, id:response.id}
                         if(shoppingList.findIndex((value)=>{return value["name"] === shopValue}) < 0){
-                            setShoppingList([... shoppingList, addedListObject])
+                            setShoppingList([... shoppingList, addedListObject]);
+                            setNewList(false);
                             sendMessage()
                         }else{
-                            alert("이미 있어부렀어")
+                            alert("이미 동일한 장바구니 목록이 존재합니다.")
                         }
                     }
                 }else{
@@ -110,9 +111,10 @@ const ShoppingList = (props:{email:string, managerName:string, roomId:number}) =
     const listUp = async (event:React.KeyboardEvent<HTMLInputElement>) => {
         if(event.key === "Enter") {
             await addShoppingList()
-            if(inputElement.current !== null){
-                inputElement.current.value = ""
-            }
+            // if(inputElement.current !== null){
+            //     inputElement.current.value = ""
+            // }
+            setNewList(false);
         }
     }
 
@@ -195,25 +197,65 @@ const ShoppingList = (props:{email:string, managerName:string, roomId:number}) =
         }
     }
 
+    //새로운 리스트 추가
+    const [newList, setNewList] = useState(false);
+
+    const addNewList = () => {
+        setNewList(true);
+    }
+
     return (
         <>
-            <h1>방 관리자 : {props.managerName}</h1>
-            <ul>
+            <h1 className="shopping-list-title">사야할 것</h1>
+            <ul className="room-list">
+                <li className="room-item">
+                    <button className="btn-add-list" onClick={addNewList}>
+                        <svg className="icon-room-list"  viewBox="0 0 448 512">
+                            <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                        </svg>
+                        <span className="room-title">추가하기</span>
+                    </button>
+                </li>
+                {
+                    newList?
+                        <li className="room-item add-list">
+                            <div className="input-container">
+                                <div className="img-container icon-shopped">
+                                    <img src="/icon-unshopped.png" alt="구매하지않음 아이콘"/>
+                                </div>
+                                <input className="room-title" type="text" id="new_item"
+                                       ref={inputElement} onKeyDown={listUp} placeholder="입력 중..."/>
+                            </div>
+                            <button className="btn-complete" onClick={addShoppingList}>
+                                완료
+                            </button>
+                        </li>:
+                        <div></div>
+                }
                 {shoppingList.map((item) => {
                     return (
-                        <li key={item.id} data-key={item.id} data-shoppped={item.shopped} style={item.shopped ? { backgroundColor: 'red', color: 'white' } : undefined}>
-                            <button onClick={checkShoppedList}>O</button>
-                            <span>{item.name}</span>
-                            <button onClick={removeShoppingList}>X</button>
+                        <li className="room-item item-shopping-list" key={item.id} data-key={item.id} data-shoppped={item.shopped}>
+                            <div>
+                                <button onClick={checkShoppedList} className="btn-list-function">
+                                    <div className="img-container icon-shopped">
+                                        <img src={item.shopped ? "/icon-shopped.png" : "/icon-unshopped.png"} alt={item.shopped ? "구매함" : "구매하지 않음"}/>
+                                    </div>
+                                </button>
+                                <span className="room-title">{item.name}</span>
+                            </div>
+                            <button onClick={removeShoppingList} className="btn-list-function">
+                                <svg className="icon-room-list"  viewBox="0 0 24 24">
+                                    <path d="M0 0h24v24H0z" fill="none">
+                                    </path>
+                                    <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                                    </path>
+                                </svg>
+                            </button>
                         </li>
                     );
                 })}
             </ul>
-            <label>
-                새로운 리스트를 추가하세요 : <input type="text" id="new_item" ref={inputElement} onKeyDown={listUp}/>
-            </label>
-
-            <button onClick={addShoppingList}>새로운 리스트 추가하기</button>
         </>
     )
 }
