@@ -143,11 +143,23 @@
 .room-item .btn-list-function{
     width: 16px;
     height: 16px;
-    padding: 0 0 0 12px;
     align-self: center;
+    margin-left: 12px;
+    padding-left: 0;
 }
-.item-shopping-list{
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*justify-content: space-between;*/
+.shopping-list-container{
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 40px);
+    box-sizing: border-box;
+    gap: 10px;
 }
+/*참여자, 장바구니 관리*/
+.member-list-wrap,
+.setting-wrap{
+    margin-top: 38px;
+}
+.member-list-wrap .icon-room-list{
+    margin: 12px 0 8px 0;
+}
+

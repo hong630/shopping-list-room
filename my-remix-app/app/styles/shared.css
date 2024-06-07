@@ -332,7 +332,8 @@ a.nav-content{
 }
 .room-item a,
 .room-item button,
-.room-item input{
+.room-item input,
+.room-item .box{
     display: flex;
     flex-direction: row;
     gap: 6px;
@@ -368,4 +369,10 @@ a.nav-content{
     height: 16px;
     align-self: center;
     flex-shrink: 0;
+}
+.authority-room-wrap{
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 16px;
 }

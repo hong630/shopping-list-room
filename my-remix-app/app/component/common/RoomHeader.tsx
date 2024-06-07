@@ -86,7 +86,7 @@ const RoomHeader = (props:{userName:string, roomId:string, userEmail:string}) =>
                     </svg>
                 </button>
                 <div className="header-function-container">
-                    <Link to={`/room/edit/${props.roomId}`}
+                    <Link to={`/room/setting/${props.roomId}`}
                     className="anchor-edit">
                         <svg className="icon-setting" viewBox="0 0 24 24">
                             <path fill="none" d="M0 0h24v24H0z">

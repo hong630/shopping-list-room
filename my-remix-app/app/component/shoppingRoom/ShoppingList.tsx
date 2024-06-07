@@ -25,6 +25,18 @@ const ShoppingList = (props:{email:string, managerName:string, roomId:number}) =
     }
 
     useEffect(()=>{
+
+        // 전역 클릭 테스트
+
+        window.onclick = (event)=>{
+            if (event.target === null) return
+            let target = event.target as HTMLElement
+            if (target.closest("li") === null) {
+                setNewList(false)
+                return;
+            }
+        }
+
         //쇼핑리스트 불러오기 API
         getShoppingList()
 
@@ -236,7 +248,7 @@ const ShoppingList = (props:{email:string, managerName:string, roomId:number}) =
                 {shoppingList.map((item) => {
                     return (
                         <li className="room-item item-shopping-list" key={item.id} data-key={item.id} data-shoppped={item.shopped}>
-                            <div>
+                            <div className="shopping-list-container">
                                 <button onClick={checkShoppedList} className="btn-list-function">
                                     <div className="img-container icon-shopped">
                                         <img src={item.shopped ? "/icon-shopped.png" : "/icon-unshopped.png"} alt={item.shopped ? "구매함" : "구매하지 않음"}/>

@@ -39,34 +39,38 @@ const MakeRoom = () => {
         const sanitizedTitle = await sanitizeValue(title.toString());
         const sanitizedDescription = await sanitizeValue(description.toString());
 
-        //방만들기 API
-        fetch("http://localhost:3000/api/room",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    type: "makeRoom",
-                    email: email,
-                    title: sanitizedTitle,
-                    description: sanitizedDescription
-                }),
-            })
-            .then(async (res)=>{
-                const data = await res.json()
-                const response = data.state;
-                if (response === 'Success'){
-                    //방 목록 페이지로 이동
-                    location.href = '/room';
-                }else{
-                    console.log('response :', response)
-                }
-            })
-            .catch((err)=>{
-                console.log(err)
-            })
-         }
+        if(sanitizedTitle.trim() === ''){
+            alert('제목을 입력해주세요.');
+        }else{
+            //방만들기 API
+            fetch("http://localhost:3000/api/room",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        type: "makeRoom",
+                        email: email,
+                        title: sanitizedTitle,
+                        description: sanitizedDescription
+                    }),
+                })
+                .then(async (res)=>{
+                    const data = await res.json()
+                    const response = data.state;
+                    if (response === 'Success'){
+                        //방 목록 페이지로 이동
+                        location.href = '/room';
+                    }else{
+                        console.log('response :', response)
+                    }
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
+            }
+        }
     }
 
     // 텍스트 카운트
