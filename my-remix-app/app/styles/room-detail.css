@@ -14,7 +14,7 @@
     align-self: center;
 }
 .anchor-edit,
-.btn-out-room,
+.anchor-out-room,
 .btn-invite,
 .anchor-members{
     display: flex;
@@ -27,12 +27,13 @@
     border: none;
     height: 48px;
     justify-content: space-between;
+    text-decoration: none;
 }
 .anchor-edit,
 .anchor-members{
     text-decoration: none;
 }
-.btn-out-room,
+.anchor-out-room,
 .btn-invite{
     padding: 0;
 }
@@ -40,7 +41,7 @@
     flex-wrap: wrap;
 }
 .anchor-edit span,
-.btn-out-room span,
+.anchor-out-room span,
 .btn-invite span,
 .anchor-members span{
     color: #000;
@@ -162,4 +163,28 @@
 .member-list-wrap .icon-room-list{
     margin: 12px 0 8px 0;
 }
-
+.room-list.authority-user-list .box{
+    position: relative;
+}
+.room-list.authority-user-list input{
+    position: absolute;
+    top: 0;
+    padding: 0;
+    left: 50%;
+    transform: translatex(-50%);
+    width: 100%;
+    margin: 0;
+    opacity: 0;
+}
+.authority-changing-guide{
+    margin-bottom: 16px;
+    color: #030303;
+    font-size: 14px;
+    font-weight: 600;
+}
+.member-list-wrap .buttons-wrap{
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+}

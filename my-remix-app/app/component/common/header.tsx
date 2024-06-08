@@ -1,7 +1,7 @@
 import {Link} from "@remix-run/react";
 import {useRef} from "react";
 
-const HeaderLayout = (props:{userName:string}) =>{
+const HeaderLayout = (props:{userName:string, title:string}) =>{
 
     //로그아웃 API
     const logout = () => {
@@ -49,7 +49,7 @@ const HeaderLayout = (props:{userName:string}) =>{
                         </path>
                     </svg>
                 </button>
-                <h1>Main</h1>
+                <h1>{props.title}</h1>
             </div>
             <div className="nav-wrap" ref={navRef}>
                 <div className="nav-content-container">

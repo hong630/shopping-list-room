@@ -14,3 +14,13 @@ h1{
 .buttons-wrap{
     margin-top: 24px;
 }
+.title{
+    color: #000000;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-top: 16px;
+}
+.simple-header-title{
+    margin-bottom: 0;
+}

@@ -356,6 +356,7 @@ a.nav-content{
     color: #030303;
     font-size: 16px;
     align-self: center;
+    margin-bottom: 0;
 }
 .room-item .room-detail{
     color: #62625b;
@@ -375,4 +376,73 @@ a.nav-content{
     display: flex;
     flex-direction: column;
     padding-top: 16px;
+}
+.icon-unselected{
+    width: 16px;
+    height: 16px;
+    background-color: #e3e0d7;
+    border: 1px solid #f0f0f0;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    align-self: center;
+}
+.icon-selected{
+    width: 16px;
+    height: 16px;
+    background-color: #62625b;
+    border: 1px solid #f0f0f0;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    align-self: center;
+}
+/*경고 모달*/
+.alert-wrap{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.alert-wrap .icon-modal{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #030303;
+    fill: #030303;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 20px;
+}
+.alert-message{
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+}
+.alert-title-message{
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+.alert-sub-message{
+    color: #62625b;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 10px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex-shrink: 1;
+}
+.alert-wrap .buttons-wrap{
+    margin-top: 48px;
+}
+.alert-wrap h1{
+    color: #030303;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+.alert-wrap input{
+    margin-top: 20px;
 }

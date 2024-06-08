@@ -18,7 +18,7 @@ const RoomLayout = (props:{email:string, userName:string}) => {
     return (
         <div>
             <div>
-                <HeaderLayout userName={props.userName}></HeaderLayout>
+                <HeaderLayout userName={props.userName} title="Main"></HeaderLayout>
                 <div className="wrap">
                     <div className="content-wrap">
                         <div className="content">

@@ -27,10 +27,7 @@ const ChangeMaster = () => {
     const data = useLoaderData() as LoggedInUserData;
     const { user } = data;
     const userEmail = user?.email || "";
-    const userNickname = user?.nickname || "";
 
-    //방정보 담기
-    const [memberData, setMemberData] = useState<RoomDetailMembersDto[] | null>(null);
     //권한 설정
     const [authority, setAuthority] = useState(false);
 
@@ -46,10 +43,10 @@ const ChangeMaster = () => {
             .then(async(res)=>{
                 const data = await res.json();
                 if(data.state.authority === 'master'){
-                    //방장일 시 방소개 변경 노출
+                    //주인일 시 방소개 변경 노출
                     setAuthority(true)
                 }else{
-                    //방장 아닐 시 방소개 변경 숨김
+                    //주인 아닐 시 방소개 변경 숨김
                     setAuthority(false)
                 }
             }).catch((err)=>{
@@ -71,9 +68,7 @@ const ChangeMaster = () => {
             .then(async (res)=>{
                 const data:RoomDetailDto = await res.json();
                 console.log(data);
-                setMemberData(data.members);
-                setMemberDataExceptMaster();
-                console.log('멤버들??', data.members)
+                setMemberDataExceptMaster(data.members);
             })
             .catch((err)=>{
                 console.log(err)
@@ -83,7 +78,7 @@ const ChangeMaster = () => {
     //후임자 리스트
     const [successorList, setSuccessorList] = useState<RoomDetailMembersDto[] | null>(null);
 
-    const setMemberDataExceptMaster = () => {
+    const setMemberDataExceptMaster = (memberData:RoomDetailMembersDto[]) => {
         console.log('memberData', memberData)
         if(memberData !== null){
             const successorMemberData = memberData.filter(member => member.email !== userEmail);
@@ -133,7 +128,7 @@ const ChangeMaster = () => {
     }
     return (
         <div>
-            <SimpleHeader title="방장 변경하기"></SimpleHeader>
+            <SimpleHeader title="주인 변경하기"></SimpleHeader>
             {
                 authority ?
                     <div>
@@ -141,22 +136,23 @@ const ChangeMaster = () => {
                             <Form ref={formRef} onSubmit={changeMaster}>
                                 {successorList && successorList.length > 0 ? (
                                     <div>
-                                        <p>방장으로 변경하고 싶은 참여자를 선택해주세요.</p>
-                                        <ul className="room-list">
+                                        <p className="authority-changing-guide">주인으로 변경하고 싶은 참여자를 선택해주세요.</p>
+                                        <ul className="room-list authority-user-list">
                                             {successorList.map((member, index) => {
                                                 return (
                                                     <li className="room-item item-shopping-list" key={index}>
                                                         <div className="box">
-                                                            <div className="img-container icon-shopped">
-                                                                <img src={checkedInput === member.email ? "/icon-shopped.png" : "/icon-unshopped.png"} alt={checkedInput === member.email ? "구매함" : "구매하지 않음"}/>
-                                                            </div>
+                                                            <div className={checkedInput === member.email ? 'icon-selected' : 'icon-unselected'}></div>
                                                             <label htmlFor="master" className="room-title">{member.nickname} ({member.email})</label>
-                                                            <input type="radio" name="master" value={member.email} onChange={changeInputStyle}/>
+                                                            <input className="authority-input" type="radio" name="master" value={member.email} onChange={changeInputStyle}/>
                                                         </div>
                                                     </li>
                                                 );
                                             })}
                                         </ul>
+                                        <div className="wrap buttons-wrap">
+                                            <button type="submit">확인</button>
+                                        </div>
                                     </div>
                                 ): (
                                     <div>
@@ -168,7 +164,7 @@ const ChangeMaster = () => {
                     </div>:
                     <div>
                         <div className="wrap authority-room-wrap">
-                            <p>방장만 장바구니 정보를 변경할 수 있습니다.</p>
+                            <p>주인만 장바구니 정보를 변경할 수 있습니다.</p>
                             <div className="buttons-wrap">
                                 <Link to="/room">확인</Link>
                             </div>

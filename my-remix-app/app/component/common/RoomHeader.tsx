@@ -65,7 +65,7 @@ const RoomHeader = (props:{userName:string, roomId:string, userEmail:string}) =>
                     //방 목록 페이지로 이동
                     location.href = '/room';
                 }else if (response === 'Master member cannot go out'){
-                    alert('방장은 나갈 수 없습니다. 방장 권한을 위임한 후 나가주세요.');
+                    alert('주인은 나갈 수 없습니다. 주인 권한을 위임한 후 나가주세요.');
                 }else{
                     console.log('response :', response)
                 }
@@ -96,13 +96,13 @@ const RoomHeader = (props:{userName:string, roomId:string, userEmail:string}) =>
                         </svg>
                         <span>관리</span>
                     </Link>
-                    <button className="btn-out-room" onClick={outOfRoom}>
+                    <Link to={`/room/out/${props.roomId}`} className="anchor-out-room">
                         <svg className="icon-out-room"  viewBox="0 0 24 24">
                             <path d="M14 6v15H3v-2h2V3h9v1h5v15h2v2h-4V6h-3zm-4 5v2h2v-2h-2z">
                             </path>
                         </svg>
                         <span>나가기</span>
-                    </button>
+                    </Link>
                     <button className="btn-nav" onClick={openNav}>
                         <svg className="nav-bar" viewBox="0 0 448 512">
                             <path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z">

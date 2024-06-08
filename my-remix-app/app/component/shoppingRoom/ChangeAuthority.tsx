@@ -70,7 +70,7 @@ const ChangeAuthority:React.FC<MemberListProps> = ({memberData, authority, email
             {
                 authority ?
                     <div>
-                        <button onClick={openAuthorityModal}>방장 변경</button>
+                        <button onClick={openAuthorityModal}>주인 변경</button>
                     </div>:
                     <div></div>
             }

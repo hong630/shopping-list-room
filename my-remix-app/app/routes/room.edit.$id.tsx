@@ -42,10 +42,10 @@ const EditRoom = () => {
             .then(async(res)=>{
                 const data = await res.json();
                 if(data.state.authority === 'master'){
-                    //방장일 시 방소개 변경 노출
+                    //주인일 시 방소개 변경 노출
                     setAuthority(true)
                 }else{
-                    //방장 아닐 시 방소개 변경 숨김
+                    //주인 아닐 시 방소개 변경 숨김
                     setAuthority(false)
                 }
             }).catch((err)=>{
@@ -180,7 +180,7 @@ const EditRoom = () => {
                     </div>:
                     <div>
                         <div className="wrap edit-room-wrap">
-                            <p>방장만 장바구니 정보를 변경할 수 있습니다.</p>
+                            <p>주인만 장바구니 정보를 변경할 수 있습니다.</p>
                             <div className="buttons-wrap">
                                 <Link to="/room">확인</Link>
                             </div>
