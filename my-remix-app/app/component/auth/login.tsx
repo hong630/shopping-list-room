@@ -28,8 +28,8 @@ const LoginComponent = () => {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        email: sanitizedEmail,
-                        password: sanitizedPassword
+                        email: sanitizedEmail.trim(),
+                        password: sanitizedPassword.trim()
                     }),
                 })
                 .then(async (res)=>{

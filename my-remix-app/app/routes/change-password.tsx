@@ -47,7 +47,7 @@ const ChangePassword = () => {
                 body: JSON.stringify({
                     type : 'password',
                     email: email,
-                    password: password
+                    password: password.trim()
                 }),
             })
             .then(async (res)=>{

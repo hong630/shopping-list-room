@@ -29,74 +29,6 @@ const Mypage = () => {
     const userEmail = user?.email || "";
     const userNickname = user?.nickname || "";
 
-    //탈퇴하기
-    const [withdrawModal, setWithdrawModal] = useState(false);
-    const [toastModal, setToastModal] = useState({state:false, message:""})
-    //비밀번호 변경하기
-    const [changingPassword, setChangingPassword] = useState(false);
-    //닉네임 변경하기
-    const [changingNickname, setChangingNickname] = useState(false);
-
-    const widthdrawService = () => {
-        const email = user?.email;
-        //TODO 탈퇴  API
-        fetch("http://localhost:3000/api/register",
-            {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: email,
-                }),
-            })
-            .then(async (res)=>{
-                const data = await res.json()
-                // console.log(data)
-                const response = data.state;
-                if (response === 'Success'){
-                    setToastModal({state:true, message:"탈퇴가 완료되었습니다."});
-                    setTimeout(()=>{location.href="/room"},2000)
-                }else{
-                    console.log('response :', response)
-                    setToastModal({state:true, message:"탈퇴를 실패하였습니다."});
-                    setTimeout(()=>{location.href="/room"},2000)
-                }
-            })
-            .catch((err)=>{
-                console.log(err)
-                setToastModal({state:true, message:"탈퇴를 실패하였습니다."});
-                setTimeout(()=>{location.href="/room"},2000)
-            })
-    }
-    const showWithdrawModal = () => {
-        setWithdrawModal(true);
-    }
-    const closeWithdrawModal = () => {
-        setWithdrawModal(false);
-    }
-
-    //비밀번호 변경하기 모달 열기
-    const openChangingPasswordModal = () => {
-        setChangingPassword(true);
-    }
-    //비밀번호 변경하기 모달 닫기
-    const closeChangingPasswordModal = () => {
-        setChangingPassword(false);
-    }
-    //닉네임 변경하기 모달 열기
-    const openChangingNicknameModal = () => {
-        setChangingNickname(true);
-    }
-    //닉네임 변경하기 모달 닫기
-    const closeChangingNicknameModal = () => {
-        setChangingNickname(false);
-    }
-
-
-
-
-
     return (
         <div>
             {
@@ -134,7 +66,7 @@ const Mypage = () => {
                                     </path>
                                 </svg>
                             </Link>
-                            <Link to={`/mypage/nickname`}>
+                            <Link to={`/help`}>
                                 <div className="mypage-container">
                                     <svg className="icon-mypage"  viewBox="0 0 512 512">
                                         <path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 400c-18 0-32-14-32-32s13.1-32 32-32c17.1 0 32 14 32 32S273.1 400 256 400zM325.1 258L280 286V288c0 13-11 24-24 24S232 301 232 288V272c0-8 4-16 12-21l57-34C308 213 312 206 312 198C312 186 301.1 176 289.1 176h-51.1C225.1 176 216 186 216 198c0 13-11 24-24 24s-24-11-24-24C168 159 199 128 237.1 128h51.1C329 128 360 159 360 198C360 222 347 245 325.1 258z">
@@ -149,7 +81,7 @@ const Mypage = () => {
                                     </path>
                                 </svg>
                             </Link>
-                            <Link to={`/mypage/nickname`}>
+                            <Link to={`/delete-account`}>
                                 <div className="mypage-container">
                                     <svg className="icon-mypage"  viewBox="0 0 512 512">
                                         <path d="M160 416H96c-17.67 0-32-14.33-32-32V128c0-17.67 14.33-32 32-32h64c17.67 0 32-14.33 32-32S177.7 32 160 32H96C42.98 32 0 74.98 0 128v256c0 53.02 42.98 96 96 96h64c17.67 0 32-14.33 32-32S177.7 416 160 416zM502.6 233.4l-128-128c-12.51-12.51-32.76-12.49-45.25 0c-12.5 12.5-12.5 32.75 0 45.25L402.8 224H192C174.3 224 160 238.3 160 256s14.31 32 32 32h210.8l-73.38 73.38c-12.5 12.5-12.5 32.75 0 45.25s32.75 12.5 45.25 0l128-128C515.1 266.1 515.1 245.9 502.6 233.4z">
@@ -165,37 +97,9 @@ const Mypage = () => {
                                 </svg>
                             </Link>
                         </div>
-
-
-                        <h1>{user.nickname}의 마이페이지입니다.</h1>
-                        <button onClick={showWithdrawModal}>탈퇴하기</button>
-                        <button onClick={openChangingPasswordModal}>비밀번호 변경하기</button>
-                        <button onClick={openChangingNicknameModal}>닉네임 변경하기</button>
                     </div>
                     : <div></div>
 
-            }
-            {
-                withdrawModal ?
-                    <div style={{backgroundColor: "tomato"}}>
-                        <h1>정말 탈퇴하시겠습니까?</h1>
-                        <button onClick={widthdrawService}>네</button>
-                        <button onClick={closeWithdrawModal}>아니요..</button>
-                    </div>
-                    : <div></div>
-            }
-            {
-                toastModal.state ?
-                    <div>
-                        <p style={{
-                            backgroundColor: "yellowgreen",
-                            position: "fixed",
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50%,-50%)"
-                        }}>{toastModal.message}</p>
-                    </div>
-                    : <div></div>
             }
         </div>
     );

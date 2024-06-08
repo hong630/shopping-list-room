@@ -33,9 +33,9 @@ const SignupLayout = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    email: email,
+                    email: email.trim(),
                     nickname : nickname,
-                    password: password
+                    password: password.trim()
                 }),
             })
             .then(async (res)=>{

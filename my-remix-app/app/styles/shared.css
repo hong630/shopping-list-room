@@ -446,3 +446,27 @@ a.nav-content{
 .alert-wrap input{
     margin-top: 20px;
 }
+
+
+/* 반응형 */
+@media only screen and (min-width: 700px) {
+    .wrap,.header{
+        width: 70vw;
+    }
+    .header{
+        margin: auto;
+    }
+}
+/*스크롤 바 */
+.room-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.room-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.room-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
