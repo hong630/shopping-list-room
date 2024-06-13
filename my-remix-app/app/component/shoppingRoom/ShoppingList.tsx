@@ -1,14 +1,16 @@
 import React, {useEffect, useRef, useState} from "react";
 import {SHOPPINGLIST} from "~/data/dto";
+import {getBaseUrl, getWsUrl} from "~/utils/getBaseUrl";
 
 const ShoppingList = (props:{email:string, managerName:string, roomId:number}) => {
+    const apiUrl = getBaseUrl();
     const originShoppingList:Array<SHOPPINGLIST> = [{name:'아직 장바구니 목록이 없습니다.',shopped:false, id:null}];
     const [shoppingList, setShoppingList] = useState<Array<SHOPPINGLIST>>(originShoppingList)
 
     const [websocket, setWebsocket] = useState<WebSocket|null>(null)
 
     const getShoppingList = () => {
-        const url = new URL('http://localhost:3000/api/shoppingList');
+        const url = new URL(`${apiUrl}/api/shoppingList`);
         url.searchParams.append('roomId', props.roomId.toString());
         url.searchParams.append('type', 'getShoppingList');
         fetch(url,
@@ -39,8 +41,8 @@ const ShoppingList = (props:{email:string, managerName:string, roomId:number}) =
 
         //쇼핑리스트 불러오기 API
         getShoppingList()
-
-        const ws = new WebSocket('ws://localhost:3001');
+        const wsUrl = getWsUrl();
+        const ws = new WebSocket(wsUrl);
 
         ws.onmessage = (event) => {
             console.log("event check")
@@ -85,7 +87,7 @@ const ShoppingList = (props:{email:string, managerName:string, roomId:number}) =
         const shopValue = inputElement.current?.value || ""
 
         //쇼핑리스트 추가하기 API
-        fetch("http://localhost:3000/api/shoppingList",
+        fetch(`${apiUrl}/api/shoppingList`,
             {
                 method: "POST",
                 headers: {
@@ -137,7 +139,7 @@ const ShoppingList = (props:{email:string, managerName:string, roomId:number}) =
         if(parentElement){
             const shoppingItemId = parentElement.getAttribute('data-key');
             //쇼핑리스트 삭제하기 API
-            fetch("http://localhost:3000/api/shoppingList",
+            fetch(`${apiUrl}/api/shoppingList`,
                 {
                     method: "DELETE",
                     headers: {
@@ -178,7 +180,7 @@ const ShoppingList = (props:{email:string, managerName:string, roomId:number}) =
             const shoppingItemShopped = parentElement.getAttribute('data-shoppped');
             const isShopped = shoppingItemShopped === 'true';
             //쇼핑리스트 상태 변경하기 API
-            fetch("http://localhost:3000/api/shoppingList",
+            fetch(`${apiUrl}/api/shoppingList`,
                 {
                     method: "PUT",
                     headers: {

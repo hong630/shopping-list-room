@@ -4,10 +4,11 @@ import React, {useEffect, useRef, useState} from "react";
 import {LoggedInUserData, RoomDetailDto} from "~/data/dto";
 import {useLoaderData, useParams} from "react-router";
 import {LoaderFunction, redirect} from "@remix-run/node";
-import {getUserSession} from "~/routes/session.server";
+import {getUserSession} from "~/routes/session";
 import type { LinksFunction } from "@remix-run/node"
 import styles from "~/styles/make-room.css?url"
 import {sanitizeValue} from "~/utils/sanitize";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 export const links: LinksFunction = () => [
     { rel: "stylesheet", href: styles },
@@ -28,12 +29,13 @@ const EditRoom = () => {
     const data = useLoaderData() as LoggedInUserData;
     const { user } = data;
     const userEmail = user?.email || "";
+    const apiUrl = getBaseUrl();
     //권한 설정
     const [authority, setAuthority] = useState(false);
 
     //권한 체크
     const checkAuthority = () => {
-        const url = new URL('http://localhost:3000/api/room');
+        const url = new URL(`${apiUrl}/api/room`);
         url.searchParams.append('type', 'authority');
         url.searchParams.append('email', userEmail);
         url.searchParams.append('roomId', roomId.toString());
@@ -54,7 +56,7 @@ const EditRoom = () => {
     }
 
     useEffect(()=>{
-        const url = new URL('http://localhost:3000/api/room');
+        const url = new URL(`${apiUrl}/api/room`);
         url.searchParams.append('roomId', roomId);
         url.searchParams.append('type', 'detail');
         //방정보 API
@@ -87,7 +89,7 @@ const EditRoom = () => {
             if(sanitizedTitle.trim() === ''){
                 alert('제목을 입력해주세요.');
             }else{
-                fetch("http://localhost:3000/api/room",
+                fetch(`${apiUrl}/api/room`,
                     {
                         method : "PUT",
                         headers : {

@@ -7,10 +7,11 @@ import {togglePasswordVisibility} from "~/utils/buttonsFunction";
 import VisibilityIcon from "~/component/common/VisibilityIcon";
 import AuthHeader from "~/component/common/AuthHeader";
 import {LoggedInUserData} from "~/data/dto";
-import {getUserSession} from "~/routes/session.server";
+import {getUserSession} from "~/routes/session";
 import {redirect} from "@remix-run/node";
 import {useLoaderData} from "react-router";
 import SimpleHeader from "~/component/common/SimpleHeader";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 
 export const links: LinksFunction = () => [
@@ -36,9 +37,10 @@ const ChangePassword = () => {
     const [noPassword, setNoPassword] = useState(false);
 
 
+    const apiUrl = getBaseUrl();
     const changingPasswordApi = (password:string) => {
         //비밀번호 변경 API
-        fetch("http://localhost:3000/api/changeUser",
+        fetch(`${apiUrl}/api/changeUser`,
             {
                 method: "PUT",
                 headers: {

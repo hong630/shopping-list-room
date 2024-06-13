@@ -1,6 +1,8 @@
 import {useState} from "react";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 const DeleteRoom = (props : {email : string, roomId : number, authority : boolean}) => {
+    const apiUrl = getBaseUrl();
     //방정보삭제 모달 노출
     const [openingDeleteModal, setOpeningDeleteModal] = useState(false);
 
@@ -13,7 +15,7 @@ const DeleteRoom = (props : {email : string, roomId : number, authority : boolea
 
     const submitToDeleteRoom = () => {
         const roomId = Number(props.roomId);
-        fetch("http://localhost:3000/api/room",
+        fetch(`${apiUrl}/api/room`,
             {
                 method : "DELETE",
                 headers : {

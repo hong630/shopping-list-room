@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Form, Link} from "@remix-run/react";
 import {LoaderFunction, redirect} from "@remix-run/node";
 import {LoggedInUserData} from "~/data/dto";
-import {getUserSession} from "~/routes/session.server";
+import {getUserSession} from "~/routes/session";
 import {useLoaderData} from "react-router";
 import HeaderLayout from "~/component/common/header";
 import type {LinksFunction} from "@remix-run/node"

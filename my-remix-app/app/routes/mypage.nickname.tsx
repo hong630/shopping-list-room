@@ -4,10 +4,11 @@ import {Form} from "@remix-run/react";
 import type {LinksFunction, LoaderFunction} from "@remix-run/node"
 import styles from "~/styles/mypage.css?url"
 import {LoggedInUserData} from "~/data/dto";
-import {getUserSession} from "~/routes/session.server";
+import {getUserSession} from "~/routes/session";
 import {redirect} from "@remix-run/node";
 import {useLoaderData} from "react-router";
 import {sanitizeValue} from "~/utils/sanitize";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 export const links: LinksFunction = () => [
     { rel: "stylesheet", href: styles },
@@ -25,7 +26,7 @@ const ChangeNickname = () => {
     const data = useLoaderData() as LoggedInUserData;
     const { user, isLoggedIn } = data;
     const email = user?.email;
-
+    const apiUrl = getBaseUrl();
     const [detailText,setDetailText] = useState('');
     const handleDetailChange = (event:React.ChangeEvent<HTMLInputElement>) => {
         if (event.currentTarget.value.length <= 10) {
@@ -45,7 +46,6 @@ const ChangeNickname = () => {
 
     const [nicknameError, setNicknameError] = useState(false);
     const changeNickname = async (event:React.FormEvent<HTMLFormElement>) => {
-        console.log('들어오긴 함?')
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const nickname = formData.get("nickname");
@@ -57,7 +57,7 @@ const ChangeNickname = () => {
                 setNicknameError(true);
             }else{
                 //닉네임 변경 API
-                fetch("http://localhost:3000/api/changeUser",
+                fetch(`${apiUrl}/api/changeUser`,
                     {
                         method: "PUT",
                         headers: {

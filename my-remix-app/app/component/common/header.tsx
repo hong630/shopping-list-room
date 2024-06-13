@@ -1,11 +1,12 @@
 import {Link} from "@remix-run/react";
 import {useRef} from "react";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 const HeaderLayout = (props:{userName:string, title:string}) =>{
-
+    const apiUrl = getBaseUrl();
     //로그아웃 API
     const logout = () => {
-        fetch("http://localhost:3000/api/logout",
+        fetch(`${apiUrl}/api/logout`,
             {
                 method: "POST",
                 headers: {

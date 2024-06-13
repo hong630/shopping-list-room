@@ -1,7 +1,10 @@
 import {Form} from "@remix-run/react";
 import React, {useState} from "react";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 const ChangeRoomInfo = (props : {email : string, roomId : number, authority : boolean}) => {
+    const apiUrl = getBaseUrl();
+
     //방정보변경 모달 노출
     const [openingChangeModal, setOpeningChangeModal] = useState(false);
 
@@ -18,7 +21,7 @@ const ChangeRoomInfo = (props : {email : string, roomId : number, authority : bo
       const title = formData.get("title");
       const description = formData.get("description");
 
-      fetch("http://localhost:3000/api/room",
+      fetch(`${apiUrl}/api/room`,
           {
               method : "PUT",
               headers : {

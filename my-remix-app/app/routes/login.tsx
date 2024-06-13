@@ -2,7 +2,7 @@ import LoginComponent from '../component/auth/login';
 import type {LinksFunction, LoaderFunction} from "@remix-run/node"
 import styles from "~/styles/login.css?url"
 import {LoggedInUserData} from "~/data/dto";
-import {getUserSession} from "~/routes/session.server";
+import {getUserSession} from "~/routes/session";
 import {redirect} from "@remix-run/node";
 
 export const links: LinksFunction = () => [

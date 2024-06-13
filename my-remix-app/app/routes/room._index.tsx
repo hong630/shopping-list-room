@@ -1,6 +1,6 @@
 import RoomLayout from "~/component/roomLayout/RoomLayout";
 import {LoaderFunction, redirect} from "@remix-run/node";
-import {getUserSession} from "~/routes/session.server";
+import {getUserSession} from "~/routes/session";
 import {useLoaderData} from "react-router";
 import {LoggedInUserData} from "~/data/dto";
 import type { LinksFunction } from "@remix-run/node"

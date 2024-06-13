@@ -1,13 +1,14 @@
 import SimpleHeader from "~/component/common/SimpleHeader";
 import {LoaderFunction, redirect} from "@remix-run/node";
 import {LoggedInUserData} from "~/data/dto";
-import {getUserSession} from "~/routes/session.server";
+import {getUserSession} from "~/routes/session";
 import {useLoaderData} from "react-router";
 import {sanitizeValue} from "~/utils/sanitize";
 import React, {useRef, useState} from "react";
 import {Form} from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node"
 import styles from "~/styles/make-room.css?url"
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 export const links: LinksFunction = () => [
     { rel: "stylesheet", href: styles },
@@ -28,7 +29,7 @@ const MakeRoom = () => {
     const { user, isLoggedIn } = data;
     const email = user?.email || "";
     const userNickname = user?.nickname || "";
-
+    const apiUrl = getBaseUrl();
     const makeRoom = async (event:React.FormEvent<HTMLFormElement>) => {
 
     const formData = new FormData(event.currentTarget);
@@ -43,7 +44,7 @@ const MakeRoom = () => {
             alert('제목을 입력해주세요.');
         }else{
             //방만들기 API
-            fetch("http://localhost:3000/api/room",
+            fetch(`${apiUrl}/api/room`,
                 {
                     method: "POST",
                     headers: {

@@ -5,7 +5,7 @@ import styles from "~/styles/room-detail.css?url"
 import {useLoaderData, useParams} from "react-router";
 import {Link} from "@remix-run/react";
 import {LoggedInUserData} from "~/data/dto";
-import {getUserSession} from "~/routes/session.server";
+import {getUserSession} from "~/routes/session";
 import {redirect} from "@remix-run/node";
 
 export const links: LinksFunction = () => [
@@ -28,30 +28,6 @@ const SettingRoom = () => {
     const { user } = data;
     const userEmail = user?.email || "";
 
-    const submitToDeleteRoom = () => {
-        fetch("http://localhost:3000/api/room",
-            {
-                method : "DELETE",
-                headers : {
-                    "Content-Type" : "application/json",
-                },
-                body : JSON.stringify({
-                    type: "deleteRoom",
-                    email : userEmail,
-                    roomId : Number(roomId)
-                }),
-            }).then(async(res)=>{
-            const data = await res.json();
-            const response = data.state;
-            if(response === 'Success'){
-                location.href = '/room'
-            }else{
-                console.log('response : ', response)
-            }
-        }).catch((err)=>{
-            console.log(err)
-        })
-    }
     return (
         <div>
             <SimpleHeader title="장바구니 관리"></SimpleHeader>

@@ -1,9 +1,13 @@
 import {MemberListProps, RoomDetailMembersDto} from "~/data/dto";
 import React, {useEffect, useRef, useState} from "react";
 import {Form} from "@remix-run/react";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 
 const ChangeAuthority:React.FC<MemberListProps> = ({memberData, authority, email, roomId}) => {
+
+    const apiUrl = getBaseUrl();
+
     //authority변경 모달 열기
     const [openingAuthorityModal, setOpeningAuthorityModal] = useState(false)
     //후임자 리스트
@@ -31,7 +35,7 @@ const ChangeAuthority:React.FC<MemberListProps> = ({memberData, authority, email
             const newManagerEmail = formData.get('master');
 
             //권한 변경 API
-            fetch("http://localhost:3000/api/room",
+            fetch(`${apiUrl}/api/room`,
                 {
                     method: "PUT",
                     headers: {

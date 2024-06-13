@@ -3,8 +3,9 @@ import SimpleHeader from "~/component/common/SimpleHeader";
 import {useLoaderData} from "react-router";
 import {LoggedInUserData} from "~/data/dto";
 import {LoaderFunction, redirect} from "@remix-run/node";
-import {getUserSession} from "~/routes/session.server";
+import {getUserSession} from "~/routes/session";
 import {Link} from "@remix-run/react";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 //세션에서 로그인한 사용자 정보 가져오기
 export const loader: LoaderFunction = async ({ request }) => {
     const data:LoggedInUserData = await getUserSession(request);
@@ -23,7 +24,8 @@ const DeleteAccount = () => {
     const [withdrawModal, setWithdrawModal] = useState(false);
 
     const widthdrawService = () => {
-        fetch("http://localhost:3000/api/register",
+        const apiUrl = getBaseUrl();
+        fetch(`${apiUrl}/api/register`,
             {
                 method: "DELETE",
                 headers: {

@@ -2,7 +2,7 @@ import {ActionFunction, json} from "@remix-run/node";
 import {ErrorResponse, UserDao} from "~/data/dao";
 import {Prisma, PrismaClient} from "@prisma/client";
 import dotenv from "dotenv";
-import {commitSession, getSession} from "~/routes/session.server";
+import {commitSession, getSession} from "~/routes/session";
 import {catchErrCode} from "~/utils/prismaErr";
 import {hashPassword} from "~/routes/api.register";
 

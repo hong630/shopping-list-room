@@ -1,5 +1,5 @@
 import {ActionFunction, json} from "@remix-run/node";
-import {destroySession, getSession} from "~/routes/session.server";
+import {destroySession, getSession} from "~/routes/session";
 
 export const action: ActionFunction = async ({ request }) => {
     try{

@@ -2,9 +2,10 @@
 import {useLoaderData, useParams} from "react-router";
 import {LoggedInUserData, RoomDetailDto} from "~/data/dto";
 import {LoaderFunction, redirect} from "@remix-run/node";
-import {getUserSession} from "~/routes/session.server";
+import {getUserSession} from "~/routes/session";
 import SimpleHeader from "~/component/common/SimpleHeader";
 import React, {useEffect, useState} from "react";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 export const loader: LoaderFunction = async ({ request }) => {
     const data:LoggedInUserData = await getUserSession(request);
@@ -20,9 +21,9 @@ const DeleteRoom = () => {
     const data = useLoaderData() as LoggedInUserData;
     const { user } = data;
     const userEmail = user?.email || "";
-
+    const apiUrl = getBaseUrl();
     const submitToDeleteRoom = () => {
-        fetch("http://localhost:3000/api/room",
+        fetch(`${apiUrl}/api/room`,
             {
                 method : "DELETE",
                 headers : {
@@ -49,7 +50,7 @@ const DeleteRoom = () => {
     const [roomDetailInfo, setRoomDetailInfo] = useState<RoomDetailDto | null>(null)
 
     useEffect(()=>{
-        const url = new URL('http://localhost:3000/api/room');
+        const url = new URL(`${apiUrl}/api/room`);
         url.searchParams.append('roomId', roomId);
         url.searchParams.append('type', 'detail');
         //로그인 API

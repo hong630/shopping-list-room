@@ -1,14 +1,16 @@
 import React, {useRef} from "react";
 import {Link} from "@remix-run/react";
 import {sanitizeValue} from "~/utils/sanitize";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 const RoomHeader = (props:{userName:string, roomId:string, userEmail:string}) => {
+    const apiUrl = getBaseUrl();
     const goBack = () => {
         history.go(-1);
     }
     //로그아웃 API
     const logout = () => {
-        fetch("http://localhost:3000/api/logout",
+        fetch(`${apiUrl}/api/logout`,
             {
                 method: "POST",
                 headers: {
@@ -43,37 +45,6 @@ const RoomHeader = (props:{userName:string, roomId:string, userEmail:string}) =>
         navRef.current?.classList.remove('open');
     }
 
-    //방 나가기
-    const outOfRoom = async () => {
-        //방 나가기 API
-        fetch("http://localhost:3000/api/room",
-            {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    type: "outRoom",
-                    email : props.userEmail,
-                    roomId : props.roomId,
-                }),
-            })
-            .then(async (res)=>{
-                const data = await res.json()
-                const response = data.state;
-                if (response === 'Success'){
-                    //방 목록 페이지로 이동
-                    location.href = '/room';
-                }else if (response === 'Master member cannot go out'){
-                    alert('주인은 나갈 수 없습니다. 주인 권한을 위임한 후 나가주세요.');
-                }else{
-                    console.log('response :', response)
-                }
-            })
-            .catch((err)=>{
-                console.log(err)
-            })
-    }
     return (
         <div>
             <div className="header room">

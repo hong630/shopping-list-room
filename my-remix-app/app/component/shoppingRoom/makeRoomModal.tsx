@@ -1,13 +1,14 @@
 import { Form } from '@remix-run/react';
 import React from "react";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 const MakeRoomModal = (props:{email:string}) => {
-
+    const apiUrl = getBaseUrl();
     const makeRoom = (event:React.FormEvent<HTMLFormElement>) => {
         const formData = new FormData(event.currentTarget);
         const title = formData.get("title");
         const description = formData.get("description");
         //방만들기 API
-        fetch("http://localhost:3000/api/room",
+        fetch(`${apiUrl}/api/room`,
             {
                 method: "POST",
                 headers: {

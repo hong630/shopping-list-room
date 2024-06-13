@@ -2,6 +2,7 @@ import {Form, Link} from "@remix-run/react";
 import React, {useState} from "react";
 import {sanitizeValue} from "~/utils/sanitize";
 import AuthHeader from "~/component/common/AuthHeader";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 
 const LoginComponent = () => {
@@ -9,6 +10,7 @@ const LoginComponent = () => {
     const [failedLogin, setFailedLogin] = useState<string>('');
 
     //로그인 성공 체크
+    const apiUrl = getBaseUrl();
     const tryLogin = async (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
@@ -21,7 +23,7 @@ const LoginComponent = () => {
             const sanitizedPassword = await sanitizeValue(password.toString());
 
             //로그인 API
-            fetch("http://localhost:3000/api/register",
+            fetch(`${apiUrl}/api/register`,
                 {
                     method: "POST",
                     headers: {

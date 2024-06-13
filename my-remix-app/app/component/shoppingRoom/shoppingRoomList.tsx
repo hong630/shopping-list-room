@@ -1,13 +1,14 @@
 import {useEffect, useState} from "react";
 import {Link} from "@remix-run/react";
 import {RoomDto} from "~/data/dto";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 const ShoppingRoomListComponent = (props:{email:string, nickname:string}) => {
     const [shoppingRoomList, setShoppingRoomList] = useState<RoomDto[] | null>(null);
 
-
+    const apiUrl = getBaseUrl();
     useEffect(()=>{
-        const url = new URL('http://localhost:3000/api/room');
+        const url = new URL(`${apiUrl}/api/room`);
         url.searchParams.append('email', props.email);
         url.searchParams.append('type', 'all');
         //로그인 API

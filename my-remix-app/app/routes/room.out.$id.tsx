@@ -1,9 +1,10 @@
 import {LoaderFunction, redirect} from "@remix-run/node";
 import {LoggedInUserData, RoomDetailDto} from "~/data/dto";
-import {getUserSession} from "~/routes/session.server";
+import {getUserSession} from "~/routes/session";
 import {useLoaderData, useParams} from "react-router";
 import SimpleHeader from "~/component/common/SimpleHeader";
 import React, {useEffect, useState} from "react";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 export const loader: LoaderFunction = async ({ request }) => {
     const data:LoggedInUserData = await getUserSession(request);
@@ -20,11 +21,12 @@ const OutRoom = () => {
     const data = useLoaderData() as LoggedInUserData;
     const { user } = data;
     const userEmail = user?.email || "";
+    const apiUrl = getBaseUrl();
     //권한 설정
     const [authority, setAuthority] = useState(false);
     //권한 체크
     const checkAuthority = () => {
-        const url = new URL('http://localhost:3000/api/room');
+        const url = new URL(`${apiUrl}/api/room`);
         url.searchParams.append('type', 'authority');
         url.searchParams.append('email', userEmail);
         url.searchParams.append('roomId', roomId.toString());
@@ -50,7 +52,7 @@ const OutRoom = () => {
     //방 나가기
     const outOfRoom = async () => {
         //방 나가기 API
-        fetch("http://localhost:3000/api/room",
+        fetch(`${apiUrl}/api/room`,
             {
                 method: "DELETE",
                 headers: {
@@ -80,7 +82,7 @@ const OutRoom = () => {
     }
     useEffect(()=>{
         checkAuthority();
-        const url = new URL('http://localhost:3000/api/room');
+        const url = new URL(`${apiUrl}/api/room`);
         url.searchParams.append('roomId', roomId);
         url.searchParams.append('type', 'detail');
         //로그인 API

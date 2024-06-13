@@ -4,7 +4,7 @@ import {catchErrCode} from "~/utils/prismaErr";
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import {UserDao} from "~/data/dao";
-import {commitSession, destroySession, getSession} from "~/routes/session.server";
+import {commitSession, destroySession, getSession} from "~/routes/session";
 
 dotenv.config();
 

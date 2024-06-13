@@ -6,11 +6,13 @@ import {checkOver, sanitizeValue, validateEmail, validatePassword} from "~/utils
 import {togglePasswordVisibility} from "~/utils/buttonsFunction";
 import VisibilityIcon from "~/component/common/VisibilityIcon";
 import AuthHeader from "~/component/common/AuthHeader";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 export const links: LinksFunction = () => [
     { rel: "stylesheet", href: styles },
 ];
 const SignupLayout = () => {
+    const apiUrl = getBaseUrl();
 
     //이메일 유효성 검사 에러 메시지
     const [noEmail, setNoEmail] = useState(false);
@@ -26,7 +28,7 @@ const SignupLayout = () => {
 
     //회원가입 API
     const signupApi = (email:string, nickname:string, password:string) => {
-        fetch("http://localhost:3000/api/register",
+        fetch(`${apiUrl}/api/register`,
             {
                 method: "PUT",
                 headers: {

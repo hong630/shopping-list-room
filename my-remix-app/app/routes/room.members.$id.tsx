@@ -4,6 +4,7 @@ import {RoomDetailDto, RoomDetailMembersDto} from "~/data/dto";
 import SimpleHeader from "~/component/common/SimpleHeader";
 import type {LinksFunction} from "@remix-run/node"
 import styles from "~/styles/room-detail.css?url"
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 export const links: LinksFunction = () => [
     { rel: "stylesheet", href: styles },
@@ -11,10 +12,11 @@ export const links: LinksFunction = () => [
 const MemberList = () => {
     const params = useParams<string>()
     const roomId:string = params.id || "";
+    const apiUrl = getBaseUrl();
     //방정보 담기
     const [roomMembers, setRoomMembers] = useState<RoomDetailMembersDto[]>([]);
     useEffect(()=>{
-        const url = new URL('http://localhost:3000/api/room');
+        const url = new URL(`${apiUrl}/api/room`);
         url.searchParams.append('roomId', roomId);
         url.searchParams.append('type', 'detail');
         //로그인 API

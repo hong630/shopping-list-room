@@ -4,6 +4,7 @@ import styles from "~/styles/find-password.css?url"
 import {Form, Link} from "@remix-run/react";
 import {sanitizeValue} from "~/utils/sanitize";
 import AuthHeader from "~/component/common/AuthHeader";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 export const links: LinksFunction = () => [
     { rel: "stylesheet", href: styles },
@@ -25,6 +26,7 @@ const FindPassword = () => {
     const openModalResetCompleted = () => {
         setFindingPasswordResult('email');
     }
+    const apiUrl = getBaseUrl();
     //비밀번호 찾기 결과 보여주기
     const showFindingPasswordResult = async (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -36,7 +38,7 @@ const FindPassword = () => {
             //스크립트 태그, HTML 태그 제거
             const sanitizedEmail = await sanitizeValue(email.toString());
             console.log(sanitizedEmail)
-            fetch("http://localhost:3000/api/changeUser",
+            fetch(`${apiUrl}/api/changeUser`,
                 {
                     method: "PUT",
                     headers: {

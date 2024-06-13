@@ -5,7 +5,7 @@ import {useLoaderData, useParams} from "react-router";
 import HeaderLayout from "~/component/common/header";
 import {Form, Link} from "@remix-run/react";
 import {LoaderFunction, redirect} from "@remix-run/node";
-import {getUserSession} from "~/routes/session.server";
+import {getUserSession} from "~/routes/session";
 import ChangeRoomInfo from "~/component/shoppingRoom/ChangeRoomInfo";
 import ChangeAuthority from "~/component/shoppingRoom/ChangeAuthority";
 import DeleteRoom from "~/component/shoppingRoom/DeleteRoom";
@@ -14,6 +14,7 @@ import type {LinksFunction} from "@remix-run/node"
 import styles from "~/styles/room-detail.css?url"
 import SimpleHeader from "~/component/common/SimpleHeader";
 import {sanitizeValue} from "~/utils/sanitize";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 export const links: LinksFunction = () => [
     { rel: "stylesheet", href: styles },
@@ -36,6 +37,7 @@ const DetailRoom = () => {
     const { user } = data;
     const userEmail = user?.email || "";
     const userNickname = user?.nickname || "";
+    const apiUrl = getBaseUrl();
 
     const copyInvitationLink = (event:React.MouseEvent<HTMLButtonElement>) => {
         const text = event.currentTarget.value;
@@ -58,7 +60,7 @@ const DetailRoom = () => {
     const [authority, setAuthority] = useState(false);
 
     useEffect(()=>{
-        const url = new URL('http://localhost:3000/api/room');
+        const url = new URL(`${apiUrl}/api/room`);
         url.searchParams.append('roomId', roomId);
         url.searchParams.append('type', 'detail');
         //로그인 API
@@ -93,7 +95,7 @@ const DetailRoom = () => {
             const sanitizedCode = await sanitizeValue(code.toString().toUpperCase())
 
             //방 들어가기 API
-            fetch("http://localhost:3000/api/room",
+            fetch(`${apiUrl}/api/room`,
                 {
                     method: "POST",
                     headers: {
@@ -127,7 +129,7 @@ const DetailRoom = () => {
 
     //권한 체크
     const checkAuthority = () => {
-        const url = new URL('http://localhost:3000/api/room');
+        const url = new URL(`${apiUrl}/api/room`);
         url.searchParams.append('type', 'authority');
         url.searchParams.append('email', userEmail);
         url.searchParams.append('roomId', roomId.toString());

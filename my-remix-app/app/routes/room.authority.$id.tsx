@@ -5,8 +5,9 @@ import styles from "~/styles/room-detail.css?url"
 import {useLoaderData, useParams} from "react-router";
 import {LoggedInUserData, RoomDetailDto, RoomDetailMembersDto} from "~/data/dto";
 import {Form, Link} from "@remix-run/react";
-import {getUserSession} from "~/routes/session.server";
+import {getUserSession} from "~/routes/session";
 import {redirect} from "@remix-run/node";
+import {getBaseUrl} from "~/utils/getBaseUrl";
 
 export const links: LinksFunction = () => [
     { rel: "stylesheet", href: styles },
@@ -27,6 +28,7 @@ const ChangeMaster = () => {
     const data = useLoaderData() as LoggedInUserData;
     const { user } = data;
     const userEmail = user?.email || "";
+    const apiUrl = getBaseUrl();
 
     //권한 설정
     const [authority, setAuthority] = useState(false);
@@ -34,7 +36,7 @@ const ChangeMaster = () => {
 
     //권한 체크
     const checkAuthority = () => {
-        const url = new URL('http://localhost:3000/api/room');
+        const url = new URL(`${apiUrl}/api/room`);
         url.searchParams.append('type', 'authority');
         url.searchParams.append('email', userEmail);
         url.searchParams.append('roomId', roomId.toString());
@@ -57,7 +59,7 @@ const ChangeMaster = () => {
     useEffect(()=>{
         //권한 체크
         checkAuthority();
-        const url = new URL('http://localhost:3000/api/room');
+        const url = new URL(`${apiUrl}/api/room`);
         url.searchParams.append('roomId', roomId);
         url.searchParams.append('type', 'detail');
         //멤버정보 가져오기 API
@@ -94,7 +96,7 @@ const ChangeMaster = () => {
             const newManagerEmail = formData.get('master');
 
             //권한 변경 API
-            fetch("http://localhost:3000/api/room",
+            fetch(`${apiUrl}/api/room`,
                 {
                     method: "PUT",
                     headers: {
