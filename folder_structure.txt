@@ -1,0 +1,1428 @@
+|   \---workflows
+|   \---inspectionProfiles
+\---my-remix-app
+    |   |   \---shoppingRoom
+    |   \---utils
+    |   |   \---assets
+    |   \---server
+    |       \---assets
+    |   |   \---prisma
+    |   |       \---master
+    |   |           \---e9771e62de70f79a5e1c604a2d7c8e2a0a874b48
+    |   |               \---windows
+    |   |   \---client
+    |   |       \---deno
+    |   |   \---deps
+    |   |   \---remapping
+    |   |       \---dist
+    |   |           \---types
+    |   |   |   \---lib
+    |   |   |   \---data
+    |   |   |   |   |   \---validation
+    |   |   |   |   |   \---util
+    |   |   |   |   |   \---util
+    |   |   |   |   \---vendor
+    |   |   |   |   \---semver
+    |   |   |   |       \---bin
+    |   |   |   \---src
+    |   |   |       \---config
+    |   |   |           \---files
+    |   |   |   |   \---node
+    |   |   |   \---node_modules
+    |   |   |       \---jsesc
+    |   |   |           \---man
+    |   |   |   \---lib
+    |   |   |   \---node_modules
+    |   |   |       \---semver
+    |   |   |           \---bin
+    |   |   |   \---node_modules
+    |   |   |       \---semver
+    |   |   |           \---bin
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---scripts
+    |   |   |   \---lib
+    |   |   |   |   \---helpers
+    |   |   |   \---scripts
+    |   |   |   \---node_modules
+    |   |   |       |   \---types
+    |   |   |       \---supports-color
+    |   |   |   \---typings
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |   |   \---esm
+    |   |   |   \---regenerator
+    |   |   |   \---lib
+    |   |   |   \---lib
+    |   |   |       |   \---lib
+    |   |   |       \---scope
+    |   |   |           \---lib
+    |   |   \---types
+    |   |       \---lib
+    |   |           |   \---generated
+    |   |           |   \---generated
+    |   |           |   \---typescript
+    |   |           |   \---generated
+    |   |           |   \---typescript
+    |   |           |   \---react
+    |   |           \---validators
+    |   |               \---react
+    |   |   \---hash
+    |   |       |   \---declarations
+    |   |       |       \---types
+    |   |       \---types
+    |   |   \---win32-x64
+    |   |   |   |   \---shared
+    |   |   |   \---node_modules
+    |   |   |       \---minimatch
+    |   |   \---js
+    |   |       \---src
+    |   |           \---configs
+    |   |   \---regexpp
+    |   |   |   \---node_modules
+    |   |   |       \---minimatch
+    |   |   |   \---src
+    |   |   \---object-schema
+    |   |       \---src
+    |   |   \---cliui
+    |   |       |   \---lib
+    |   |       \---node_modules
+    |   |           \---strip-ansi
+    |   |   |   \---dist
+    |   |   |       \---types
+    |   |   |   \---dist
+    |   |   |       \---types
+    |   |   |   \---dist
+    |   |   |       \---types
+    |   |   |   \---dist
+    |   |   |       \---types
+    |   |   \---trace-mapping
+    |   |       \---dist
+    |   |           \---types
+    |   |   \---core
+    |   |       |   \---workflows
+    |   |       |   |   \---util
+    |   |       |   |   \---util
+    |   |       |   \---node
+    |   |       |       \---util
+    |   |       |   \---util
+    |   |       \---test
+    |   |   \---node-pre-gyp
+    |   |       |   \---workflows
+    |   |       \---lib
+    |   |           \---util
+    |   |               \---nw-pre-gyp
+    |   |   \---mdx
+    |   |       \---lib
+    |   |           \---util
+    |   |   |   \---out
+    |   |   |       \---utils
+    |   |   |   \---out
+    |   |   |       \---types
+    |   |   \---fs.walk
+    |   |       \---out
+    |   |           \---types
+    |   |   |   \---lib
+    |   |   |       \---cp
+    |   |   |   \---node_modules
+    |   |   |       \---lru-cache
+    |   |   |   \---lib
+    |   |   \---promise-spawn
+    |   |       \---lib
+    |   |   \---parseargs
+    |   |       \---internal
+    |   |   |   \---scripts
+    |   |   |   \---dist
+    |   |   |   |   \---scripts
+    |   |   |   |   \---.cache
+    |   |   |   |       \---prisma
+    |   |   |   |           \---master
+    |   |   |   |               \---e9771e62de70f79a5e1c604a2d7c8e2a0a874b48
+    |   |   |   |                   \---windows
+    |   |   |   \---scripts
+    |   |   |   \---dist
+    |   |   \---get-platform
+    |   |       \---dist
+    |   |           \---test-utils
+    |   |   |   |   |   |   \---plugins
+    |   |   |   |   |   |   \---plugins
+    |   |   |   |   |   |   \---plugins
+    |   |   |   |   |   \---utils
+    |   |   |   |   |   \---defaults
+    |   |   |   |   \---vite
+    |   |   |   |       \---static
+    |   |   |   \---node_modules
+    |   |   |       |   \---node
+    |   |   |       |       \---dist
+    |   |   |       |           \---upload
+    |   |   |       \---ws
+    |   |   |           \---lib
+    |   |   |   \---node_modules
+    |   |   |       \---@remix-run
+    |   |   |           \---node
+    |   |   |               \---dist
+    |   |   |                   \---upload
+    |   |   |   |   \---upload
+    |   |   |   \---node_modules
+    |   |   |       \---@remix-run
+    |   |   |           |   \---dist
+    |   |   |           \---server-runtime
+    |   |   |               \---dist
+    |   |   |                   |   \---upload
+    |   |   |                   \---upload
+    |   |   |   |   |   \---_virtual
+    |   |   |   |   \---_virtual
+    |   |   |   \---node_modules
+    |   |   |       \---@remix-run
+    |   |   |           |   \---dist
+    |   |   |           \---server-runtime
+    |   |   |               \---dist
+    |   |   |                   |   \---upload
+    |   |   |                   \---upload
+    |   |   |   \---dist
+    |   |   |   \---node_modules
+    |   |   |       \---@remix-run
+    |   |   |           \---node
+    |   |   |               \---dist
+    |   |   |                   \---upload
+    |   |   |   \---dist
+    |   |   |       |   \---upload
+    |   |   |       \---upload
+    |   |   |   |   \---src
+    |   |   |   \---src
+    |   |   |   |   \---src
+    |   |   |   |       \---utils
+    |   |   |   \---src
+    |   |   |       \---utils
+    |   |   |   |   \---src
+    |   |   |   \---src
+    |   |   |   |   \---src
+    |   |   |   \---src
+    |   |   \---web-stream
+    |   |       \---src
+    |   |   \---rollup-win32-x64-msvc
+    |   |   \---component-emitter
+    |   |       \---lib
+    |   |           \---esm
+    |   |   |   \---timers
+    |   |   |   \---lib
+    |   |   |       \---xoauth2
+    |   |   |   \---ts5.0
+    |   |   |   \---test-utils
+    |   |   |   \---ranges
+    |   |   \---ws
+    |   |   |   |   |   \---prefer-optional-chain-utils
+    |   |   |   |   \---util
+    |   |   |   \---docs
+    |   |   |       \---rules
+    |   |   |   \---dist
+    |   |   |   \---dist
+    |   |   |       \---variable
+    |   |   |   \---dist
+    |   |   |   \---dist
+    |   |   |       \---generated
+    |   |   |   |   \---ts-estree
+    |   |   |   \---node_modules
+    |   |   |       \---minimatch
+    |   |   |           \---dist
+    |   |   |               \---mjs
+    |   |   |   \---dist
+    |   |   |       |   \---eslint-utils
+    |   |   |       \---ts-utils
+    |   |   \---visitor-keys
+    |   |       \---dist
+    |   |   \---structured-clone
+    |   |       |   \---workflows
+    |   |       \---esm
+    |   |   |   \---dist
+    |   |   |   |   \---dist
+    |   |   |   |   \---dist
+    |   |   |   |   \---dist
+    |   |   |   |   \---dist
+    |   |   |   |   \---dist
+    |   |   |   |   \---dist
+    |   |   |   \---transformCss
+    |   |   |       \---dist
+    |   |   |   \---dist
+    |   |   \---private
+    |   |       \---dist
+    |   |   \---multipart-parser
+    |   |       |   \---src
+    |   |       |   \---src
+    |   |       \---types
+    |   |   \---text-encoding
+    |   |       |   |   \---x-user-defined
+    |   |       |   \---helper
+    |   |       |   |   \---x-user-defined
+    |   |       |   \---helper
+    |   |       |   |   \---x-user-defined
+    |   |       |   \---helper
+    |   |       \---umd
+    |   |   \---dist
+    |   |   \---dist
+    |   |   |   \---src
+    |   |   \---src
+    |   |   |   \---refs
+    |   |   \---scripts
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |       |   \---roles
+    |   |       |       \---literal
+    |   |       \---util
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---lib
+    |   |   \---dist
+    |   |   \---test
+    |   |   \---locales
+    |   |   \---lib
+    |   |       |   \---objects
+    |   |       \---util
+    |   |   \---.github
+    |   |   \---lib
+    |   |   |   \---workflows
+    |   |   |   \---binding
+    |   |   |       \---napi-v3
+    |   |   \---test
+    |   |   \---test
+    |   |   |   \---types
+    |   |   \---node_modules
+    |   |       |   \---src
+    |   |       \---ms
+    |   |   \---.github
+    |   |   \---lib
+    |   |   \---test
+    |   |       \---ignored
+    |   |   \---dist
+    |   |   |   \---util
+    |   |   \---node_modules
+    |   |       \---lru-cache
+    |   |   \---test
+    |   |   |   \---regions
+    |   |   \---dist
+    |   |       \---unpacker
+    |   |   \---source
+    |   |   \---types
+    |   |   |   \---lib
+    |   |   \---node_modules
+    |   |       |   \---es2015
+    |   |       \---wrap-ansi
+    |   |   \---node_modules
+    |   |       |   \---src
+    |   |       \---ms
+    |   |   \---test
+    |   |   |   \---src
+    |   |   |       \---flow-control
+    |   |   \---node_modules
+    |   |       \---supports-color
+    |   |   \---dist
+    |   |       \---shared
+    |   |   \---node_modules
+    |   |       \---safe-buffer
+    |   |   \---node_modules
+    |   |       |   \---src
+    |   |       \---safe-buffer
+    |   |   \---lib
+    |   |   \---lib
+    |   |   |   \---util
+    |   |   \---node_modules
+    |   |       \---which
+    |   |           \---bin
+    |   |   \---lib
+    |   |       \---es
+    |   |   \---man
+    |   |   \---test
+    |   |   \---dist
+    |   |       \---src
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   |   |   \---_lib
+    |   |   |   |       \---convertToFP
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---localize
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---formatLong
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---formatLong
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---formatLong
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---formatLong
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---formatLong
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---formatLong
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---formatLong
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---formatRelative
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---formatLong
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   |   \---_lib
+    |   |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---buildMatchPatternFn
+    |   |   |   |   \---_lib
+    |   |   |   |       \---parsers
+    |   |   |   \---_lib
+    |   |   |       |   \---longFormatters
+    |   |   |       \---toInteger
+    |   |   |   \---_lib
+    |   |   |       \---convertToFP
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---localize
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---formatLong
+    |   |   |   |   \---_lib
+    |   |   |   |       \---formatLong
+    |   |   |   |   \---_lib
+    |   |   |   |       \---formatLong
+    |   |   |   |   \---_lib
+    |   |   |   |       \---formatLong
+    |   |   |   |   \---_lib
+    |   |   |   |       \---formatLong
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---formatLong
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---formatLong
+    |   |   |   |   \---_lib
+    |   |   |   |       \---formatRelative
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---formatLong
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   |   \---_lib
+    |   |   |   |       \---match
+    |   |   |   \---_lib
+    |   |   |       \---buildMatchPatternFn
+    |   |   |   \---_lib
+    |   |   |       \---parsers
+    |   |   \---_lib
+    |   |       |   \---longFormatters
+    |   |       \---toInteger
+    |   |   \---src
+    |   |   \---test
+    |   |   \---mjs
+    |   |   \---dist
+    |   |   \---test
+    |   |   \---.github
+    |   |   \---test
+    |   |   \---lib
+    |   |       \---browser
+    |   |   \---lite
+    |   |   \---lib
+    |   |   \---lib
+    |   |       \---util
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---node_modules
+    |   |       |   |   \---wg-meetings
+    |   |       |   \---lib
+    |   |       |       \---internal
+    |   |       |           \---streams
+    |   |       \---string_decoder
+    |   |           \---lib
+    |   |   \---es2015
+    |   |   |   \---transports-uws
+    |   |   \---node_modules
+    |   |       |   \---cookie
+    |   |       \---ws
+    |   |           \---lib
+    |   |   \---build
+    |   |       |   \---contrib
+    |   |       \---esm
+    |   |           \---contrib
+    |   |   \---lib
+    |   |       \---util
+    |   |   \---test
+    |   |   |   \---tables
+    |   |   |   \---tables
+    |   |   |   \---tables
+    |   |   |   \---tables
+    |   |   |   \---tables
+    |   |   |   \---tables
+    |   |   |   \---tables
+    |   |   |   \---tables
+    |   |   |   \---tables
+    |   |   |   \---tables
+    |   |   |   \---records
+    |   |   \---operations
+    |   |   \---test
+    |   |   \---test
+    |   |   |   \---helpers
+    |   |   \---WrapForValidIteratorPrototype
+    |   |   \---types
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---lib
+    |   |   \---globals
+    |   |   \---sync
+    |   |   |   |   \---formatters
+    |   |   |   |   \---code-path-analysis
+    |   |   |   |   \---utils
+    |   |   |   |       \---unicode
+    |   |   |   \---source-code
+    |   |   |       \---token-store
+    |   |   \---node_modules
+    |   |       \---minimatch
+    |   |   \---node_modules
+    |   |       \---debug
+    |   |           \---src
+    |   |   \---lib
+    |   |   \---node_modules
+    |   |       \---debug
+    |   |           \---src
+    |   |   |   \---rules
+    |   |   |   \---rules
+    |   |   \---node_modules
+    |   |       |   \---src
+    |   |       |   \---lib
+    |   |       |   \---lib
+    |   |       |   \---bin
+    |   |       \---tsconfig-paths
+    |   |           |   \---__tests__
+    |   |           |       \---data
+    |   |           \---src
+    |   |               \---__tests__
+    |   |                   \---data
+    |   |   |   \---rules
+    |   |   |   \---util
+    |   |   |       \---implicitRoles
+    |   |   |   \---minimatch
+    |   |   \---__tests__
+    |   |       |   \---util
+    |   |       |       \---implicitRoles
+    |   |       \---__util__
+    |   |           \---helpers
+    |   |   |   \---util
+    |   |   \---node_modules
+    |   |       |   \---lib
+    |   |       |   \---test
+    |   |       |       |   \---abc
+    |   |       |       |   |   \---aaa
+    |   |       |       |   |   \---aaa
+    |   |       |       |   \---zmodules
+    |   |       |       |       \---bbb
+    |   |       |       |   |   \---ccc
+    |   |       |       |   \---y
+    |   |       |       |       \---ccc
+    |   |       |       |   \---deep_ref
+    |   |       |       |   \---bbb
+    |   |       |       |   |   \---packages
+    |   |       |       |   |       \---package-b
+    |   |       |       |   |   \---mylib
+    |   |       |       |   |   \---lib
+    |   |       |       |   |   \---foo
+    |   |       |       |   |   \---foo
+    |   |       |       |   |   \---_
+    |   |       |       |   |       \---symlink_target
+    |   |       |       |   \---without_basedir
+    |   |       |       \---shadowed_core
+    |   |       |           \---node_modules
+    |   |       |               \---util
+    |   |       \---semver
+    |   |           \---bin
+    |   |   \---cjs
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---dist
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---dist
+    |   |   \---lib
+    |   |   \---types
+    |   |   \---lib
+    |   |   \---dist
+    |   |   \---lib
+    |   |   |   \---router
+    |   |   \---node_modules
+    |   |       |   \---src
+    |   |       \---safe-buffer
+    |   |   \---es6
+    |   |   \---out
+    |   |       |   \---transformers
+    |   |       \---utils
+    |   |   \---test
+    |   |   |   \---workflows
+    |   |   \---test
+    |   |   \---node_modules
+    |   |       |   \---src
+    |   |       \---ms
+    |   |   \---src
+    |   |   |   \---__pycache__
+    |   |   \---types
+    |   |   \---test
+    |   |   |   \---mjs
+    |   |   \---node_modules
+    |   |       \---signal-exit
+    |   |           \---dist
+    |   |               \---mjs
+    |   |   \---lib
+    |   |       \---util
+    |   |   \---lib
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---node_modules
+    |   |       |   \---es2015
+    |   |       \---string-width
+    |   |   \---.idea
+    |   |       \---inspectionProfiles
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---dist
+    |   |   \---dist
+    |   |       \---esm
+    |   |   \---test
+    |   |   \---test
+    |   |   \---lib
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |       \---shams
+    |   |   \---test
+    |   |       \---shams
+    |   |   \---.github
+    |   |   \---lib
+    |   |       \---handlers
+    |   |   \---node_modules
+    |   |       \---lru-cache
+    |   |   \---dist
+    |   |   \---build
+    |   |       \---src
+    |   |   |   \---tables
+    |   |   \---lib
+    |   |   \---src
+    |   |   \---dist
+    |   |   \---test
+    |   |   \---lib
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---types
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---dist
+    |   |       \---esm
+    |   |   \---dist
+    |   |   \---lib
+    |   |       \---type
+    |   |   \---man
+    |   |   \---test
+    |   |   \---lib
+    |   |   \---spec
+    |   |       \---fixtures
+    |   |   \---test
+    |   |   \---lib
+    |   |   |   \---values
+    |   |   |       \---expressions
+    |   |   |   \---values
+    |   |   |       \---expressions
+    |   |   \---__tests__
+    |   |       \---src
+    |   |   \---src
+    |   |   \---data
+    |   |       \---json
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---src
+    |   |   \---lib
+    |   |       \---hash
+    |   |   \---dist
+    |   |   \---fp
+    |   |   \---node_modules
+    |   |       \---semver
+    |   |           \---bin
+    |   |   \---lib
+    |   |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |       \---handlers
+    |   |   \---lib
+    |   |       \---util
+    |   |   \---lib
+    |   |   \---dist
+    |   |       \---parse
+    |   |   |   \---lib
+    |   |   |       \---initialize
+    |   |   \---lib
+    |   |       \---initialize
+    |   |   |   \---lib
+    |   |   \---lib
+    |   |   |   \---lib
+    |   |   \---lib
+    |   |   |   \---lib
+    |   |   \---lib
+    |   |   |   \---lib
+    |   |   \---lib
+    |   |   |   \---lib
+    |   |   \---lib
+    |   |   \---dev
+    |   |   \---dev
+    |   |   \---dev
+    |   |   \---dev
+    |   |   \---dev
+    |   |   \---dev
+    |   |   |   \---lib
+    |   |   \---lib
+    |   |   \---dev
+    |   |   \---dev
+    |   |   \---dev
+    |   |   \---dev
+    |   |   \---dev
+    |   |   \---dev
+    |   |   \---dev
+    |   |   \---dev
+    |   |   \---src
+    |   |   \---dist
+    |   |       \---esm
+    |   |   \---test
+    |   |   \---dist
+    |   |       \---esm
+    |   |   \---node_modules
+    |   |       \---yallist
+    |   |   \---node_modules
+    |   |       \---yallist
+    |   |   \---node_modules
+    |   |       \---yallist
+    |   |   \---node_modules
+    |   |       \---yallist
+    |   |   \---lib
+    |   |   \---dist
+    |   |   \---types
+    |   |   \---node_modules
+    |   |       |   \---src
+    |   |       \---on-finished
+    |   |   \---lib
+    |   |   \---url-alphabet
+    |   |   \---lib
+    |   |   \---tools
+    |   |   \---lib
+    |   |   \---data
+    |   |       \---release-schedule
+    |   |   \---lib
+    |   |       \---xoauth2
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---test
+    |   |       \---browser
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---lib
+    |   |   \---src
+    |   |   \---lib
+    |   |       \---zlib
+    |   |   \---lib
+    |   |   |   \---esm
+    |   |   \---node_modules
+    |   |       \---lru-cache
+    |   |           \---dist
+    |   |               \---esm
+    |   |   \---dist
+    |   |       \---shared
+    |   |   \---types
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---dist
+    |   |   \---test
+    |   |   \---lib
+    |   |   \---types
+    |   |   \---src
+    |   |   \---build
+    |   |   \---src
+    |   |   \---src
+    |   |   \---src
+    |   |   \---src
+    |   |   \---dist
+    |   |       \---util
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---esm
+    |   |   |   \---public
+    |   |   |       \---pages
+    |   |   |           \---http
+    |   |   |   \---scripts
+    |   |   \---scripts
+    |   |   \---lib
+    |   |   \---test
+    |   |   \---lib
+    |   |   \---lib
+    |   |       \---util
+    |   |   \---test
+    |   |   \---node_modules
+    |   |       \---bytes
+    |   |   \---umd
+    |   |   \---umd
+    |   |   \---umd
+    |   |   \---cjs
+    |   |   |   \---umd
+    |   |   \---node_modules
+    |   |       \---@remix-run
+    |   |           \---router
+    |   |               \---dist
+    |   |   |   \---umd
+    |   |   \---node_modules
+    |   |       \---@remix-run
+    |   |           \---router
+    |   |               \---dist
+    |   |   \---lib
+    |   |       \---internal
+    |   |           \---streams
+    |   |   \---test
+    |   |   \---test
+    |   |   \---node_modules
+    |   |       \---estree-util-is-identifier-name
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---test
+    |   |       \---integration
+    |   |   \---test
+    |   |       |   \---abc
+    |   |       |   |   \---aaa
+    |   |       |   |   \---aaa
+    |   |       |   \---zmodules
+    |   |       |       \---bbb
+    |   |       |   |   \---ccc
+    |   |       |   \---y
+    |   |       |       \---ccc
+    |   |       |   \---deep_ref
+    |   |       |   \---bbb
+    |   |       |   |   \---packages
+    |   |       |   |       \---package-b
+    |   |       |   |   \---mylib
+    |   |       |   |   \---lib
+    |   |       |   |   \---foo
+    |   |       |   |   \---foo
+    |   |       |   |   \---_
+    |   |       |   |       \---symlink_target
+    |   |       |   \---without_basedir
+    |   |       \---shadowed_core
+    |   |           \---node_modules
+    |   |               \---util
+    |   |   \---dist
+    |   |   \---dist
+    |   |   \---test
+    |   |       \---integration
+    |   |   \---benchmarks
+    |   |   \---node_modules
+    |   |       \---minimatch
+    |   |   \---dist
+    |   |       |   \---shared
+    |   |       \---shared
+    |   |   |   |   |   |   \---dom
+    |   |   |   |   |   \---util
+    |   |   |   |   \---webSocket
+    |   |   |   |   |   |   \---dom
+    |   |   |   |   |   \---util
+    |   |   |   |   \---webSocket
+    |   |   |   |   |   |   \---dom
+    |   |   |   |   |   \---util
+    |   |   |   |   \---webSocket
+    |   |   |   \---types
+    |   |   |       |   |   \---dom
+    |   |   |       |   \---util
+    |   |   |       \---webSocket
+    |   |   |   |   |   \---dom
+    |   |   |   |   \---util
+    |   |   |   \---webSocket
+    |   |   \---webSocket
+    |   |   \---lib
+    |   |   \---test
+    |   |   \---test
+    |   |   \---umd
+    |   |   |   \---yallist
+    |   |   \---ranges
+    |   |   \---node_modules
+    |   |       |   |   \---ms
+    |   |       |   \---src
+    |   |       \---ms
+    |   |   \---lib
+    |   |   \---.github
+    |   |   \---.github
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---dist
+    |   |   |   \---contrib
+    |   |   \---node_modules
+    |   |       \---ws
+    |   |           \---lib
+    |   |   \---build
+    |   |       \---esm-debug
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---node_modules
+    |   |       \---source-map
+    |   |           \---lib
+    |   |   \---test
+    |   |       \---fixtures
+    |   |   \---lib
+    |   |   \---.github
+    |   |       \---workflows
+    |   |   \---node_modules
+    |   |       \---strip-ansi
+    |   |   \---node_modules
+    |   |       \---emoji-regex
+    |   |           \---es2015
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---lib
+    |   |       \---util
+    |   |   \---node_modules
+    |   |       \---safe-buffer
+    |   |   \---dist
+    |   |   \---test
+    |   |   \---lib
+    |   |   \---node_modules
+    |   |       |   \---node_modules
+    |   |       |       \---minipass
+    |   |       \---yallist
+    |   |   |   \---pump
+    |   |   \---test
+    |   |       \---fixtures
+    |   |           |   \---a
+    |   |           |   \---sub-files
+    |   |           \---e
+    |   |               \---directory
+    |   |   \---test
+    |   |   \---node_modules
+    |   |       |   |   \---wg-meetings
+    |   |       |   \---lib
+    |   |       |       \---internal
+    |   |       |           \---streams
+    |   |       \---string_decoder
+    |   |           \---lib
+    |   |   \---test
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---types
+    |   |   |   \---__tests__
+    |   |   |       \---data
+    |   |   \---src
+    |   |       \---__tests__
+    |   |           \---data
+    |   |   \---modules
+    |   |   \---test
+    |   |       \---unit
+    |   |   \---dist
+    |   |   \---lib
+    |   |   \---ts41
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---lib
+    |   |       \---zh-tw
+    |   |   \---dist
+    |   |   \---test
+    |   |   |   \---docs
+    |   |   |       \---best-practices
+    |   |   |   \---web
+    |   |   |       \---websocket
+    |   |   \---types
+    |   |   \---node_modules
+    |   |       \---is-plain-obj
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---dist
+    |   |       \---esnext
+    |   |           \---schemes
+    |   |   \---support
+    |   |   \---dist
+    |   |       \---esm-node
+    |   |   \---run
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   |   |   \---chunks
+    |   |   |   \---node-cjs
+    |   |   |   |   \---win32-x64
+    |   |   |   \---esbuild
+    |   |   |       \---lib
+    |   |   \---types
+    |   |   \---dist
+    |   |   \---src
+    |   |   \---test
+    |   |   |   \---workflows
+    |   |   \---test
+    |   |       |   \---src
+    |   |       |   \---src
+    |   |       \---ts-use
+    |   |           \---src
+    |   |   |   \---types
+    |   |   |       \---ts3.6
+    |   |   \---ponyfill
+    |   |       \---es6
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---lib
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---test
+    |   |   \---node_modules
+    |   |       |   \---es2015
+    |   |       \---string-width
+    |   |   \---node_modules
+    |   |       \---strip-ansi
+    |   |   \---node_modules
+    |   |       |   \---es2015
+    |   |       \---string-width
+    |   |   \---lib
+    |   |   \---build
+    |   |       \---lib
+    |   |           \---platform-shims
+    |   |   |   \---dist
+    |   |   |       |   \---tslib
+    |   |   |       |   \---yaml-1.1
+    |   |   |       \---stringify
+    |   |   \---dist
+    |   |       |   \---yaml-1.1
+    |   |       \---stringify
+    |   |   |   \---lib
+    |   |   |       \---utils
+    |   |   |   \---platform-shims
+    |   |   \---node_modules
+    |   |       |   \---es2015
+    |   |       \---string-width
+    |   |   \---build
+    |   |       \---lib
+    |   \---zwitch
+    |   \---migrations
+    |       \---20240527143815_change_shopping_item_on_delete_2
+    \---server
+        \---node_modules
+            |   \---lib
+            |       \---types
+            |   \---test
+            |   \---node_modules
+            |       \---safe-buffer
+            |   \---src
+            |   \---test
+            |   \---lib
+            |       \---browser
+            |   \---test
+            |   \---test
+            |   \---lib
+            |       \---router
+            |   \---test
+            |   \---test
+            |   \---test
+            |   \---test
+            |   \---test
+            |   \---test
+            |       \---shams
+            |   \---.github
+            |   |   \---tables
+            |   \---lib
+            |   \---lib
+            |   \---src
+            |   \---lib
+            |   \---test
+            |       \---browser
+            |   \---test
+            |   \---node_modules
+            |       \---ms
+            |   \---.github
+            |   \---test
+            |   \---test
+            \---ws
+                \---lib
