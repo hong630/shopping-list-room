@@ -7,6 +7,7 @@ const ShoppingRoomListComponent = (props:{email:string, nickname:string}) => {
     const [shoppingRoomList, setShoppingRoomList] = useState<RoomDto[] | null>(null);
 
     const apiUrl = getBaseUrl();
+
     useEffect(()=>{
         const url = new URL(`${apiUrl}/api/room`);
         url.searchParams.append('email', props.email);

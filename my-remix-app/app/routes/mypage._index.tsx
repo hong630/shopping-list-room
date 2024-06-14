@@ -26,7 +26,6 @@ export const loader: LoaderFunction = async ({ request }) => {
 const Mypage = () => {
     const data = useLoaderData() as LoggedInUserData;
     const { user, isLoggedIn } = data;
-    const userEmail = user?.email || "";
     const userNickname = user?.nickname || "";
 
     return (

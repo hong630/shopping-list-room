@@ -1,5 +1,5 @@
 import { Form } from '@remix-run/react';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import type {LinksFunction, LoaderFunction} from "@remix-run/node"
 import styles from "../styles/signup.css?url"
 import {checkOver, sanitizeValue, validateEmail, validatePassword} from "~/utils/sanitize";
@@ -36,8 +36,11 @@ const ChangePassword = () => {
     const [incorrectPassword, setIncorrectPassword] = useState(false);
     const [noPassword, setNoPassword] = useState(false);
 
+    let apiUrl = '';
+    useEffect(()=>{
+        apiUrl = getBaseUrl();
+    },[])
 
-    const apiUrl = getBaseUrl();
     const changingPasswordApi = (password:string) => {
         //비밀번호 변경 API
         fetch(`${apiUrl}/api/changeUser`,

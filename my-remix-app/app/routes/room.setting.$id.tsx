@@ -26,7 +26,6 @@ const SettingRoom = () => {
     const roomId:string = params.id || "";
     const data = useLoaderData() as LoggedInUserData;
     const { user } = data;
-    const userEmail = user?.email || "";
 
     return (
         <div>

@@ -43,6 +43,7 @@ const SignupLayout = () => {
             .then(async (res)=>{
                 const data = await res.json()
                 if (data.state == true){
+                    alert('회원가입이 완료되었습니다. 로그인해주세요.')
                     location.href = '/room';
                 } else {
                     if (data.state === 'An error occurred while creating the user.'){
